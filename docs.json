@@ -23,27 +23,6 @@
         ]
       },
       {
-        "tab": "Guide2",
-        "groups": [
-          {
-            "group": "Post Purchase",
-            "groups": [
-          {
-            "group": "Post Purchase",
-            "pages": [
-              "klaviyo-integration/klaviyoIntegrationGuide", 
-              "klaviyo-integration/brandManagedCampaignGuide"
-            ]
-          }
-        ],
-            "pages": [
-              "klaviyo-integration/klaviyoIntegrationGuide", 
-              "klaviyo-integration/brandManagedCampaignGuide"
-            ]
-          }
-        ]
-      },
-      {
         "tab": "API Reference",
         "groups": [
           {
