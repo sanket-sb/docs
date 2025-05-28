@@ -1,0 +1,98 @@
+---
+title: 'List Warranty Quotes'
+openapi: 'GET /quoteService/api/v1/category/listWarrantyQuotes/{storeId}'
+---
+
+## Headers
+
+| Header | Description | Required |
+|--------|-------------|----------|
+| X-SureBright-Access-Token | Access token for authentication | No |
+
+
+
+
+# Examples
+
+## Request
+
+```bash
+curl -X GET 'https://{HOST_NAME}/quoteService/api/v1/category/listWarrantyQuotes/{storeId}?country=US&state=AL&sbCategoryId=ecca4210-09a4-446c-ad87-5e65bd50df12&price=230.54'
+```
+
+## Response Examples
+
+### 200 - Quotes Found
+
+```json
+{
+  "warrantyQuoteId": "929d14dd-2937-4290-9818-8fca2a00a9a3",
+  "warrantyQuoteItemList": [
+    {
+      "warrantyTenure": 2,
+      "warrantyPrice": 64.99,
+      "warrantyQuoteItemId": "8c78bc1a-0790-4cd3-a3f9-5ed97bbe59f5"
+    },
+    {
+      "warrantyTenure": 3,
+      "warrantyPrice": 74.99,
+      "warrantyQuoteItemId": "78adfa49-b058-4ce5-a65b-afa0c504a7de"
+    }
+  ],
+  "tncLink": "https://customer.surebright.com/t-c/c1a8661621492282a574fb3ff19a5bed119c3bcc96bea784675e0fffc93667d37a0a38efa176a69421e7e013186aaadf482bf066434056578fc29f3d6a2bdc2d",
+  "coveragePopupHeading": "Don't want to spend extra on this product for the next few years? We've got you covered!",
+  "coverageWidgetHeading": "Add premium product protection",
+  "coverageList": [
+    {
+      "coverageItemType": "COVERAGE_OPTION",
+      "coverageItemTitle": "Your warranty plan provides,",
+      "coverageItemList": [
+        "Protection against everyday spills (food, beverages, human or pet biological stains, cosmetics, etc) and accidental stains from items like pens and crayons.",
+        "Repairs for burns or heat caused by household items (excluding fire)",
+        "Coverage for punctures and cuts in fabric, microfiber, and leather.",
+        "Repairs for manufacturing defects in non-motorized mechanisms, springs, and wood frames."
+      ]
+    },
+    {
+      "coverageItemType": "WHY_SUREBRIGHT",
+      "coverageItemTitle": "Why Surebright ? ",
+      "coverageItemList": [
+        "$0 Deductible",
+        "Cancel anytime",
+        "24x7 Support and quick online claim filing in under 5 minutes"
+      ]
+    }
+  ]
+}
+```
+
+### 511 - Insufficient Parameters
+
+```json
+{
+  "isError": true,
+  "errorType": 511,
+  "errorMessage": "Insufficient Params. Mandatory Params missing"
+}
+```
+
+# HTTP Status Codes & Error Types
+
+| Code | Message |
+|------|---------|
+| 511 | Insufficient Parameters |
+| 512 | Validation Failed for Input Parameters |
+| 513 | Product Not Found |
+| 514 | No Quote Found |
+| 515 | Store Not Found |
+| 516 | Not Eligible |
+| 517 | Category Not Found |
+| 200 | Quotes Found |
+| 500 | Something Unexpectedly Went Wrong |
+
+# Appendix
+
+## Country and State Codes
+
+- Country codes (Alpha 2): [IBAN Country Codes](https://www.iban.com/country-codes)
+- US State codes: [FIPS State Codes](https://en.wikipedia.org/wiki/Federal_Information_Processing_Standard_state_code) 

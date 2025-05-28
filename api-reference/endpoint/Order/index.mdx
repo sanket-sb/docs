@@ -1,0 +1,52 @@
+---
+title: Overview
+
+---
+
+
+The **Order entity** serves as the foundational record that captures detailed information about the line items purchased by a customer. Each line item within an order represents a product eligible for various warranty offerings, such as:
+
+- Product protection plans
+- Shipping warranties
+- Other related contracts
+
+The **SureBright Order API** is designed to transmit these sold contract details to our system and to manage related operations such as order updates and cancellations. It acts as the primary interface for creating, updating, or canceling warranty contracts associated with your sales.
+
+---
+
+## 🔧 Key Functions of the Order API
+
+### ✅ Create Warranty Contracts
+
+When a new order is submitted:
+
+- The API checks if the `partnerOrderId` exists in SureBright’s records.
+- If it **does not exist**, the API automatically generates **warranty contracts** for the order’s line items based on the provided details.
+
+### ♻️ Update Existing Contracts
+
+When the `partnerOrderId` **already exists**:
+
+- Use the **`PUT` method** to update the existing order and its associated warranty contracts.
+- If a lower quantity is specified for any line item compared to the original order, the system will **automatically cancel** the corresponding number of warranty contracts to reflect the reduced coverage.
+
+### ❌ Cancel Specific Line Items
+
+To cancel warranty coverage on a particular product line:
+
+- Set the `warrantyQuantity` field to `0` for that line item in the `lineItemList` via the `PUT` method.
+- This action cancels **only** the warranty contracts for that specific line item, leaving the rest of the order unaffected.
+
+---
+
+## 🧾 Summary of API Capabilities
+
+| Operation              | Description                                                                 |
+|------------------------|-----------------------------------------------------------------------------|
+| **Create Order (POST)** | Generates new warranty contracts if the order is not yet recorded (`partnerOrderId` not found). |
+| **Update Order (PUT)** | Modifies existing warranty contracts and adjusts quantities. Cancels contracts if quantity decreases. |
+| **Cancel Line Item(PUT)**   | To cancel a specific line item, Using PUT method of order API set the field "warrantyQuantity" in lineItem inside lineItemList to 0 as part of the lineItem details. |
+
+---
+
+This API provides a robust way to keep your warranty contracts in sync with your order lifecycle, ensuring **accurate coverage management** across sales, returns, and cancellations.

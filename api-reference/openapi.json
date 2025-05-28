@@ -7,16 +7,19 @@
   },
   "servers": [
     {
-      "url": "http://sandbox.mintlify.com"
+      "url": "https://{HOST_NAME}"
     }
   ],
   "paths": {
     "/quoteService/api/v1/store/listCategories": {
       "get": {
         "summary": "List Categories",
-        "description": "Retrieve a list of store categories corresponding to the provided storeId. The response should include detailed category information as well as labels that reflect the authorization status.",
+        "x-docs-disable-tryit": true,
+        "description": "Retrieves a list of store categories based on storeId . The response includes category details, and labels based on the authorization status",
         "operationId": "listCategories",
-        "tags": ["storeCategory"],
+        "tags": [
+          "storeCategory"
+        ],
         "parameters": [
           {
             "name": "storeId",
@@ -25,7 +28,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "A unique identifier for a store will be shared as part of the integration kit"
+            "description": "A unique identifier for a store will be shared as part of the integration kit.It is a path variable"
           },
           {
             "name": "country",
@@ -88,6 +91,640 @@
           },
           "511": {
             "description": "Error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean"
+                    },
+                    "errorType": {
+                      "type": "integer"
+                    },
+                    "errorMessage": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quoteService/api/v1/category/listWarrantyQuotes/{storeId}": {
+      "get": {
+        "summary": "List Warranty Quotes by Category",
+        "description": "This endpoint retrieves a list of warranty quotes for a specific store and category. The response includes detailed warranty options, pricing, and coverage information.",
+        "operationId": "listWarrantyQuotesByCategory",
+        "tags": [
+          "quotes"
+        ],
+        "parameters": [
+          {
+            "name": "storeId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "A unique identifier for a store will be shared as part of the integration kit. this will be added as path variable"
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Z]{2}$"
+            },
+            "description": "The country code of the identified customer location"
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The state code of the identified customer location"
+          },
+          {
+            "name": "sbCategoryId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The URL containing the product page that is shown to the customer"
+          },
+          {
+            "name": "price",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "float"
+            },
+            "description": "The price of the product in the currency of the country specified in the above parameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Quotes Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "warrantyQuoteId",
+                    "warrantyQuoteItemList",
+                    "coverageWidgetHeading",
+                    "coveragePopupHeading",
+                    "coverageList"
+                  ],
+                  "properties": {
+                    "warrantyQuoteId": {
+                      "type": "string",
+                      "description": "A unique ID representing this specific return quote in this particular API call"
+                    },
+                    "warrantyQuoteItemList": {
+                      "type": "array",
+                      "description": "A list of warranty offers generated for this particular request",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "warrantyTenure": {
+                            "type": "integer",
+                            "description": "Duration of the warranty in years"
+                          },
+                          "warrantyPrice": {
+                            "type": "number",
+                            "format": "float",
+                            "description": "Price of the warranty"
+                          },
+                          "warrantyQuoteItemId": {
+                            "type": "string",
+                            "description": "Unique identifier for the warranty quote item"
+                          }
+                        }
+                      }
+                    },
+                    "tncLink": {
+                      "type": "string",
+                      "description": "Unique link for legal Terms & Conditions of the warranty for each product Category"
+                    },
+                    "coverageWidgetHeading": {
+                      "type": "string",
+                      "description": "Heading for the various tenure options shown to a customer on the product page"
+                    },
+                    "coveragePopupHeading": {
+                      "type": "string",
+                      "description": "Title that nudges the customers to buy a warranty for their product purchase"
+                    },
+                    "coverageList": {
+                      "type": "array",
+                      "description": "List of coverage options grouped under different sections",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "coverageItemType": {
+                            "type": "string",
+                            "enum": [
+                              "COVERAGE_OPTION",
+                              "WHY_SUREBRIGHT"
+                            ]
+                          },
+                          "coverageItemTitle": {
+                            "type": "string"
+                          },
+                          "coverageItemList": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "511": {
+            "description": "Insufficient Parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean"
+                    },
+                    "errorType": {
+                      "type": "integer"
+                    },
+                    "errorMessage": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/platform/api/v1/order": {
+      "post": {
+        "summary": "Create Warranty",
+        "description": "This endpoint creates warranty contracts for a specific order.",
+        "operationId": "createWarranty",
+        "tags": [
+          "orders"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "storeId",
+                  "partnerOrderId",
+                  "orderPurchaseDateTime",
+                  "lineItemList",
+                  "customerDetails"
+                ],
+                "properties": {
+                  "storeId": {
+                    "type": "string",
+                    "description": "A unique identifier for a store will be shared as part of the integration kit"
+                  },
+                  "partnerOrderId": {
+                    "type": "string",
+                    "description": "Unique identifier for the complete successful order placed by a customer on the merchant site. This represents the whole order that can have multiple line items of different quantities.",
+                    "maxLength": 48
+                  },
+                  "orderPurchaseDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Date time at which the order was purchased by customer."
+                  },
+                  "lineItemList": {
+                    "type": "array",
+                    "description": "The lineItemList consists of individual line items representing purchased policies. Each line item is uniquely identified by a lineItemId (String: maximum length 48 characters). The warrantyQuoteId and warrantyQuoteItemId serve to identify the specific quote option acquired by the customer. A line item must include warrantyQuoteItemId and warrantyQuoteId. The unitSalePrice and totalPrice indicate the price at which the policy was purchased by the customer. Please refrain from sending a line item in which no policy sales have been made. OptionId is the combination of product attributes separated by #.",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "lineItemId",
+                        "policyPurchaseDate",
+                        "warrantyQuoteId",
+                        "warrantyQuoteItemId",
+                        "totalPrice",
+                        "warrantyQuantity",
+                        "unitSalePrice",
+                        "productTitle",
+                        "productId",
+                        "optionId",
+                        "productSKU",
+                        "productPrice",
+                        "productURL"
+                      ],
+                      "properties": {
+                        "lineItemId": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "policyPurchaseDate": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "warrantyQuoteId": {
+                          "type": "string"
+                        },
+                        "warrantyQuoteItemId": {
+                          "type": "string"
+                        },
+                        "totalPrice": {
+                          "type": "number"
+                        },
+                        "warrantyQuantity": {
+                          "type": "integer"
+                        },
+                        "unitSalePrice": {
+                          "type": "number"
+                        },
+                        "productTitle": {
+                          "type": "string"
+                        },
+                        "productId": {
+                          "type": "string"
+                        },
+                        "optionId": {
+                          "type": "string"
+                        },
+                        "productSKU": {
+                          "type": "string"
+                        },
+                        "productPrice": {
+                          "type": "number"
+                        },
+                        "productURL": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "customerDetails": {
+                    "type": "object",
+                    "required": [
+                      "firstName",
+                      "lastName",
+                      "addressLine1",
+                      "city",
+                      "state",
+                      "country",
+                      "zipCode",
+                      "customerEmail"
+                    ],
+                    "properties": {
+                      "firstName": {
+                        "type": "string"
+                      },
+                      "lastName": {
+                        "type": "string"
+                      },
+                      "addressLine1": {
+                        "type": "string"
+                      },
+                      "addressLine2": {
+                        "type": "string"
+                      },
+                      "city": {
+                        "type": "string"
+                      },
+                      "state": {
+                        "type": "string",
+                        "description": "ISO 3166-2 code"
+                      },
+                      "country": {
+                        "type": "string",
+                        "description": "Country code for USA is US"
+                      },
+                      "zipCode": {
+                        "type": "string"
+                      },
+                      "customerEmail": {
+                        "type": "string",
+                        "format": "email"
+                      },
+                      "mobileNumber": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Warranty created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "storeId",
+                    "partnerOrderId",
+                    "contractList"
+                  ],
+                  "properties": {
+                    "storeId": {
+                      "type": "string",
+                      "description": "A unique identifier for a store will be shared as part of the integration kit"
+                    },
+                    "partnerOrderId": {
+                      "type": "string",
+                      "description": "A unique identifier for the complete successful order placed by a customer on the merchant site. This represents the whole order that can have multiple line items of different quantities.",
+                      "maxLength": 48
+                    },
+                    "contractList": {
+                      "type": "array",
+                      "description": "The list of contracts generated for each quantity in each line item. If any error in generating a contract, the error code and msg will be added for that item instead of the contract id.",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "lineItemId",
+                          "warrantyQuoteId",
+                          "warrantyQuoteItemId",
+                          "isCancelled"
+                        ],
+                        "properties": {
+                          "lineItemId": {
+                            "type": "string"
+                          },
+                          "contractId": {
+                            "type": "string"
+                          },
+                          "warrantyQuoteId": {
+                            "type": "string"
+                          },
+                          "warrantyQuoteItemId": {
+                            "type": "string"
+                          },
+                          "isCancelled": {
+                            "type": "boolean"
+                          },
+                          "errorCode": {
+                            "type": "integer"
+                          },
+                          "errorMessage": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "511": {
+            "description": "Insufficient Parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean"
+                    },
+                    "errorType": {
+                      "type": "integer"
+                    },
+                    "errorMessage": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Cancel/Update Line Item",
+        "description": "To cancel a specific line item, Using PUT method of order API, set the field 'warrantyQuantity' in lineItem inside lineItemList to 0 as part of the lineItem details as shown below. If a contract has been cancelled, it cannot be marked as active again.",
+        "operationId": "updateWarranty",
+        "tags": [
+          "orders"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "storeId",
+                  "partnerOrderId",
+                  "orderPurchaseDate",
+                  "lineItemList",
+                  "customerDetails"
+                ],
+                "properties": {
+                  "storeId": {
+                    "type": "string",
+                    "description": "A unique identifier for a store will be shared as part of the integration kit"
+                  },
+                  "partnerOrderId": {
+                    "type": "string",
+                    "description": "Unique identifier for the complete successful order placed by a customer on the merchant site. This represents the whole order that can have multiple line items of different quantities.",
+                    "maxLength": 48
+                  },
+                  "orderPurchaseDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Date time at which the order was purchased by customer."
+                  },
+                  "lineItemList": {
+                    "type": "array",
+                    "description": "The lineItemList consists of individual line items representing purchased policies. Each line item is uniquely identified by a lineItemId (String: maximum length 48 characters). The warrantyQuoteId and warrantyQuoteItemId serve to identify the specific quote option acquired by the customer. A line item must include warrantyQuoteItemId and warrantyQuoteId. The unitWarrantySalePrice and totalWarrantyPrice indicate the price at which the policy was purchased by the customer. Please refrain from sending a line item in which no policy sales have been made. OptionId is the combination of product attributes separated by #.",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "lineItemId",
+                        "policyPurchaseDate",
+                        "warrantyQuoteId",
+                        "warrantyQuoteItemId",
+                        "totalWarrantyPrice",
+                        "warrantyQuantity",
+                        "unitWarrantySalePrice",
+                        "productTitle",
+                        "productId",
+                        "optionId",
+                        "productSKU",
+                        "productPrice"
+                      ],
+                      "properties": {
+                        "lineItemId": {
+                          "type": "string",
+                          "maxLength": 48
+                        },
+                        "policyPurchaseDate": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "warrantyQuoteId": {
+                          "type": "string"
+                        },
+                        "warrantyQuoteItemId": {
+                          "type": "string"
+                        },
+                        "totalWarrantyPrice": {
+                          "type": "number"
+                        },
+                        "warrantyQuantity": {
+                          "type": "integer"
+                        },
+                        "unitWarrantySalePrice": {
+                          "type": "number"
+                        },
+                        "productTitle": {
+                          "type": "string"
+                        },
+                        "productId": {
+                          "type": "string"
+                        },
+                        "optionId": {
+                          "type": "string"
+                        },
+                        "productSKU": {
+                          "type": "string"
+                        },
+                        "productPrice": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  },
+                  "customerDetails": {
+                    "type": "object",
+                    "required": [
+                      "firstName",
+                      "lastName",
+                      "addressLine1",
+                      "city",
+                      "state",
+                      "country",
+                      "zipCode",
+                      "customerEmail"
+                    ],
+                    "properties": {
+                      "firstName": {
+                        "type": "string"
+                      },
+                      "lastName": {
+                        "type": "string"
+                      },
+                      "addressLine1": {
+                        "type": "string"
+                      },
+                      "addressLine2": {
+                        "type": "string"
+                      },
+                      "city": {
+                        "type": "string"
+                      },
+                      "state": {
+                        "type": "string",
+                        "description": "ISO 3166-2 code"
+                      },
+                      "country": {
+                        "type": "string",
+                        "description": "Country code for USA is US"
+                      },
+                      "zipCode": {
+                        "type": "string"
+                      },
+                      "customerEmail": {
+                        "type": "string",
+                        "format": "email"
+                      },
+                      "mobileNumber": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Line item updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "storeId",
+                    "partnerOrderId",
+                    "contractList"
+                  ],
+                  "properties": {
+                    "storeId": {
+                      "type": "string",
+                      "description": "A unique identifier for a store will be shared as part of the integration kit"
+                    },
+                    "partnerOrderId": {
+                      "type": "string",
+                      "description": "A unique identifier for the complete successful order placed by a customer on the merchant site. This represents the whole order that can have multiple line items of different quantities.",
+                      "maxLength": 48
+                    },
+                    "contractList": {
+                      "type": "array",
+                      "description": "The list of contracts generated for each quantity in each line item. If any error in generating a contract, the error code and msg will be added for that item instead of the contract id.",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "lineItemId",
+                          "warrantyQuoteId",
+                          "warrantyQuoteItemId",
+                          "isCancelled"
+                        ],
+                        "properties": {
+                          "lineItemId": {
+                            "type": "string"
+                          },
+                          "contractId": {
+                            "type": "string"
+                          },
+                          "warrantyQuoteId": {
+                            "type": "string"
+                          },
+                          "warrantyQuoteItemId": {
+                            "type": "string"
+                          },
+                          "isCancelled": {
+                            "type": "boolean"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "511": {
+            "description": "Insufficient Parameters",
             "content": {
               "application/json": {
                 "schema": {

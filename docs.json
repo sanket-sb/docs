@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "SureBright Documentation",
   "colors": {
     "primary": "#16A34A",
     "light": "#07C983",
@@ -11,25 +11,12 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Guide",
         "groups": [
           {
-            "group": "Get Started",
+            "group": "Post Purchase",
             "pages": [
-              "index",
-              "quickstart",
-              "development"
-            ]
-          },
-          {
-            "group": "Essentials",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
+              "klaviyo-integration/klaviyoIntegrationGuide"
             ]
           }
         ]
@@ -40,13 +27,42 @@
           {
             "group": "API Documentation",
             "pages": [
-              "api-reference/introduction"
+              "api-reference/introduction",
+              "api-reference/authentication"
             ]
           },
           {
-            "group":"Store Category",
-            "pages":[
+            "group": "Store Category",
+            "pages": [
+              "api-reference/endpoint/storeCategory/index",
               "api-reference/endpoint/storeCategory/listCategory"
+            ]
+          },
+          {
+            "group": "Quotes",
+            "pages": [
+              "api-reference/endpoint/Quotes/index",
+              "api-reference/endpoint/Quotes/listwarrantyquotesbyCategory"
+            ]
+          },
+          {
+            "group": "Order",
+            "pages": [
+              "api-reference/endpoint/Order/index",
+              "api-reference/endpoint/Order/createWarranty",
+              "api-reference/endpoint/Order/updateWarranty"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Frontend Widget",
+        "groups": [
+          {
+            "group": "Frontend Widget Kit",
+            "pages": [
+              "frontend-widget-integration/frontend-widget-kit/getCartItemList",
+              "frontend-widget-integration/frontend-widget-kit/javascriptInjection"
             ]
           }
         ]
@@ -54,21 +70,7 @@
     ],
     "global": {
       "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
+        
       ]
     }
   },

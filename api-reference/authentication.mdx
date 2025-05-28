@@ -1,0 +1,42 @@
+---
+title: 'Authentication'
+description: 'Learn how to authenticate your requests to the SureBright API'
+---
+
+## Overview
+
+The SureBright API uses a private API key for authenticating requests. This key must be included in the request header using the X-SureBright-Access-Token field. You can view and manage your API key through the SureBright Merchant Portal under Account Settings.
+
+🔒 **Important:**
+Your API key grants privileged access—treat it as sensitive information. Never expose your API key in public repositories (e.g., GitHub) or embed it in client-side code.
+
+All API requests must be made over HTTPS. Requests sent over plain HTTP will be rejected. Proper authentication is required for all interactions with the SureBright API.
+
+## Security Scheme
+
+
+| Type |  API key
+|------|----------------------|
+| Header Parameter Name | X-SureBright-Access-Token |
+
+## Example Request
+
+### Sandbox Environment
+
+```bash
+curl -X GET \
+https://{HOST_NAME}/api/v1/quote/listWarrantyQuotes \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'X-SureBright-Access-Token: {sandbox access token}'
+```
+
+## Required Credentials
+
+The following values will be provided as part of the SureBright Integration Kit for both staging and production environments:
+
+- `storeId`
+- `SUREBRIGHT_CDN_URL`
+- `X-SureBright-Access-Token`
+- `HOST_NAME`
+

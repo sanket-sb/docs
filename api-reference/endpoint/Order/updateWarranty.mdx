@@ -1,0 +1,103 @@
+---
+title: 'Cancel / Update contract'
+openapi: 'PUT /platform/api/v1/order'
+---
+
+## Headers
+
+| Header | Description | Required |
+|--------|-------------|----------|
+| X-SureBright-Access-Token | Access token for authentication | Yes |
+
+
+# Examples
+
+## Request
+
+```bash
+
+{
+  "storeId": "**f4c059b2-5b74-4e4c-a3c5-85bc80cf8a09**",
+  "partnerOrderId": "83737121380",
+  "orderPurchaseDate": "2024-01-07T10:15:30Z",
+  "lineItemList": [
+    {
+      "lineItemId": "374dc3c3-94a3-4b85-a876-8651e461446d",
+      "policyPurchaseDate": "2024-01-07T10:15:30Z",
+      "warrantyQuoteId": "929d14dd-2937-4290-9818-8fca2a00a9a3",
+      "warrantyQuoteItemId": "8c78bc1a-0790-4cd3-a3f9-5ed97bbe59f5",
+      "totalWarrantyPrice": 99,
+      "warrantyQuantity": 0,
+      "unitWarrantySalePrice": 33, 
+      "productTitle": "GreatCircleUSA 3-in-1 Wood Chipper - 7HP Engine, 3 Max Branch Capacity", 
+      "productId": "6673746231399", 
+      "optionId": "8577825144935", 
+      "productSKU": "ALH05",
+      "productPrice": 1299       
+    }],
+  "customerDetails": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "addressLine1": "123 Hathway Street",
+    "addressLine2": "",
+    "city": "New York City",
+    "state": "NY",
+    "country": "US",
+    "zipCode": "10005",
+    "customerEmail": "johndoe@gmail.com",
+    "mobileNumber": "7872323781"
+  }
+}
+
+```
+
+
+## Response
+
+```bash
+
+{
+  "storeId": "**f4c059b2-5b74-4e4c-a3c5-85bc80cf8a09**",
+  "partnerOrderId": "83737121380",
+  "contractList": [
+    {
+      "lineItemId": "374dc3c3-94a3-4b85-a876-8651e461446d",
+      "contractId": "eb46a2ba-050f-4d40-9105-02ccd497d99e",
+      "warrantyQuoteId": "929d14dd-2937-4290-9818-8fca2a00a9a3",
+      "warrantyQuoteItemId": "8c78bc1a-0790-4cd3-a3f9-5ed97bbe59f5",
+      "isCancelled": true
+    }, 
+    {
+      "lineItemId": "374dc3c3-94a3-4b85-a876-8651e461446d",
+      "contractId": "ab46a2ba-050f-4d40-9105-02ccd497d99e",
+      "warrantyQuoteId": "929d14dd-2937-4290-9818-8fca2a00a9a3",
+      "warrantyQuoteItemId": "8c78bc1a-0790-4cd3-a3f9-5ed97bbe59f5", 
+      "isCancelled": true
+    }, 
+    {
+      "lineItemId": "374dc3c3-94a3-4b85-a876-8651e461446d",
+      "contractId": "cd46a2ba-050f-4d40-9105-02ccd497d99e",
+      "warrantyQuoteId": "129d14dd-2937-4290-9818-8fca2a00a9a3",
+      "warrantyQuoteItemId": "3478bc1a-0790-4cd3-a3f9-5ed97bbe59f5", 
+      "isCancelled": true
+    }
+  ]
+}
+
+```
+
+
+
+# HTTP Status Codes & Error Types
+
+| Code | Message |
+|------|---------|
+| 511 | Insufficient Parameters |
+| 512 | Validation Failed for Input Parameters |
+| 513 | Product Not Found |
+| 514 | No Quote Found |
+| 515 | Store Not Found |
+| 516 | Not Eligible |
+| 517 | Category Not Found |
+| 200 | Line Item Updated Successfully |
+| 500 | Something Unexpectedly Went Wrong | 
