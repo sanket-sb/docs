@@ -16,7 +16,8 @@
           {
             "group": "Post Purchase",
             "pages": [
-              "klaviyo-integration/klaviyoIntegrationGuide"
+              "klaviyo-integration/klaviyoIntegrationGuide", 
+              "klaviyo-integration/brandManagedCampaignGuide"
             ]
           }
         ]
