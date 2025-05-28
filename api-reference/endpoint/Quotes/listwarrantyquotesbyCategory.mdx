@@ -1,0 +1,34 @@
+---
+title: 'List Warranty Quotes'
+openapi: 'GET /quoteService/api/v1/category/listWarrantyQuotes/{storeId}'
+---
+
+## Headers
+
+| Header | Description | Required |
+|--------|-------------|----------|
+| X-SureBright-Access-Token | Access token for authentication | No |
+
+
+
+
+
+# HTTP Status Codes & Error Types
+
+| Code | Message |
+|:----:|:-------:|
+| 511  | Insufficient Parameters |
+| 512  | Validation Failed for Input Parameters |
+| 513  | Product Not Found |
+| 514  | No Quote Found |
+| 515  | Store Not Found |
+| 516  | Not Eligible |
+| 517  | Category Not Found |
+| 200  | Quotes Found |
+| 500  | Something Unexpectedly Went Wrong |
+
+
+## Country and State Codes
+
+- Country codes (Alpha 2): [IBAN Country Codes](https://www.iban.com/country-codes)
+- US State codes: [FIPS State Codes](https://en.wikipedia.org/wiki/Federal_Information_Processing_Standard_state_code) 

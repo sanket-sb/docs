@@ -1,0 +1,28 @@
+---
+title: 'JavaScript Injection'
+---
+
+## Integration Steps
+
+### 1. Add Script Tag
+
+Add the following script tag to the `<head>` section of your website:
+
+```html
+<script src="https://[SUREBRIGHT_CDN_URL]/path-to-surebright-library.js"></script>
+```
+
+### 2. Initialize the Library
+
+After adding the script tag, initialize the SureBright library using the `initialize` method. The `STORE_ID` will be provided as part of the integration guide:
+
+```javascript
+SureBright.initialize({
+    "storeId": "STORE_ID"
+}, function onInitialisation(response) {
+    console.log("Initialization successful", response.storeId);
+});
+```
+
+
+💡 Look for this message in console logs to ensure that SureBright has been successfully initialized

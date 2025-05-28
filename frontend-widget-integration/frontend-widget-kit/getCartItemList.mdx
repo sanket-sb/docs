@@ -1,0 +1,49 @@
+---
+title: 'Get Cart Items List'
+description: 'SureBright maintains the information on the warranty offer that customers choose for any product they purchase. If needed, you can retrieve these details using the getCartItems method from the injected library mentioned above.'
+---
+
+
+
+```javascript
+SureBright.getCartItems((response) => {
+  console.log(response.cartItems);
+});
+```
+
+## Example Response
+
+```json
+{
+  "cartItems": [
+    {
+      "productDetails": {
+        "productId": 6673746231399,
+        "optionId": 8577825144935,
+        "productTitle": "GreatCircleUSA 3-in-1 Wood Chipper - 7HP Engine, 3 Max Branch Capacity",
+        "productPrice": 649.99,
+        "productThumbnail": "https://cdn.shopify.com/s/files/1/2134/2653/files/81wDzkJdj4L._AC_SL1500.jpg",
+        "quantity": 2
+      },
+      "warrantyDetails": {
+        "warrantyProductId": 7080029454439,
+        "warrantyOptionId": 40937702359143,
+        "warrantyPrice": 69,
+        "warrantyTitle": "Add premium product protection",
+        "warrantyImage": "https://www.surebright.com/_next/image?url=https%3A%2F%2Fdemtt2r26n0u0.cloudfront.net%2Fmisc%2Fsurebright_logo_v2.png&w=256&q=75",
+        "warrantyTenure": 2,
+        "warrantyQuantity": 2,
+        "warrantyQuoteId": "7b9a6c31-f6c5-4110-a1f4-c69dca10ab06",
+        "warrantyQuoteItemId": "047cd751-8737-45cd-b113-227312a88d51"
+      }
+    }
+  ]
+}
+```
+
+## Notes
+
+- This method is asynchronous and uses a callback pattern
+- The callback function will be called with the response containing the cart items
+- Each cart item includes both product details and warranty details
+- The warranty details are only included if a warranty has been selected for the product
