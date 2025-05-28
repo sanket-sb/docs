@@ -1,0 +1,6 @@
+/* Hide all "Try it" buttons */
+button[class*="tryit-button"], 
+.try-it-button, 
+.tryItButton {
+  display: none !important;
+}

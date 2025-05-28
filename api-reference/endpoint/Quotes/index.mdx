@@ -1,0 +1,67 @@
+---
+title: Quotes
+---
+
+
+A **Quote** represents the dynamically generated pricing and coverage details for an extended warranty plan when a user inquires about protection for a specific product variant or product category.
+
+It serves as a core object in the warranty flow, allowing customers to view and select the most relevant protection plans at the point of sale.
+
+---
+
+## 🧩 How Quotes Are Generated
+
+Quotes can be generated in two ways:
+
+### 🔹 For a Specific Product Variant
+
+Provides **precise pricing and plan options** tailored to the exact product configuration (e.g., brand, model, price).
+
+- Ideal for **product detail pages** or **checkout flows**
+
+### 🔹 For a Product Category
+
+Returns a **price range** that reflects variability across products within the selected category (e.g., Televisions, Home Appliances).
+
+- Includes **multiple tenure and coverage options**
+- Helps users understand **general cost and protection level**
+
+---
+
+## 🌍 Geographic Sensitivity
+
+Quotes are **region-aware** and vary based on:
+
+- **Country**  
+  Warranty pricing, tax, regulations, and coverage terms may differ by country.
+
+- **Province/State (within a Country)**  
+  Localized pricing or regulations may apply.  
+  _Example: California vs Texas, or Ontario vs Quebec._
+
+---
+
+## 📦 Quote & QuoteItem Structure
+
+Each quote is uniquely identified by a `quoteId`.  
+A `quoteId` may include **multiple plan options**, each represented by a unique `quoteItemId`.
+
+Each `quoteItemId` includes:
+
+- **Coverage Type** – e.g., Accidental Damage, Breakdown, or both  
+- **Tenure** – Duration of coverage (e.g., 12, 24, 36 months)  
+- **Price** – Fixed cost (variant-level) or price range (category-level)  
+- **Deductible** – Optional customer-paid portion per claim  
+- **Region** – Country and, if applicable, province/state  
+- **Currency & Locale** – Ensures accurate regional pricing  
+- **Terms & Conditions URL** – Link to the full warranty policy  
+
+---
+
+## 🚀 Usage
+
+Quotes enable both customers and merchant systems to:
+
+- Dynamically present **warranty options** based on user location and product context  
+- Power **product detail pages**, modals, or embedded widgets with tailored protection plans  
+- Drive **upsell logic** that reflects jurisdiction-specific compliance and pricing logic

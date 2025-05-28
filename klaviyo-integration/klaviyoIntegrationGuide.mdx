@@ -1,0 +1,110 @@
+---
+title: Klaviyo
+---
+
+
+## Overview
+This guide explains the two key events SureBright sends to Klaviyo to power your warranty-related marketing flows. Order data from your e-commerce platform is used to determine eligibility, and to generate unique links for eligible end customers receiving the post purchase email. These events enable you to create targeted post-purchase communications for customers with warranty-eligible products and those who have purchased warranties.
+
+## Configure the Integration
+Share your [Klaviyo Public Key](https://help.klaviyo.com/hc/en-us/articles/115005062267#your-public-api-key-site-id2) with the SureBright Team.
+
+If you want SureBright to handle Warranty related marketing flows and templates then share a Private Key with the SureBright Team by following the [guide](https://app.storylane.io/share/gmb05pqr5zbj).
+ 
+<iframe
+  src="https://app.storylane.io/share/gmb05pqr5zbj"
+  width="100%"
+  height="600"
+  frameborder="0"
+  allowfullscreen
+></iframe>
+
+
+
+## Klaviyo Set-up & Defining the Flows
+Navigate to the Klaviyo page that allows you to define the [Klaviyo flow](https://help.klaviyo.com/hc/en-us/articles/115002774932) with the initial trigger and filters.
+
+To define the [Post-Purchase Flow](https://help.klaviyo.com/hc/en-us/articles/115002774932) , focus on these Klaviyo fields:
+- Trigger - Set to SureBright: Eligible Order. Do not use the generic Placed Order.
+- Trigger Filter - Set to "is_eligible: true".
+- Use the SureBright-integrated attributes to insert the event data in the communication template. The key attribute to be used is post_purchase_url, which takes the user to a customer-facing page where protection plans can be directly purchased.
+
+## Flow Example
+
+![FlowChart Example](/images/klaviyo-flowchart.png)
+
+### Event 1: SureBright: Eligible Order
+This event is triggered when a customer purchases a product that is eligible for a SureBright warranty. Here are the attributes available to you in Klaviyo about SureBright eligibility on your store's orders:
+
+<ParamField path="order_id" type="string" required>
+  Shopify Order Id
+</ParamField>
+<ParamField path="order_amount" type="string" required>
+  Total Order Amount
+</ParamField>
+<ParamField path="currency_code" type="string" required>
+  Currency code
+</ParamField>
+<ParamField path="order_created_at" type="datetime" required>
+  Timestamp of order creation
+</ParamField>
+<ParamField path="merchant_logo_url" type="string" required>
+  URL of the merchant's logo
+</ParamField>
+<ParamField path="surebright_logo_url" type="string" required>
+  Url for SureBright's Logo
+</ParamField>
+<ParamField path="merchant_name" type="string" required>
+  Name of the merchant
+</ParamField>
+<ParamField path="post_purchase_url" type="string" required>
+  URL for post-purchase warranty actions
+</ParamField>
+<ParamField path="product_title" type="string" required>
+  Title of the purchased product
+</ParamField>
+<ParamField path="is_eligible" type="boolean" required>
+  Whether the order is warranty eligible
+</ParamField>
+<ParamField path="coverage_type" type="string" required>
+  Indicates type of coverage
+</ParamField>
+<ParamField path="coverage_option_title" type="string" required>
+  Coverage based dynamic title
+</ParamField>
+
+
+
+### Event 2: SureBright: Policy Purchased
+This event is triggered when a customer successfully purchases a warranty for their product. Most merchants will set up campaigns that target eligible purchases but stop emailing their customers after a SureBright: Policy Purchased (this event).
+
+| Property | Type | Example | Description |
+|:--------:|:----:|:-------:|:-----------:|
+| order_id | string | 1234567890 | Shopify Order Id |
+| contract_id | string | bb783fde671e4cac849e39 | Unique warranty contract identifier |
+| product_title | string | Sample Product Title | Product the warranty covers |
+| policy_tenure | string | 1 year | Duration of the warranty coverage |
+| policy_price | string | 199.99 | Price paid for the warranty |
+| warranty_purchase_date | datetime | 2025-04-10T15:00:41.301007 | When the warranty was purchased |
+| coverage_type | string | AD | Indicates type of coverage |
+
+## Implementation Use Cases
+
+### SureBright: Eligible Order
+- Send follow-up emails encouraging customers to purchase warranties for eligible products
+- Create reminder flows for customers who haven't purchased available warranty protection
+- Use the post_purchase_url to direct customers to complete their warranty registration
+
+### SureBright: Policy Purchased
+- Send warranty confirmation and thank you emails
+- Create educational content about how to use their warranty
+- Set up anniversary reminders as the warranty approaches expiration
+- Cross-sell related products that complement their purchase
+
+## Best Practices
+- Personalize messaging using the customer and product information included in both events
+- Use segmentation to target customers based on product type and warranty value
+- Create different flows based on whether breakdown coverage is included
+
+## Support
+For integration assistance, contact SureBright technical support or your Klaviyo account manager.
