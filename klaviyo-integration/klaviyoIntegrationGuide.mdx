@@ -1,5 +1,5 @@
 ---
-title: Klaviyo Integration Guide
+title: Klaviyo
 ---
 
 
@@ -36,21 +36,44 @@ To define the [Post-Purchase Flow](https://help.klaviyo.com/hc/en-us/articles/11
 ### Event 1: SureBright: Eligible Order
 This event is triggered when a customer purchases a product that is eligible for a SureBright warranty. Here are the attributes available to you in Klaviyo about SureBright eligibility on your store's orders:
 
-| Property | Type | Example | Description |
-|:--------:|:----:|:-------:|:-----------:|
-| order_id | string | 613804887271 | Shopify Order Id |
-| order_amount | string | 149.99 | Total Order Amount |
-| currency_code | string | USD | Currency code |
-| order_created_at | datetime | 2025-04-01T12:34:56.000Z | Timestamp of order creation |
-| merchant_logo_url | string | https://merchant.com/logo.png | URL of the merchant's logo |
-| surebright_logo_url | string | https://demtt2r26n0u0.cloudfront.net/misc/surebright_logo_v2.png | Url for SureBright's Logo |
-| merchant_name | string | Example Merchant | Name of the merchant |
-| post_purchase_url | string | https://surebright.com/warranty | URL for post-purchase warranty actions |
-| product_title | string | Example Product Name | Title of the purchased product |
-| is_eligible | boolean | true | Whether the order is warranty eligible |
-| coverage_type | string | AD | Indicates type of coverage |
-| coverage_option_title | string | Your warranty coverage includes: | coverage based dynamic title |
-| coverage_options | array | \[ \{"icon_url": "[https://demtt2r26n0u0.cloudfront.net/misc/images/postPurchase/sb_icon_cancel_any_time.png](https://demtt2r26n0u0.cloudfront.net/misc/images/postPurchase/sb_icon_cancel_any_time.png)", "text": "Cancel anytime." \}\] | coverage options for the warranty category |
+<ParamField path="order_id" type="string" required>
+  Shopify Order Id
+</ParamField>
+<ParamField path="order_amount" type="string" required>
+  Total Order Amount
+</ParamField>
+<ParamField path="currency_code" type="string" required>
+  Currency code
+</ParamField>
+<ParamField path="order_created_at" type="datetime" required>
+  Timestamp of order creation
+</ParamField>
+<ParamField path="merchant_logo_url" type="string" required>
+  URL of the merchant's logo
+</ParamField>
+<ParamField path="surebright_logo_url" type="string" required>
+  Url for SureBright's Logo
+</ParamField>
+<ParamField path="merchant_name" type="string" required>
+  Name of the merchant
+</ParamField>
+<ParamField path="post_purchase_url" type="string" required>
+  URL for post-purchase warranty actions
+</ParamField>
+<ParamField path="product_title" type="string" required>
+  Title of the purchased product
+</ParamField>
+<ParamField path="is_eligible" type="boolean" required>
+  Whether the order is warranty eligible
+</ParamField>
+<ParamField path="coverage_type" type="string" required>
+  Indicates type of coverage
+</ParamField>
+<ParamField path="coverage_option_title" type="string" required>
+  Coverage based dynamic title
+</ParamField>
+
+
 
 ### Event 2: SureBright: Policy Purchased
 This event is triggered when a customer successfully purchases a warranty for their product. Most merchants will set up campaigns that target eligible purchases but stop emailing their customers after a SureBright: Policy Purchased (this event).

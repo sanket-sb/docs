@@ -14,57 +14,19 @@ openapi: 'GET /quoteService/api/v1/store/listCategories'
 
 
 
-# Examples
 
-## Request
-
-```bash
-curl -X GET 'https://{HOST_NAME}/quoteService/api/v1/store/listCategories/{storeId}?country=US&state=AL'
-```
-
-## Response
-
-### 200 - Categories Found
-
-```json
-{
-  "storeId": "ecca4210-09a4-446c-ad87-5e65bd50df12",
-  "categoryList": [
-    {
-      "labelList": [],
-      "sbCategoryName": "Wi Fi Tablets",
-      "sbCategoryId": "9fbc2345-17b2-42ef-9a76-bc1d88a1e411"
-    },
-    {
-      "labelList": [],
-      "sbCategoryName": "TV",
-      "sbCategoryId": "9fbc2345-17b2-42ef-9a76-bc1d88a1e411"
-    }
-  ],
-  "isError": false
-}
-```
-
-### 511 - Insufficient Parameters
-
-```json
-{
-  "isError": true,
-  "errorType": 511,
-  "errorMessage": "Insufficient Params. Mandatory Params missing"
-}
-```
 
 # HTTP Status Codes & Error Types
 
 | Code | Message |
-|------|---------|
-| 511 | Insufficient Parameters |
-| 512 | Validation Failed for Input Parameters |
-| 513 | Product Not Found |
-| 514 | No Quote Found |
-| 515 | Store Not Found |
-| 516 | Not Eligible |
-| 517 | Category Not Found |
-| 200 | Quotes Found |
-| 500 | Something Unexpectedly Went Wrong |
+|:----:|:-------:|
+| 511  | Insufficient Parameters |
+| 512  | Validation Failed for Input Parameters |
+| 513  | Product Not Found |
+| 514  | No Quote Found |
+| 515  | Store Not Found |
+| 516  | Not Eligible |
+| 517  | Category Not Found |
+| 200  | Quotes Found |
+| 500  | Something Unexpectedly Went Wrong |
+
