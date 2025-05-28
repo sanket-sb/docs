@@ -1,0 +1,60 @@
+---
+title: "Step by Step : Brand Managed Campaign"
+description: "Follow the steps below to configure a Klaviyo Flow that targets customers eligible for warranty upsell emails using your own email templates and messaging"
+---
+
+### 1. Navigate to the Flow Builder
+
+- Log in to your Klaviyo account.
+- Go to **Flows** from the left-hand menu.
+- Click **Create Flow**.
+- Choose **Create from Scratch**, and name your flow something like `SureBright Post-Purchase Warranty`.
+
+---
+
+### 2. Set the Trigger
+
+- For the **Trigger**, select **Metric**.
+- In the dropdown, \*\*choose \*\*`SureBright: Eligible Order`.
+
+> ⚠️ _Do not use the generic “Placed Order” trigger—this will not capture warranty-eligible events._
+
+---
+
+### 3. Add a Trigger Filter
+
+- After selecting the trigger, click **“Trigger Filters”**.
+- Add a condition:
+  - **Field:** `is_eligible`
+  - **Condition:** `equals`
+  - **Value:** `true`
+
+> ✅ This ensures that only orders eligible for a post-purchase warranty offer are included.
+
+---
+
+### 4. Build Your Flow
+
+- Add your **email step(s)** to the flow as desired.
+- Use **SureBright event data** to personalize your messaging.
+
+---
+
+### 5. Personalize Using Event Attributes
+
+In your email content, you can dynamically insert values from the SureBright event payload. One key attribute to include is:
+
+- `{{ event.post_purchase_url }}` – This is a unique, customer-facing link where protection plans can be directly purchased.
+
+You can also use additional attributes like:
+
+- `{{ event.order_number }}`
+- `{{ event.product_name }}`
+- `{{ event.coverage_summary }}`
+- `{{ event.customer_first_name }}`
+
+---
+
+### 6. Submit for Review
+
+Before activating the flow, please submit a preview or test email to the SureBright team for compliance review and approval.
