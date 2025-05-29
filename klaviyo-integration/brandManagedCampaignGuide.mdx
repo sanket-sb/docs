@@ -1,7 +1,22 @@
 ---
-title: "Brand Managed Campaign"
+title: "Klaviyo : Brand Managed Campaign"
 description: "Follow the steps below to configure a Klaviyo Flow that targets customers eligible for warranty upsell emails using your own email templates and messaging"
 ---
+
+<Warning>
+  **Disclaimer:** Access credentials must be shared and initial configuration steps completed as outlined in the [Klaviyo Integration Guide](/klaviyo-integration/klaviyoIntegrationGuide). Once setup is complete, you may proceed with this guide.
+</Warning>
+
+### Seamless Klaviyo Integration
+
+To power these campaigns, we push the following data directly to Klaviyo:
+
+- Warranty plan details
+- Order and product information
+- Coverage summary
+- Personalized post-purchase journey links
+
+This enables you to craft dynamic, timely, and relevant messages to drive conversions and enhance customer trust.
 
 ### 1. Navigate to the Flow Builder
 
@@ -66,7 +81,7 @@ Before activating the flow, please submit a preview or test email to the SureBri
 This event is triggered when a customer purchases a product that is eligible for a SureBright warranty. Here are the attributes available to you in Klaviyo about SureBright eligibility on your store's orders:
 
 <ParamField path="order_id" type="string">
-  Shopify Order Id
+  Platform Order Id (Example: Shopify)
 </ParamField>
 
 <ParamField path="order_amount" type="string">
@@ -74,7 +89,7 @@ This event is triggered when a customer purchases a product that is eligible for
 </ParamField>
 
 <ParamField path="currency_code" type="string">
-  Currency code
+  Currency code (Example: "USD")
 </ParamField>
 
 <ParamField path="order_created_at" type="datetime">
@@ -177,7 +192,7 @@ Use this event to drive engagement and conversion among customers who didn’t b
 
 Leverage this event to build customer trust and extend your brand experience post-purchase:
 
-- **Confirmation Emails:** Immediately send policy confirmation and a thank-you message.
+- **Acknowledge and Appreciate Your Customers:** Brand's customized thank-you message.
 - **Stop further communications:** Scheduled communications can be terminated based on this event.
 
 ## Flow Example
@@ -190,6 +205,16 @@ Ensure your campaign delivers maximum value and conversion by following these re
 
 - **Dynamic Personalization:** Use attributes like `product_title`, `coverage_type`, and `policy_price` to tailor messaging.
 - **Contextual Journeys:** Differentiate your flows based on warranty type—e.g., breakdown vs. accidental damage—to increase relevance.
+
+### FAQs
+
+<Accordion title="Can I send post-purchase emails to all of my previous customers?" iconType="duotone">
+  Data from SureBright begins flowing into Klaviyo only after the integration is enabled. This means that any historical SureBright data—captured prior to activation—will not be available within Klaviyo.
+</Accordion>
+
+<Accordion title="Why can't I see the SureBright metric or data in Klaviyo to be used in creating a flow?" iconType="duotone">
+  Once SureBright has completed the configuration on your account, the relevant events (e.g., SureBright: Eligible Order, SureBright: Policy Purchased) and associated data will appear in Klaviyo. If you've already shared access but still don't see the events, please wait for confirmation from the SureBright team or contact support for an update.
+</Accordion>
 
 ## [**​**](https://surebrighttechnologiesinc.mintlify.app/klaviyo-integration/klaviyoIntegrationGuide#implementation-use-cases)Support
 
