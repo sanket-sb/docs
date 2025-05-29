@@ -114,7 +114,17 @@ This event is triggered when a customer purchases a product that is eligible for
 </ParamField>
 
 <ParamField path="coverage_options" type="array">
-  Array of Coverage options provided with the warranty
+  Array of Coverage options provided with the warranty.
+
+  <Expandable title="object">
+    <ParamField path="icon_url" type="string">
+      Icon for the particular coverage text
+
+      <ParamField path="text" type="string">
+        Coverage text
+      </ParamField>
+    </ParamField>
+  </Expandable>
 </ParamField>
 
 ### [**​**](https://surebrighttechnologiesinc.mintlify.app/klaviyo-integration/klaviyoIntegrationGuide#event-2%3A-surebright%3A-policy-purchased)
