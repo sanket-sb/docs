@@ -88,21 +88,47 @@ This event is triggered when a customer purchases a product that is eligible for
 
 <ParamField path="coverage_option_title" type="string" required>
   Coverage based dynamic title
+  <Expandable title="Child attributes">
+    <ResponseField name="icon_url" type="string">
+    </ResponseField>
+
+    <ResponseField name="text" type="string">
+    </ResponseField>
+  </Expandable>
+
 </ParamField>
 
 ### Event 2: SureBright: Policy Purchased
 
 This event is triggered when a customer successfully purchases a warranty for their product. Most merchants will set up campaigns that target eligible purchases but stop emailing their customers after a SureBright: Policy Purchased (this event).
 
-| Property               | Type     | Example                    | Description                         |
-| :--------------------: | :------: | :------------------------: | :---------------------------------: |
-| order_id               | string   | 1234567890                 | Shopify Order Id                    |
-| contract_id            | string   | bb783fde671e4cac849e39     | Unique warranty contract identifier |
-| product_title          | string   | Sample Product Title       | Product the warranty covers         |
-| policy_tenure          | string   | 1 year                     | Duration of the warranty coverage   |
-| policy_price           | string   | 199.99                     | Price paid for the warranty         |
-| warranty_purchase_date | datetime | 2025-04-10T15:00:41.301007 | When the warranty was purchased     |
-| coverage_type          | string   | AD                         | Indicates type of coverage          |
+<ParamField path="order_id" type="string" required initialValue="1234567890">
+  Shopify Order Id
+</ParamField>
+
+<ParamField path="contract_id" type="string" required initialValue="bb783fde671e4cac849e39">
+  Unique warranty contract identifier
+</ParamField>
+
+<ParamField path="product_title" type="string" required initialValue="Sample Product Title">
+  Product the warranty covers
+</ParamField>
+
+<ParamField path="policy_tenure" type="string" required initialValue="1 year">
+  Duration of the warranty coverage
+</ParamField>
+
+<ParamField path="policy_price" type="string" required initialValue="199.99">
+  Price paid for the warranty
+</ParamField>
+
+<ParamField path="warranty_purchase_date" type="string" required initialValue="2025-04-10T15:00:41.301007">
+  When the warranty was purchased (ISO datetime format)
+</ParamField>
+
+<ParamField path="coverage_type" type="string" required initialValue="AD">
+  Indicates type of coverage
+</ParamField>
 
 ## Implementation Use Cases
 
