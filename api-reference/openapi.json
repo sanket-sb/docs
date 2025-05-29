@@ -14,7 +14,6 @@
     "/quoteService/api/v1/store/listCategories": {
       "get": {
         "summary": "List Categories",
-        "x-docs-disable-tryit": true,
         "description": "Retrieves a list of store categories based on storeId . The response includes category details, and labels based on the authorization status",
         "operationId": "listCategories",
         "tags": [
@@ -90,26 +89,213 @@
             }
           },
           "511": {
-            "description": "Error response",
+            "description": "Insufficient Parameters",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
                     "isError": {
-                      "type": "boolean"
+                      "type": "boolean",
+                      "description": "true"
                     },
                     "errorType": {
-                      "type": "integer"
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 511
                     },
                     "errorMessage": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Insufficient Parameters"
                     }
                   }
                 }
               }
             }
+          },
+          "512": {
+  "description": "Validation Failed for Input Parameters",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "isError": {
+            "type": "boolean",
+            "description": "true"
+          },
+          "errorType": {
+            "type": "integer",
+            "description": "error type",
+            "example": 512
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "error message",
+            "example": "Validation Failed for Input Parameters"
           }
+        }
+      }
+    }
+  }
+},
+"513": {
+  "description": "Product Not Found",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "isError": {
+            "type": "boolean",
+            "description": "true"
+          },
+          "errorType": {
+            "type": "integer",
+            "description": "error type",
+            "example": 513
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "error message",
+            "example": "Product Not Found"
+          }
+        }
+      }
+    }
+  }
+},
+"514": {
+  "description": "No Quote Found",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "isError": {
+            "type": "boolean",
+            "description": "true"
+          },
+          "errorType": {
+            "type": "integer",
+            "description": "error type",
+            "example": 514
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "error message",
+            "example": "No Quote Found"
+          }
+        }
+      }
+    }
+  }
+},
+"515": {
+  "description": "Store Not Found",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "isError": {
+            "type": "boolean",
+            "description": "true"
+          },
+          "errorType": {
+            "type": "integer",
+            "description": "error type",
+            "example": 515
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "error message",
+            "example": "Store Not Found"
+          }
+        }
+      }
+    }
+  }
+},
+"516": {
+  "description": "Not Eligible",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "isError": {
+            "type": "boolean",
+            "description": "true"
+          },
+          "errorType": {
+            "type": "integer",
+            "description": "error type",
+            "example": 516
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "error message",
+            "example": "Not Eligible"
+          }
+        }
+      }
+    }
+  }
+},
+"517": {
+  "description": "Category Not Found",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "isError": {
+            "type": "boolean",
+            "description": "true"
+          },
+          "errorType": {
+            "type": "integer",
+            "description": "error type",
+            "example": 517
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "error message",
+            "example": "Category Not Found"
+          }
+        }
+      }
+    }
+  }
+},
+"500": {
+  "description": "Something Unexpectedly Went Wrong",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "isError": {
+            "type": "boolean",
+            "description": "true"
+          },
+          "errorType": {
+            "type": "integer",
+            "description": "error type",
+            "example": 500
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "error message",
+            "example": "Something Unexpectedly Went Wrong"
+          }
+        }
+      }
+    }
+  }
+}
         }
       }
     },
@@ -261,19 +447,206 @@
                   "type": "object",
                   "properties": {
                     "isError": {
-                      "type": "boolean"
+                      "type": "boolean",
+                      "description": "true"
                     },
                     "errorType": {
-                      "type": "integer"
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 511
                     },
                     "errorMessage": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Insufficient Parameters"
                     }
                   }
                 }
               }
             }
+          },
+          "512": {
+  "description": "Validation Failed for Input Parameters",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "isError": {
+            "type": "boolean",
+            "description": "true"
+          },
+          "errorType": {
+            "type": "integer",
+            "description": "error type",
+            "example": 512
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "error message",
+            "example": "Validation Failed for Input Parameters"
           }
+        }
+      }
+    }
+  }
+},
+"513": {
+  "description": "Product Not Found",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "isError": {
+            "type": "boolean",
+            "description": "true"
+          },
+          "errorType": {
+            "type": "integer",
+            "description": "error type",
+            "example": 513
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "error message",
+            "example": "Product Not Found"
+          }
+        }
+      }
+    }
+  }
+},
+"514": {
+  "description": "No Quote Found",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "isError": {
+            "type": "boolean",
+            "description": "true"
+          },
+          "errorType": {
+            "type": "integer",
+            "description": "error type",
+            "example": 514
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "error message",
+            "example": "No Quote Found"
+          }
+        }
+      }
+    }
+  }
+},
+"515": {
+  "description": "Store Not Found",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "isError": {
+            "type": "boolean",
+            "description": "true"
+          },
+          "errorType": {
+            "type": "integer",
+            "description": "error type",
+            "example": 515
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "error message",
+            "example": "Store Not Found"
+          }
+        }
+      }
+    }
+  }
+},
+"516": {
+  "description": "Not Eligible",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "isError": {
+            "type": "boolean",
+            "description": "true"
+          },
+          "errorType": {
+            "type": "integer",
+            "description": "error type",
+            "example": 516
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "error message",
+            "example": "Not Eligible"
+          }
+        }
+      }
+    }
+  }
+},
+"517": {
+  "description": "Category Not Found",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "isError": {
+            "type": "boolean",
+            "description": "true"
+          },
+          "errorType": {
+            "type": "integer",
+            "description": "error type",
+            "example": 517
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "error message",
+            "example": "Category Not Found"
+          }
+        }
+      }
+    }
+  }
+},
+"500": {
+  "description": "Something Unexpectedly Went Wrong",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "isError": {
+            "type": "boolean",
+            "description": "true"
+          },
+          "errorType": {
+            "type": "integer",
+            "description": "error type",
+            "example": 500
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "error message",
+            "example": "Something Unexpectedly Went Wrong"
+          }
+        }
+      }
+    }
+  }
+}
         }
       }
     },
@@ -502,19 +875,206 @@
                   "type": "object",
                   "properties": {
                     "isError": {
-                      "type": "boolean"
+                      "type": "boolean",
+                      "description": "true"
                     },
                     "errorType": {
-                      "type": "integer"
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 511
                     },
                     "errorMessage": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Insufficient Parameters"
                     }
                   }
                 }
               }
             }
+          },
+          "512": {
+  "description": "Validation Failed for Input Parameters",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "isError": {
+            "type": "boolean",
+            "description": "true"
+          },
+          "errorType": {
+            "type": "integer",
+            "description": "error type",
+            "example": 512
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "error message",
+            "example": "Validation Failed for Input Parameters"
           }
+        }
+      }
+    }
+  }
+},
+"513": {
+  "description": "Product Not Found",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "isError": {
+            "type": "boolean",
+            "description": "true"
+          },
+          "errorType": {
+            "type": "integer",
+            "description": "error type",
+            "example": 513
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "error message",
+            "example": "Product Not Found"
+          }
+        }
+      }
+    }
+  }
+},
+"514": {
+  "description": "No Quote Found",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "isError": {
+            "type": "boolean",
+            "description": "true"
+          },
+          "errorType": {
+            "type": "integer",
+            "description": "error type",
+            "example": 514
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "error message",
+            "example": "No Quote Found"
+          }
+        }
+      }
+    }
+  }
+},
+"515": {
+  "description": "Store Not Found",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "isError": {
+            "type": "boolean",
+            "description": "true"
+          },
+          "errorType": {
+            "type": "integer",
+            "description": "error type",
+            "example": 515
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "error message",
+            "example": "Store Not Found"
+          }
+        }
+      }
+    }
+  }
+},
+"516": {
+  "description": "Not Eligible",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "isError": {
+            "type": "boolean",
+            "description": "true"
+          },
+          "errorType": {
+            "type": "integer",
+            "description": "error type",
+            "example": 516
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "error message",
+            "example": "Not Eligible"
+          }
+        }
+      }
+    }
+  }
+},
+"517": {
+  "description": "Category Not Found",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "isError": {
+            "type": "boolean",
+            "description": "true"
+          },
+          "errorType": {
+            "type": "integer",
+            "description": "error type",
+            "example": 517
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "error message",
+            "example": "Category Not Found"
+          }
+        }
+      }
+    }
+  }
+},
+"500": {
+  "description": "Something Unexpectedly Went Wrong",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "isError": {
+            "type": "boolean",
+            "description": "true"
+          },
+          "errorType": {
+            "type": "integer",
+            "description": "error type",
+            "example": 500
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "error message",
+            "example": "Something Unexpectedly Went Wrong"
+          }
+        }
+      }
+    }
+  }
+}
         }
       },
       "put": {
@@ -731,19 +1291,206 @@
                   "type": "object",
                   "properties": {
                     "isError": {
-                      "type": "boolean"
+                      "type": "boolean",
+                      "description": "true"
                     },
                     "errorType": {
-                      "type": "integer"
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 511
                     },
                     "errorMessage": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Insufficient Parameters"
                     }
                   }
                 }
               }
             }
+          },
+          "512": {
+  "description": "Validation Failed for Input Parameters",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "isError": {
+            "type": "boolean",
+            "description": "true"
+          },
+          "errorType": {
+            "type": "integer",
+            "description": "error type",
+            "example": 512
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "error message",
+            "example": "Validation Failed for Input Parameters"
           }
+        }
+      }
+    }
+  }
+},
+"513": {
+  "description": "Product Not Found",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "isError": {
+            "type": "boolean",
+            "description": "true"
+          },
+          "errorType": {
+            "type": "integer",
+            "description": "error type",
+            "example": 513
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "error message",
+            "example": "Product Not Found"
+          }
+        }
+      }
+    }
+  }
+},
+"514": {
+  "description": "No Quote Found",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "isError": {
+            "type": "boolean",
+            "description": "true"
+          },
+          "errorType": {
+            "type": "integer",
+            "description": "error type",
+            "example": 514
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "error message",
+            "example": "No Quote Found"
+          }
+        }
+      }
+    }
+  }
+},
+"515": {
+  "description": "Store Not Found",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "isError": {
+            "type": "boolean",
+            "description": "true"
+          },
+          "errorType": {
+            "type": "integer",
+            "description": "error type",
+            "example": 515
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "error message",
+            "example": "Store Not Found"
+          }
+        }
+      }
+    }
+  }
+},
+"516": {
+  "description": "Not Eligible",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "isError": {
+            "type": "boolean",
+            "description": "true"
+          },
+          "errorType": {
+            "type": "integer",
+            "description": "error type",
+            "example": 516
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "error message",
+            "example": "Not Eligible"
+          }
+        }
+      }
+    }
+  }
+},
+"517": {
+  "description": "Category Not Found",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "isError": {
+            "type": "boolean",
+            "description": "true"
+          },
+          "errorType": {
+            "type": "integer",
+            "description": "error type",
+            "example": 517
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "error message",
+            "example": "Category Not Found"
+          }
+        }
+      }
+    }
+  }
+},
+"500": {
+  "description": "Something Unexpectedly Went Wrong",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "isError": {
+            "type": "boolean",
+            "description": "true"
+          },
+          "errorType": {
+            "type": "integer",
+            "description": "error type",
+            "example": 500
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "error message",
+            "example": "Something Unexpectedly Went Wrong"
+          }
+        }
+      }
+    }
+  }
+}
         }
       }
     }

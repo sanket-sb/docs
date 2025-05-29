@@ -11,18 +11,6 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Guide",
-        "groups": [
-          {
-            "group": "Post Purchase",
-            "pages": [
-              "klaviyo-integration/brandManagedCampaignGuide",
-              "klaviyo-integration/klaviyoIntegrationGuide"
-            ]
-          }
-        ]
-      },
-      {
         
         "tab": "API Reference",
         "groups": [
@@ -30,11 +18,12 @@
             "group": " ",
             "pages": [
               "api-reference/introduction",
-              "api-reference/authentication"
+              "api-reference/authentication",
+              "api-reference/httpStatusCode"
             ]
           },
           {
-            "group": "Store Category",
+            "group": " ",
             "pages": [
               {
                 "group": "Store Category",
@@ -46,7 +35,7 @@
             ]
           },
           {
-            "group": "Quotes",
+            "group": " ",
             "pages": [
               {
                 "group": "Quotes",
@@ -58,7 +47,7 @@
             ]
           },
           {
-            "group": "Order",
+            "group": " ",
             "pages": [
               {
                 "group": "Order",
@@ -73,13 +62,40 @@
         ]
       },
       {
+        "tab": "Guide",
+        "groups": [
+          {
+            "group": " ",
+            "pages": [
+              {
+                "group": "Post Purchase",
+                "pages":[
+                  {
+                    "group": "Klaviyo",
+                    "pages": [
+                      "klaviyo-integration/brandManagedCampaignGuide",
+                      "klaviyo-integration/klaviyoIntegrationGuide"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
         "tab": "Frontend Widget",
         "groups": [
           {
-            "group": "Frontend Widget Kit",
+            "group": " ",
             "pages": [
-              "frontend-widget-integration/frontend-widget-kit/getCartItemList",
-              "frontend-widget-integration/frontend-widget-kit/javascriptInjection"
+              {
+                "group": "Frontend Widget Kit",
+                "pages": [
+                  "frontend-widget-integration/frontend-widget-kit/getCartItemList",
+                  "frontend-widget-integration/frontend-widget-kit/javascriptInjection"
+                ]
+              }
             ]
           }
         ]
