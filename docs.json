@@ -11,57 +11,6 @@
   "navigation": {
     "tabs": [
       {
-        
-        "tab": "API Reference",
-        "groups": [
-          {
-            "group": " ",
-            "pages": [
-              "api-reference/introduction",
-              "api-reference/authentication",
-              "api-reference/httpStatusCode"
-            ]
-          },
-          {
-            "group": " ",
-            "pages": [
-              {
-                "group": "Store Category",
-                "pages": [
-                  "api-reference/endpoint/storeCategory/index",
-                  "api-reference/endpoint/storeCategory/listCategory"
-                ]
-              }
-            ]
-          },
-          {
-            "group": " ",
-            "pages": [
-              {
-                "group": "Quotes",
-                "pages": [
-                  "api-reference/endpoint/Quotes/index",
-                  "api-reference/endpoint/Quotes/listwarrantyquotesbyCategory"
-                ]
-              }
-            ]
-          },
-          {
-            "group": " ",
-            "pages": [
-              {
-                "group": "Order",
-                "pages": [
-                  "api-reference/endpoint/Order/index",
-                  "api-reference/endpoint/Order/createContract",
-                  "api-reference/endpoint/Order/updateContract"
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      {
         "tab": "Guide",
         "groups": [
           {
@@ -73,12 +22,47 @@
                   {
                     "group": "Klaviyo",
                     "pages": [
-                      "klaviyo-integration/brandManagedCampaignGuide",
-                      "klaviyo-integration/klaviyoIntegrationGuide"
+                      "klaviyo-integration/IntegrationGuide",
+                      "klaviyo-integration/brandManagedCampaignGuide"
                     ]
                   }
                 ]
               }
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": " ",
+            "pages": [
+              "api-reference/introduction",
+              "api-reference/authentication",
+              {
+                "group": "Store Category",
+                "pages": [
+                  "api-reference/endpoint/storeCategory/index",
+                  "api-reference/endpoint/storeCategory/listCategory"
+                ]
+              },
+              {
+                "group": "Quotes",
+                "pages": [
+                  "api-reference/endpoint/Quotes/index",
+                  "api-reference/endpoint/Quotes/listwarrantyquotesbyCategory"
+                ]
+              },
+              {
+                "group": "Order",
+                "pages": [
+                  "api-reference/endpoint/Order/index",
+                  "api-reference/endpoint/Order/createContract",
+                  "api-reference/endpoint/Order/updateContract"
+                ]
+              },
+              "api-reference/httpStatusCode"
             ]
           }
         ]
@@ -92,8 +76,8 @@
               {
                 "group": "Frontend Widget Kit",
                 "pages": [
-                  "frontend-widget-integration/frontend-widget-kit/getCartItemList",
-                  "frontend-widget-integration/frontend-widget-kit/javascriptInjection"
+                  "frontend-widget-integration/frontend-widget-kit/javascriptInjection",
+                  "frontend-widget-integration/frontend-widget-kit/getCartItemList"
                 ]
               }
             ]

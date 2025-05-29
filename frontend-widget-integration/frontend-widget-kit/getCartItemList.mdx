@@ -5,41 +5,76 @@ description: 'SureBright maintains the information on the warranty offer that cu
 
 
 
-```javascript
+```javascript js
 SureBright.getCartItems((response) => {
   console.log(response.cartItems);
 });
 ```
 
-## Example Response
+## Response
 
-```json
-{
-  "cartItems": [
-    {
-      "productDetails": {
-        "productId": 6673746231399,
-        "optionId": 8577825144935,
-        "productTitle": "GreatCircleUSA 3-in-1 Wood Chipper - 7HP Engine, 3 Max Branch Capacity",
-        "productPrice": 649.99,
-        "productThumbnail": "https://cdn.shopify.com/s/files/1/2134/2653/files/81wDzkJdj4L._AC_SL1500.jpg",
-        "quantity": 2
-      },
-      "warrantyDetails": {
-        "warrantyProductId": 7080029454439,
-        "warrantyOptionId": 40937702359143,
-        "warrantyPrice": 69,
-        "warrantyTitle": "Add premium product protection",
-        "warrantyImage": "https://www.surebright.com/_next/image?url=https%3A%2F%2Fdemtt2r26n0u0.cloudfront.net%2Fmisc%2Fsurebright_logo_v2.png&w=256&q=75",
-        "warrantyTenure": 2,
-        "warrantyQuantity": 2,
-        "warrantyQuoteId": "7b9a6c31-f6c5-4110-a1f4-c69dca10ab06",
-        "warrantyQuoteItemId": "047cd751-8737-45cd-b113-227312a88d51"
-      }
-    }
-  ]
-}
-```
+<ResponseField name="cartItems" type="array">
+  List of cart items with associated product and warranty details
+  <Expandable title="items">
+    <ResponseField name="productDetails" type="object">
+      Details of the product added to the cart
+      <Expandable title="properties">
+        <ResponseField name="productId" type="integer">
+          Product ID
+        </ResponseField>
+        <ResponseField name="optionId" type="integer">
+          Variant/Option ID for the product
+        </ResponseField>
+        <ResponseField name="productTitle" type="string">
+          Title of the product
+        </ResponseField>
+        <ResponseField name="productPrice" type="number">
+          Price of the product
+        </ResponseField>
+        <ResponseField name="productThumbnail" type="string">
+          URL of the product image
+        </ResponseField>
+        <ResponseField name="quantity" type="integer">
+          Quantity of the product in the cart
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+
+    <ResponseField name="warrantyDetails" type="object">
+      Warranty details associated with the product
+      <Expandable title="properties">
+        <ResponseField name="warrantyProductId" type="integer">
+          Product ID of the warranty item
+        </ResponseField>
+        <ResponseField name="warrantyOptionId" type="integer">
+          Variant/Option ID of the warranty
+        </ResponseField>
+        <ResponseField name="warrantyPrice" type="number">
+          Price of the warranty
+        </ResponseField>
+        <ResponseField name="warrantyTitle" type="string">
+          Title of the warranty
+        </ResponseField>
+        <ResponseField name="warrantyImage" type="string">
+          Image URL for the warranty
+        </ResponseField>
+        <ResponseField name="warrantyTenure" type="integer">
+          Duration of the warranty in years
+        </ResponseField>
+        <ResponseField name="warrantyQuantity" type="integer">
+          Quantity of warranties added
+        </ResponseField>
+        <ResponseField name="warrantyQuoteId" type="string">
+          ID of the warranty quote
+        </ResponseField>
+        <ResponseField name="warrantyQuoteItemId" type="string">
+          ID of the individual warranty quote item
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
 
 ## Notes
 
