@@ -7,8 +7,8 @@ description: "Follow the steps below to configure a Klaviyo Flow that targets cu
 
 - Log in to your Klaviyo account.
 - Go to **Flows** from the left-hand menu.
-- Click **Create Flow**.
-- Choose **Create from Scratch**, and name your flow something like `SureBright Post-Purchase Warranty`.
+- Click [**Create Flow**](https://help.klaviyo.com/hc/en-us/articles/115002774932-Getting-Started-with-Flows).
+- Choose **Build your own**, and name your flow something like `SureBright Post-Purchase Warranty`.
 
 ---
 
@@ -48,10 +48,10 @@ In your email content, you can dynamically insert values from the SureBright eve
 
 You can also use additional attributes like:
 
-- `{{ event.order_number }}`
-- `{{ event.product_name }}`
+- `{{ event.order_id }}`
+- `{{ event.product_title }}`
 - `{{ event.coverage_summary }}`
-- `{{ event.customer_first_name }}`
+- `{{ event.first_name }}`
 
 ---
 
@@ -61,144 +61,95 @@ Before activating the flow, please submit a preview or test email to the SureBri
 
 ## Event Details
 
-### **Event 1: SureBright: Eligible Order**
+### Event - SureBright: Eligible Order
 
-This event is triggered when a customer purchases a product that is eligible for a SureBright warranty. Here are the attributes available to you in Klaviyo about SureBright eligibility on your store’s orders:
+This event is triggered when a customer purchases a product that is eligible for a SureBright warranty. Here are the attributes available to you in Klaviyo about SureBright eligibility on your store's orders:
 
-[**​**](https://surebrighttechnologiesinc.mintlify.app/klaviyo-integration/klaviyoIntegrationGuide#param-order-id)
+<ParamField path="order_id" type="string">
+  Shopify Order Id
+</ParamField>
 
-**order_id**
+<ParamField path="order_amount" type="string">
+  Total Order Amount
+</ParamField>
 
-**string**
+<ParamField path="currency_code" type="string">
+  Currency code
+</ParamField>
 
-**required**
+<ParamField path="order_created_at" type="datetime">
+  Timestamp of order creation
+</ParamField>
 
-Shopify Order Id
+<ParamField path="merchant_logo_url" type="string">
+  URL of the merchant's logo
+</ParamField>
 
-[**​**](https://surebrighttechnologiesinc.mintlify.app/klaviyo-integration/klaviyoIntegrationGuide#param-order-amount)
+<ParamField path="surebright_logo_url" type="string">
+  Url for SureBright's Logo
+</ParamField>
 
-**order_amount**
+<ParamField path="merchant_name" type="string">
+  Name of the merchant
+</ParamField>
 
-**string**
+<ParamField path="post_purchase_url" type="string">
+  URL for post-purchase warranty actions
+</ParamField>
 
-**required**
+<ParamField path="product_title" type="string">
+  Title of the purchased product
+</ParamField>
 
-Total Order Amount
+<ParamField path="is_eligible" type="boolean">
+  Whether the order is warranty eligible
+</ParamField>
 
-[**​**](https://surebrighttechnologiesinc.mintlify.app/klaviyo-integration/klaviyoIntegrationGuide#param-currency-code)
+<ParamField path="coverage_type" type="string">
+  Indicates type of coverage
+</ParamField>
 
-**currency_code**
+<ParamField path="coverage_option_title" type="string">
+  Coverage based dynamic title
+</ParamField>
 
-**string**
-
-**required**
-
-Currency code
-
-[**​**](https://surebrighttechnologiesinc.mintlify.app/klaviyo-integration/klaviyoIntegrationGuide#param-order-created-at)
-
-**order_created_at**
-
-**datetime**
-
-**required**
-
-Timestamp of order creation
-
-[**​**](https://surebrighttechnologiesinc.mintlify.app/klaviyo-integration/klaviyoIntegrationGuide#param-merchant-logo-url)
-
-**merchant_logo_url**
-
-**string**
-
-**required**
-
-URL of the merchant’s logo
-
-[**​**](https://surebrighttechnologiesinc.mintlify.app/klaviyo-integration/klaviyoIntegrationGuide#param-surebright-logo-url)
-
-**surebright_logo_url**
-
-**string**
-
-**required**
-
-Url for SureBright’s Logo
-
-[**​**](https://surebrighttechnologiesinc.mintlify.app/klaviyo-integration/klaviyoIntegrationGuide#param-merchant-name)
-
-**merchant_name**
-
-**string**
-
-**required**
-
-Name of the merchant
-
-[**​**](https://surebrighttechnologiesinc.mintlify.app/klaviyo-integration/klaviyoIntegrationGuide#param-post-purchase-url)
-
-**post_purchase_url**
-
-**string**
-
-**required**
-
-URL for post-purchase warranty actions
-
-[**​**](https://surebrighttechnologiesinc.mintlify.app/klaviyo-integration/klaviyoIntegrationGuide#param-product-title)
-
-**product_title**
-
-**string**
-
-**required**
-
-Title of the purchased product
-
-[**​**](https://surebrighttechnologiesinc.mintlify.app/klaviyo-integration/klaviyoIntegrationGuide#param-is-eligible)
-
-**is_eligible**
-
-**boolean**
-
-**required**
-
-Whether the order is warranty eligible
-
-[**​**](https://surebrighttechnologiesinc.mintlify.app/klaviyo-integration/klaviyoIntegrationGuide#param-coverage-type)
-
-**coverage_type**
-
-**string**
-
-**required**
-
-Indicates type of coverage
-
-[**​**](https://surebrighttechnologiesinc.mintlify.app/klaviyo-integration/klaviyoIntegrationGuide#param-coverage-option-title)
-
-**coverage_option_title**
-
-**string**
-
-**required**
-
-Coverage based dynamic title
-
+<ParamField path="coverage_options" type="array">
+ Array of Coverage options provided with the warranty
+</ParamField>
 ### [**​**](https://surebrighttechnologiesinc.mintlify.app/klaviyo-integration/klaviyoIntegrationGuide#event-2%3A-surebright%3A-policy-purchased)
 
-**Event 2: SureBright: Policy Purchased**
+### Event - SureBright: Policy Purchased
 
-This event is triggered when a customer successfully purchases a warranty for their product. Most merchants will set up campaigns that target eligible purchases but stop emailing their customers after a SureBright: Policy Purchased (this event).
+This event is triggered when a customer successfully purchases a warranty for their product. Most merchants use this event to stop further warranty marketing once coverage has been bought.
 
-| **Property**           | **Type** | **Example**                | **Description**                     |
-| :--------------------: | :------: | :------------------------: | :---------------------------------: |
-| order_id               | string   | 1234567890                 | Shopify Order Id                    |
-| contract_id            | string   | bb783fde671e4cac849e39     | Unique warranty contract identifier |
-| product_title          | string   | Sample Product Title       | Product the warranty covers         |
-| policy_tenure          | string   | 1 year                     | Duration of the warranty coverage   |
-| policy_price           | string   | 199.99                     | Price paid for the warranty         |
-| warranty_purchase_date | datetime | 2025-04-10T15:00:41.301007 | When the warranty was purchased     |
-| coverage_type          | string   | AD                         | Indicates type of coverage          |
+Here are the attributes available in Klaviyo when a policy is purchased:
+
+<ParamField path="order_id" type="string">
+  Shopify Order Id
+</ParamField>
+
+<ParamField path="contract_id" type="string">
+  Unique identifier for the SureBright warranty contract
+</ParamField>
+
+<ParamField path="product_title" type="string">
+  Title of the product covered by the warranty
+</ParamField>
+
+<ParamField path="policy_tenure" type="string">
+  Duration of the warranty coverage (e.g., 1 year, 2 years)
+</ParamField>
+
+<ParamField path="policy_price" type="string">
+  Price paid by the customer for the warranty
+</ParamField>
+
+<ParamField path="warranty_purchase_date" type="datetime">
+  Timestamp when the warranty was purchased
+</ParamField>
+
+<ParamField path="coverage_type" type="string">
+  Type of warranty coverage (e.g., AD for Accidental Damage, B for Breakdown)
+</ParamField>
 
 ## [**​**](https://surebrighttechnologiesinc.mintlify.app/klaviyo-integration/klaviyoIntegrationGuide#implementation-use-cases)
