@@ -7,9 +7,9 @@ description: "Follow the steps below to configure a Klaviyo Flow that targets cu
   **Disclaimer:** Access credentials must be shared and initial configuration steps completed as outlined in the [Klaviyo Integration Guide](/klaviyo-integration/klaviyoIntegrationGuide). Once setup is complete, you may proceed with this guide.
 </Warning>
 
-### Seamless Klaviyo Integration
+## Seamless Integration
 
-To power these campaigns, we push the following data directly to Klaviyo:
+To power these campaigns, SureBright automatically sends enriched customer and order data to your Klaviyo account. This includes:
 
 - Warranty plan details
 - Order and product information
@@ -17,6 +17,23 @@ To power these campaigns, we push the following data directly to Klaviyo:
 - Personalized post-purchase journey links
 
 This enables you to craft dynamic, timely, and relevant messages to drive conversions and enhance customer trust.
+
+## Flow Configuration
+
+### Overview
+
+To engage customers with eligible warranty options, you’ll set up a custom flow in Klaviyo triggered by SureBright’s eligibility events. This involves:
+
+- Creating a new flow tailored for warranty outreach.
+- Selecting the specific **SureBright: Eligible Order** event as the trigger.
+- Filtering the trigger to target only eligible orders.
+- Designing email steps that leverage SureBright Event data for personalized messaging.
+- Inserting dynamic links and details from the events to enhance relevance.
+- Test the functionality end-to-end by creating an order with SureBright Warranty Eligible product.
+
+  <Note>
+    All post-purchase emails must be approved by the SureBright team to ensure brand and compliance alignment.
+  </Note>
 
 ### 1. Navigate to the Flow Builder
 
@@ -32,7 +49,9 @@ This enables you to craft dynamic, timely, and relevant messages to drive conver
 - For the **Trigger**, select **Metric**.
 - In the dropdown, \*\*choose \*\*`SureBright: Eligible Order`.
 
-> ⚠️ _Do not use the generic “Placed Order” trigger—this will not capture warranty-eligible events._
+<Warning>
+  _Do not use the generic “Placed Order” trigger—this will not capture warranty-eligible events._
+</Warning>
 
 ---
 
@@ -44,16 +63,24 @@ This enables you to craft dynamic, timely, and relevant messages to drive conver
   - **Condition:** `equals`
   - **Value:** `true`
 
-> ✅ This ensures that only orders eligible for a post-purchase warranty offer are included.
+<Check>
+  This ensures that only orders eligible for a post-purchase warranty offer are included.
+</Check>
 
 ---
 
-### 4. Build Your Flow
+<img
+  src="/SBTriggerExample.png"
+  alt="SB Trigger Example Pn"
+  title="SB Trigger Example Pn"
+  className="mx-auto"
+  style={{ width:"86%" }}
+/>
+
+**4. Build Your Flow**
 
 - Add your **email step(s)** to the flow as desired.
 - Use **SureBright event data** to personalize your messaging.
-
----
 
 ### 5. Personalize Using Event Attributes
 
@@ -66,9 +93,7 @@ You can also use additional attributes like:
 - `{{ event.order_id }}`
 - `{{ event.product_title }}`
 - `{{ event.coverage_options }}`
-- `{{ event.first_name }}`
-
----
+- `{{ event.person.first_name }}`
 
 ### 6. Submit for Review
 
@@ -76,7 +101,7 @@ Before activating the flow, please submit a preview or test email to the SureBri
 
 ## Event Details
 
-### Event - SureBright: Eligible Order
+### **Event - SureBright: Eligible Order**
 
 This event is triggered when a customer purchases a product that is eligible for a SureBright warranty. Here are the attributes available to you in Klaviyo about SureBright eligibility on your store's orders:
 
@@ -140,11 +165,11 @@ This event is triggered when a customer purchases a product that is eligible for
       </ParamField>
     </ParamField>
   </Expandable>
+
 </ParamField>
 
-### [**​**](https://surebrighttechnologiesinc.mintlify.app/klaviyo-integration/klaviyoIntegrationGuide#event-2%3A-surebright%3A-policy-purchased)
+### **Event - SureBright: Policy Purchased**
 
-### Event - SureBright: Policy Purchased
 
 This event is triggered when a customer successfully purchases a warranty for their product. Most merchants use this event to stop further warranty marketing once coverage has been bought.
 
@@ -184,8 +209,8 @@ Here are the attributes available in Klaviyo when a policy is purchased:
 
 Use this event to drive engagement and conversion among customers who didn’t buy a warranty at checkout:
 
-- **Follow-up Campaigns:** Send reminder emails prompting customers to purchase protection for eligible products.
 - **Timed Drip Flows:** Create flows that trigger based on time elapsed since purchase, nudging non-buyers at key intervals.
+- **Follow-up Campaigns:** Send reminder emails prompting customers to purchase protection for eligible products.
 - **Direct to Purchase:** Use the `post_purchase_url` to guide customers to a pre-filled, personalized warranty offer page.
 
 ### SureBright: Policy Purchased
@@ -209,7 +234,7 @@ Ensure your campaign delivers maximum value and conversion by following these re
 ### FAQs
 
 <Accordion title="Can I send post-purchase emails to all of my previous customers?" iconType="duotone">
-  Data from SureBright begins flowing into Klaviyo only after the integration is enabled. This means that any historical SureBright data—captured prior to activation—will not be available within Klaviyo.
+  Event Data from SureBright begins flowing into Klaviyo only after the integration is enabled. This means that any historical SureBright Data—captured prior to activation—will not be available within Klaviyo.
 </Accordion>
 
 <Accordion title="Why can't I see the SureBright metric or data in Klaviyo to be used in creating a flow?" iconType="duotone">
@@ -218,4 +243,4 @@ Ensure your campaign delivers maximum value and conversion by following these re
 
 ## [**​**](https://surebrighttechnologiesinc.mintlify.app/klaviyo-integration/klaviyoIntegrationGuide#implementation-use-cases)Support
 
-Need help with setup or strategy? Reach out to your **SureBright Representative** or your **Klaviyo account manager** for hands-on support.
+Need help with setup or strategy? Reach out to your **SureBright Representative**,  email us at [support@surebright.com](mailto:support@surebright.com), or your **Klaviyo account manager** for hands-on support.
