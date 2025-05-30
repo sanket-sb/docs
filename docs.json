@@ -27,13 +27,6 @@
                     ]
                   }
                 ]
-              },
-              {
-                "group": "Magento",
-                "pages":[
-                      "magento/InstallGuide",
-                      "magento/UnInstallGuide"
-                ]
               }
             ]
           }
