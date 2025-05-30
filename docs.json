@@ -27,6 +27,12 @@
                     ]
                   }
                 ]
+              },
+              {
+                "group": "Magento",
+                "pages":[
+                  "magento/InstallGuide"
+                ]
               }
             ]
           }
@@ -48,10 +54,12 @@
                 ]
               },
               {
-                "group": "Quotes",
+                "group": "Quote",
                 "pages": [
-                  "api-reference/endpoint/Quotes/index",
-                  "api-reference/endpoint/Quotes/listwarrantyquotesbyCategory"
+                  "api-reference/endpoint/Quote/index",
+                  "api-reference/endpoint/Quote/listWarrantyQuotesByCategory",
+                  "api-reference/endpoint/Quote/listWarrantyQuotesByProduct",
+                  "api-reference/endpoint/Quote/listWarrantyQuotesByUrl"
                 ]
               },
               {
