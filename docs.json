@@ -52,28 +52,28 @@
               {
                 "group": "Store Category",
                 "pages": [
-                  "api-reference/endpoint/storeCategory/index",
-                  "api-reference/endpoint/storeCategory/listCategory"
+                  "api-reference/endpoint/store-category/index",
+                  "api-reference/endpoint/store-category/list-category"
                 ]
               },
               {
                 "group": "Quote",
                 "pages": [
-                  "api-reference/endpoint/Quote/index",
-                  "api-reference/endpoint/Quote/listWarrantyQuotesByCategory",
-                  "api-reference/endpoint/Quote/listWarrantyQuotesByProduct",
-                  "api-reference/endpoint/Quote/listWarrantyQuotesByUrl"
+                  "api-reference/endpoint/quote/index",
+                  "api-reference/endpoint/quote/list-warranty-quotes-by-category",
+                  "api-reference/endpoint/quote/list-warranty-quotes-by-product",
+                  "api-reference/endpoint/quote/list-warranty-quotes-by-url"
                 ]
               },
               {
                 "group": "Order",
                 "pages": [
-                  "api-reference/endpoint/Order/index",
-                  "api-reference/endpoint/Order/createContract",
-                  "api-reference/endpoint/Order/updateContract"
+                  "api-reference/endpoint/order/index",
+                  "api-reference/endpoint/order/create-contract",
+                  "api-reference/endpoint/order/update-contract"
                 ]
               },
-              "api-reference/httpStatusCode"
+              "api-reference/http-status-codes"
             ]
           }
         ]
