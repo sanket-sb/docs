@@ -1,0 +1,78 @@
+---
+title: "Uninstall/Re-Install Guide"
+description: "Re-install or Uninstall guide to disable and re-enable SureBright module for Magento."
+---
+
+## A. Uninstall SureBright module
+
+<Accordion title=" Turn Off SureBright Integration">
+  Run this command to disable the module and remove old files:
+
+  > php bin/magento module:disable Surebright_Integration --clear-static-content
+</Accordion>
+
+****That's all 🎉\!\! you have disabled SureBright module from your website.****
+
+Follow below steps if you want to remove the SureBright module from website.
+
+<AccordionGroup>
+  <Accordion title=" Rebuild Code">
+    Run this to rebuild the necessary files:
+
+    > bin/magento setup:di:compile
+  </Accordion>
+  <Accordion title=" Remove the Integration">
+    Run this to remove the SureBright integration:
+
+    > composer remove surebright/integration
+  </Accordion>
+  <Accordion title=" Update Magento">
+    Run this to apply the changes:
+
+    > bin/magento setup:upgrade
+  </Accordion>
+  <Accordion title=" Clear Cache">
+    Run this to clean up the cache:
+
+    > bin/magento cache:clean
+  </Accordion>
+</AccordionGroup>
+
+Follow below steps if you want to re-install SureBright module.
+
+## B. Re-Install Steps
+
+<Accordion title="Re-Install SureBright" description="Skip this step if you only disbaled the mdule and haven't removed it yet.">
+  Run this to add SureBright back:
+
+  > composer require surebright/integration
+</Accordion>
+
+**If you have only disbaled the app then just follow below step and ignore rest of guide.**
+
+<Accordion title=" Turn SureBright Back On">
+  Run this to enable the module:
+
+  > php bin/magento module:enable Surebright_Integration
+</Accordion>
+
+**Follow below guide only if you had removed the module.**
+
+<AccordionGroup>
+  <Accordion title=" Update Magento and Rebuild Code">
+    Run this to finalize the reinstall:
+
+    > bin/magento setup:upgrade
+    >
+    > bin/magento setup:di:compile
+  </Accordion>
+  <Accordion title=" Clear Cache Again">
+    Run this to finish the reinstall:
+
+    > Run this to finish the reinstall:
+  </Accordion>
+</AccordionGroup>
+
+### ✅ **All Set\! SureBright Integration Completed**
+
+🎉 You’ve successfully**reinstalled**  the SureBright Integration on your Magento store\!
