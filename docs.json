@@ -16,6 +16,14 @@
           {
             "group": " ",
             "pages": [
+              
+              {
+                "group": "Magento",
+                "pages":[
+                      "magento/InstallGuide",
+                      "magento/UnInstallGuide"
+                ]
+              },
               {
                 "group": "Post Purchase",
                 "pages":[
