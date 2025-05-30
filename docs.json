@@ -21,6 +21,7 @@
                 "group": "Magento",
                 "pages":[
                       "magento/InstallGuide",
+                      "magento/DisableGuide",
                       "magento/UnInstallGuide"
                 ]
               },

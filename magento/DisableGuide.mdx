@@ -1,0 +1,40 @@
+---
+title: "Disable/Enable Module"
+description: "Guide to disable SureBright module."
+---
+
+## 1. Turn off SureBright Module
+
+Run this command to disable SureBright module.
+
+> php bin/magento module:disable Surebright_Integration --clear-static-content
+
+## 2. Rebuild Code
+
+Run following command to rebuild code
+
+> bin/magento setup:di:compile
+
+## 3. Clear Cache
+
+Run this to clean up the cache:
+
+> bin/magento cache:clean
+
+## 4. Turn on SureBright Module
+
+Run this to enable the module:
+
+> php bin/magento module:enable Surebright_Integration
+
+## 5. Rebuild Code
+
+Run following command to rebuild code
+
+> bin/magento setup:di:compile
+
+## 6. Clear Cache
+
+Run this to clean up the cache:
+
+> bin/magento cache:clean

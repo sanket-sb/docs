@@ -1,6 +1,6 @@
 ---
-title: "Uninstall/Re-Install Guide"
-description: "Re-install or Uninstall guide to disable and re-enable SureBright module for Magento."
+title: "Re-Install Guide"
+description: "Re-install guide to disable and re-enable SureBright module for Magento."
 ---
 
 ## A. Uninstall SureBright module
@@ -10,10 +10,6 @@ description: "Re-install or Uninstall guide to disable and re-enable SureBright 
 
   > php bin/magento module:disable Surebright_Integration --clear-static-content
 </Accordion>
-
-### ****That's all 🎉 \!\! you have disabled SureBright module from your website.****
-
-Follow below steps if you want to remove the SureBright module from website.
 
 <Accordion title=" Rebuild Code" iconType="duotone">
   Run this to rebuild the necessary files:
@@ -27,8 +23,10 @@ Follow below steps if you want to remove the SureBright module from website.
   > composer remove surebright/integration
 </Accordion>
 
-<Accordion title=" Update Magento" iconType="duotone">
-  
+<Accordion title="Update Magento" iconType="duotone">
+  Run this to apply the changes
+
+  > bin/magento setup:upgrade
 </Accordion>
 
 <Accordion title=" Clear Cache" iconType="duotone">
@@ -37,25 +35,19 @@ Follow below steps if you want to remove the SureBright module from website.
   > bin/magento cache:clean
 </Accordion>
 
-Follow below steps if you want to re-install SureBright module.
-
 ## B. Re-Install Steps
 
-<Accordion title="Re-Install SureBright" description="Skip this step if you only disbaled the mdule and haven't removed it yet.">
+<Accordion title="Re-Install SureBright">
   Run this to add SureBright back:
 
   > composer require surebright/integration
 </Accordion>
-
-**If you have only disbaled the app then just follow below step and ignore rest of guide.**
 
 <Accordion title=" Turn SureBright Back On">
   Run this to enable the module:
 
   > php bin/magento module:enable Surebright_Integration
 </Accordion>
-
-**Follow below guide only if you had removed the module.**
 
 <Accordion title=" Update Magento and Rebuild Code" iconType="duotone">
   Run this to finalize the reinstall:
