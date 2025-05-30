@@ -20,9 +20,9 @@
               {
                 "group": "Magento",
                 "pages":[
-                      "magento/InstallGuide",
-                      "magento/DisableGuide",
-                      "magento/UnInstallGuide"
+                      "magento/install-guide",
+                      "magento/disable-guide",
+                      "magento/uninstall-guide"
                 ]
               },
               {
