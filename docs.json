@@ -31,7 +31,8 @@
               {
                 "group": "Magento",
                 "pages":[
-                      "magento/InstallGuide"
+                      "magento/InstallGuide",
+                      "magento/UnInstallGuide"
                 ]
               }
             ]
