@@ -86,8 +86,8 @@
               {
                 "group": "Frontend Widget Kit",
                 "pages": [
-                  "frontend-widget-integration/frontend-widget-kit/javascriptInjection",
-                  "frontend-widget-integration/frontend-widget-kit/getCartItemList"
+                  "frontend-widget-integration/frontend-widget-kit/javascript-injection",
+                  "frontend-widget-integration/frontend-widget-kit/get-cart-item-list"
                 ]
               }
             ]
