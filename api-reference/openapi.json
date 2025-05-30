@@ -11,7 +11,7 @@
     }
   ],
   "paths": {
-    "/quoteService/api/v1/store/listCategories": {
+    "/quote/api/v1/store/listCategories?storeId={storeId}&country={country}": {
       "get": {
         "summary": "List Categories",
         "description": "Retrieves a list of store categories based on storeId . The response includes category details, and labels based on the authorization status",
@@ -25,7 +25,8 @@
             "in": "query",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example": "ecca4210-09a4-446c-ad87-5e65bd50df12"
             },
             "description": "A unique identifier for a store will be shared as part of the integration kit.It is a path variable"
           },
@@ -35,7 +36,8 @@
             "required": true,
             "schema": {
               "type": "string",
-              "pattern": "^[A-Z]{2}$"
+              "pattern": "^[A-Z]{2}$",
+              "example": "US"
             },
             "description": "The country code of the identified customer location"
           },
@@ -44,7 +46,8 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example": "AL"
             },
             "description": "The state code of the identified customer location"
           }
@@ -58,31 +61,71 @@
                   "type": "object",
                   "properties": {
                     "storeId": {
-                      "type": "string"
+                      "type": "string",
+                      "example": "ecca4210-09a4-446c-ad87-5e65bd50df12",
+                      "description": "A unique identifier for a store"
                     },
                     "isError": {
-                      "type": "boolean"
+                      "type": "boolean",
+                      "example": false,
+                      "description": "Indicates if an error occurred"
                     },
                     "categoryList": {
                       "type": "array",
+                      "description": "A list containing details of SureBright categories",
                       "items": {
                         "type": "object",
                         "properties": {
                           "sbCategoryName": {
-                            "type": "string"
+                            "type": "string",
+                            "example": "Small Home Appliance",
+                            "description": "Name of the SureBright category"
                           },
                           "sbCategoryId": {
-                            "type": "string"
+                            "type": "string",
+                            "example": "4c3103e4-38dc-4171-96e5-b4b77ab0e96f",
+                            "description": "Unique identifier for the category"
                           },
                           "labelList": {
                             "type": "array",
+                            "description": "List of category labels",
                             "items": {
-                              "type": "string"
-                            }
+                              "type": "string",
+                              "example": "HOME_APPLIANCES"
+                            },
+                            "example": [
+                              "Ovens",
+                              "Microwaves",
+                              "Refrigerators"
+                            ]
                           }
+                        },
+                        "example": {
+                          "sbCategoryName": "Small Home Appliance",
+                          "sbCategoryId": "4c3103e4-38dc-4171-96e5-b4b77ab0e96f",
+                          "labelList": [
+                            "Ovens",
+                            "Microwaves",
+                            "Refrigerators"
+                          ]
                         }
                       }
                     }
+                  },
+                  "example": {
+                    "storeId": "ecca4210-09a4-446c-ad87-5e65bd50df12",
+                    "isError": false,
+                    "categoryList": [
+                      {
+                        "sbCategoryName": "Small Home Appliance",
+                        "sbCategoryId": "4c3103e4-38dc-4171-96e5-b4b77ab0e96f",
+                        "labelList": [
+                          "Ovens",
+                          "Microwaves",
+                          "Refrigerators"
+                        ]
+                      }
+                    ]
                   }
                 }
               }
@@ -115,195 +158,195 @@
             }
           },
           "512": {
-  "description": "Validation Failed for Input Parameters",
-  "content": {
-    "application/json": {
-      "schema": {
-        "type": "object",
-        "properties": {
-          "isError": {
-            "type": "boolean",
-            "description": "true"
+            "description": "Validation Failed for Input Parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 512
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Validation Failed for Input Parameters"
+                    }
+                  }
+                }
+              }
+            }
           },
-          "errorType": {
-            "type": "integer",
-            "description": "error type",
-            "example": 512
+          "513": {
+            "description": "Product Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 513
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Product Not Found"
+                    }
+                  }
+                }
+              }
+            }
           },
-          "errorMessage": {
-            "type": "string",
-            "description": "error message",
-            "example": "Validation Failed for Input Parameters"
+          "514": {
+            "description": "No Quote Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 514
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "No Quote Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "515": {
+            "description": "Store Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 515
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Store Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "516": {
+            "description": "Not Eligible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 516
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Not Eligible"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "517": {
+            "description": "Category Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 517
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Category Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Something Unexpectedly Went Wrong",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 500
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Something Unexpectedly Went Wrong"
+                    }
+                  }
+                }
+              }
+            }
           }
-        }
-      }
-    }
-  }
-},
-"513": {
-  "description": "Product Not Found",
-  "content": {
-    "application/json": {
-      "schema": {
-        "type": "object",
-        "properties": {
-          "isError": {
-            "type": "boolean",
-            "description": "true"
-          },
-          "errorType": {
-            "type": "integer",
-            "description": "error type",
-            "example": 513
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "error message",
-            "example": "Product Not Found"
-          }
-        }
-      }
-    }
-  }
-},
-"514": {
-  "description": "No Quote Found",
-  "content": {
-    "application/json": {
-      "schema": {
-        "type": "object",
-        "properties": {
-          "isError": {
-            "type": "boolean",
-            "description": "true"
-          },
-          "errorType": {
-            "type": "integer",
-            "description": "error type",
-            "example": 514
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "error message",
-            "example": "No Quote Found"
-          }
-        }
-      }
-    }
-  }
-},
-"515": {
-  "description": "Store Not Found",
-  "content": {
-    "application/json": {
-      "schema": {
-        "type": "object",
-        "properties": {
-          "isError": {
-            "type": "boolean",
-            "description": "true"
-          },
-          "errorType": {
-            "type": "integer",
-            "description": "error type",
-            "example": 515
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "error message",
-            "example": "Store Not Found"
-          }
-        }
-      }
-    }
-  }
-},
-"516": {
-  "description": "Not Eligible",
-  "content": {
-    "application/json": {
-      "schema": {
-        "type": "object",
-        "properties": {
-          "isError": {
-            "type": "boolean",
-            "description": "true"
-          },
-          "errorType": {
-            "type": "integer",
-            "description": "error type",
-            "example": 516
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "error message",
-            "example": "Not Eligible"
-          }
-        }
-      }
-    }
-  }
-},
-"517": {
-  "description": "Category Not Found",
-  "content": {
-    "application/json": {
-      "schema": {
-        "type": "object",
-        "properties": {
-          "isError": {
-            "type": "boolean",
-            "description": "true"
-          },
-          "errorType": {
-            "type": "integer",
-            "description": "error type",
-            "example": 517
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "error message",
-            "example": "Category Not Found"
-          }
-        }
-      }
-    }
-  }
-},
-"500": {
-  "description": "Something Unexpectedly Went Wrong",
-  "content": {
-    "application/json": {
-      "schema": {
-        "type": "object",
-        "properties": {
-          "isError": {
-            "type": "boolean",
-            "description": "true"
-          },
-          "errorType": {
-            "type": "integer",
-            "description": "error type",
-            "example": 500
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "error message",
-            "example": "Something Unexpectedly Went Wrong"
-          }
-        }
-      }
-    }
-  }
-}
         }
       }
     },
-    "/quoteService/api/v1/category/listWarrantyQuotes/{storeId}": {
+    "/api/v1/quote/listWarrantyQuotes/storeId={storeId}?country={country}&productUrl={PRODUCT_URL}&price={price}": {
       "get": {
-        "summary": "List Warranty Quotes by Category",
-        "description": "This endpoint retrieves a list of warranty quotes for a specific store and category. The response includes detailed warranty options, pricing, and coverage information.",
-        "operationId": "listWarrantyQuotesByCategory",
+        "summary": "List Warranty Quotes by Product",
+        "description": "This endpoint retrieves a list of warranty quotes for a specific product and its price.",
+        "operationId": "listWarrantyQuotesByProduct",
         "tags": [
           "quotes"
         ],
@@ -313,7 +356,8 @@
             "in": "query",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example": "ecca4210-09a4-446c-ad87-5e65bd50df12"
             },
             "description": "A unique identifier for a store will be shared as part of the integration kit. this will be added as path variable"
           },
@@ -323,7 +367,8 @@
             "required": true,
             "schema": {
               "type": "string",
-              "pattern": "^[A-Z]{2}$"
+              "pattern": "^[A-Z]{2}$",
+              "example": "US"
             },
             "description": "The country code of the identified customer location"
           },
@@ -332,16 +377,18 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example": "AL"
             },
             "description": "The state code of the identified customer location"
           },
           {
-            "name": "sbCategoryId",
+            "name": "productUrl",
             "in": "query",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example": "4c3103e4-38dc-4171-96e5-b4b77ab0e96f"
             },
             "description": "The URL containing the product page that is shown to the customer"
           },
@@ -351,7 +398,8 @@
             "required": true,
             "schema": {
               "type": "number",
-              "format": "float"
+              "format": "float",
+              "example": 230.54
             },
             "description": "The price of the product in the currency of the country specified in the above parameter"
           }
@@ -373,7 +421,8 @@
                   "properties": {
                     "warrantyQuoteId": {
                       "type": "string",
-                      "description": "A unique ID representing this specific return quote in this particular API call"
+                      "description": "A unique ID representing this specific return quote in this particular API call",
+                      "example": "929d14dd-2937-4290-9818-8fca2a00a9a3"
                     },
                     "warrantyQuoteItemList": {
                       "type": "array",
@@ -383,31 +432,42 @@
                         "properties": {
                           "warrantyTenure": {
                             "type": "integer",
-                            "description": "Duration of the warranty in years"
+                            "description": "Duration of the warranty in years",
+                            "example": 2
                           },
                           "warrantyPrice": {
                             "type": "number",
                             "format": "float",
-                            "description": "Price of the warranty"
+                            "description": "Price of the warranty",
+                            "example": 64.99
                           },
                           "warrantyQuoteItemId": {
                             "type": "string",
-                            "description": "Unique identifier for the warranty quote item"
+                            "description": "Unique identifier for the warranty quote item",
+                            "example": "8c78bc1a-0790-4cd3-a3f9-5ed97bbe59f5"
                           }
                         }
                       }
                     },
                     "tncLink": {
                       "type": "string",
-                      "description": "Unique link for legal Terms & Conditions of the warranty for each product Category"
+                      "description": "Unique link for legal Terms & Conditions of the warranty for each product Category",
+                      "example": "https://customer.surebright.com/t-c/098e0e696f20839479dfe4a2804756233d32130f068441e24c6c0dbbc790677ff9718e04396a18dac753d0cf92bcaf63a26d2b666e5326475d0b2ed7475ad7fc"
+                    },
+                    "productImageUrl":{
+                      "type": "string",
+                      "description": "Link of the product image that can be show as part of the warranty offer UI",
+                      "example": "<https://cdn.shopify.com/s/files/1/0254/6227/6182/products/bedbathandimage.jpg?v=1664467971>"
                     },
                     "coverageWidgetHeading": {
                       "type": "string",
-                      "description": "Heading for the various tenure options shown to a customer on the product page"
+                      "description": "Heading for the various tenure options shown to a customer on the product page",
+                      "example": "Add premium product protection"
                     },
                     "coveragePopupHeading": {
                       "type": "string",
-                      "description": "Title that nudges the customers to buy a warranty for their product purchase"
+                      "description": "Title that nudges the customers to buy a warranty for their product purchase",
+                      "example": "Don’t want to spend extra on this product for the next few years? We've got you covered!"
                     },
                     "coverageList": {
                       "type": "array",
@@ -420,16 +480,21 @@
                             "enum": [
                               "COVERAGE_OPTION",
                               "WHY_SUREBRIGHT"
-                            ]
+                            ],
+                            "example": "COVERAGE_OPTION"
                           },
                           "coverageItemTitle": {
-                            "type": "string"
+                            "type": "string",
+                            "example": "Your warranty plan provides,"
                           },
                           "coverageItemList": {
                             "type": "array",
                             "items": {
                               "type": "string"
-                            }
+                            },
+                            "example": [
+                              "Protection against everyday spills (food, beverages, human or pet biological stains, cosmetics, etc)."
+                            ]
                           }
                         }
                       }
@@ -466,190 +531,934 @@
             }
           },
           "512": {
-  "description": "Validation Failed for Input Parameters",
-  "content": {
-    "application/json": {
-      "schema": {
-        "type": "object",
-        "properties": {
-          "isError": {
-            "type": "boolean",
-            "description": "true"
+            "description": "Validation Failed for Input Parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 512
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Validation Failed for Input Parameters"
+                    }
+                  }
+                }
+              }
+            }
           },
-          "errorType": {
-            "type": "integer",
-            "description": "error type",
-            "example": 512
+          "513": {
+            "description": "Product Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 513
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Product Not Found"
+                    }
+                  }
+                }
+              }
+            }
           },
-          "errorMessage": {
-            "type": "string",
-            "description": "error message",
-            "example": "Validation Failed for Input Parameters"
+          "514": {
+            "description": "No Quote Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 514
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "No Quote Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "515": {
+            "description": "Store Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 515
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Store Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "516": {
+            "description": "Not Eligible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 516
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Not Eligible"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "517": {
+            "description": "Category Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 517
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Category Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Something Unexpectedly Went Wrong",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 500
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Something Unexpectedly Went Wrong"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
     }
-  }
-},
-"513": {
-  "description": "Product Not Found",
-  "content": {
-    "application/json": {
-      "schema": {
-        "type": "object",
-        "properties": {
-          "isError": {
-            "type": "boolean",
-            "description": "true"
+    ,
+    "/api/v1/quote/listCategoryWarrantyQuotes/storeId={storeId}?country={country}&productUrl={PRODUCT_URL}": {
+      "get": {
+        "summary": "List Quotes by URL",
+        "description": "This endpoint fetches all warranty quotes for the product category to which product in the sent URL belongs.",
+        "operationId": "listWarrantyQuotesByUrl",
+        "tags": [
+          "quotes"
+        ],
+        "parameters": [
+          {
+            "name": "storeId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "ecca4210-09a4-446c-ad87-5e65bd50df12"
+            },
+            "description": "A unique identifier for a store will be shared as part of the integration kit."
           },
-          "errorType": {
-            "type": "integer",
-            "description": "error type",
-            "example": 513
+          {
+            "name": "country",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Z]{2}$",
+              "example": "US"
+            },
+            "description": "The country code of the identified customer location"
           },
-          "errorMessage": {
-            "type": "string",
-            "description": "error message",
-            "example": "Product Not Found"
+          {
+            "name": "state",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "AL"
+            },
+            "description": "The state code of the identified customer location"
+          },
+          {
+            "name": "productUrl",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "4c3103e4-38dc-4171-96e5-b4b77ab0e96f"
+            },
+            "description": "The URL containing the product page that is shown to the customer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Quotes Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "warrantyQuoteId",
+                    "warrantyQuoteItemList",
+                    "coverageWidgetHeading",
+                    "coveragePopupHeading",
+                    "coverageList"
+                  ],
+                  "properties": {
+                    "lowerPrice": {
+                      "type": "number",
+                      "format": "float",
+                      "example": 0
+                    },
+                    "upperPrice": {
+                      "type": "number",
+                      "format": "float",
+                      "example": 499.99
+                    },
+                    
+                    "warrantyQuoteId": {
+                      "type": "string",
+                      "description": "A unique ID representing this specific return quote in this particular API call",
+                      "example": "929d14dd-2937-4290-9818-8fca2a00a9a3"
+                    },
+                    "warrantyQuoteItemList": {
+                      "type": "array",
+                      "description": "A list of warranty offers generated for this particular request",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "warrantyTenure": {
+                            "type": "integer",
+                            "description": "Duration of the warranty in years",
+                            "example": 2
+                          },
+                          "warrantyPrice": {
+                            "type": "number",
+                            "format": "float",
+                            "description": "Price of the warranty",
+                            "example": 64.99
+                          },
+                          "warrantyQuoteItemId": {
+                            "type": "string",
+                            "description": "Unique identifier for the warranty quote item",
+                            "example": "8c78bc1a-0790-4cd3-a3f9-5ed97bbe59f5"
+                          }
+                        }
+                      }
+                    },
+                    "tncLink": {
+                      "type": "string",
+                      "description": "Unique link for legal Terms & Conditions of the warranty for each product Category",
+                      "example": "https://customer.surebright.com/t-c/098e0e696f20839479dfe4a2804756233d32130f068441e24c6c0dbbc790677ff9718e04396a18dac753d0cf92bcaf63a26d2b666e5326475d0b2ed7475ad7fc"
+                    },
+                    "productImageUrl":{
+                      "type": "string",
+                      "description": "Link of the product image that can be show as part of the warranty offer UI",
+                      "example": "<https://cdn.shopify.com/s/files/1/0254/6227/6182/products/bedbathandimage.jpg?v=1664467971>"
+                    },
+                    "coverageWidgetHeading": {
+                      "type": "string",
+                      "description": "Heading for the various tenure options shown to a customer on the product page",
+                      "example": "Add premium product protection"
+                    },
+                    "coveragePopupHeading": {
+                      "type": "string",
+                      "description": "Title that nudges the customers to buy a warranty for their product purchase",
+                      "example": "Don’t want to spend extra on this product for the next few years? We've got you covered!"
+                    },
+                    "coverageList": {
+                      "type": "array",
+                      "description": "List of coverage options grouped under different sections",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "coverageItemType": {
+                            "type": "string",
+                            "enum": [
+                              "COVERAGE_OPTION",
+                              "WHY_SUREBRIGHT"
+                            ],
+                            "example": "COVERAGE_OPTION"
+                          },
+                          "coverageItemTitle": {
+                            "type": "string",
+                            "example": "Your warranty plan provides,"
+                          },
+                          "coverageItemList": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "example": [
+                              "Protection against everyday spills (food, beverages, human or pet biological stains, cosmetics, etc)."
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "511": {
+            "description": "Insufficient Parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 511
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Insufficient Parameters"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "512": {
+            "description": "Validation Failed for Input Parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 512
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Validation Failed for Input Parameters"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "513": {
+            "description": "Product Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 513
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Product Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "514": {
+            "description": "No Quote Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 514
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "No Quote Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "515": {
+            "description": "Store Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 515
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Store Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "516": {
+            "description": "Not Eligible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 516
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Not Eligible"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "517": {
+            "description": "Category Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 517
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Category Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Something Unexpectedly Went Wrong",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 500
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Something Unexpectedly Went Wrong"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
     }
-  }
-},
-"514": {
-  "description": "No Quote Found",
-  "content": {
-    "application/json": {
-      "schema": {
-        "type": "object",
-        "properties": {
-          "isError": {
-            "type": "boolean",
-            "description": "true"
+    ,
+    "/quote/api/v1/category/listWarrantyQuotes/{storeId}?country={country}&sbCategoryId={sbCategoryId}&price={price}": {
+      "get": {
+        "summary": "List Quotes by Category",
+        "description": "This endpoint retrieves a list of warranty quotes for a specific store and category. The response includes detailed warranty options, pricing, and coverage information.",
+        "operationId": "listWarrantyQuotesByCategory",
+        "tags": [
+          "quotes"
+        ],
+        "parameters": [
+          {
+            "name": "storeId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "ecca4210-09a4-446c-ad87-5e65bd50df12"
+            },
+            "description": "A unique identifier for a store will be shared as part of the integration kit. this will be added as path variable"
           },
-          "errorType": {
-            "type": "integer",
-            "description": "error type",
-            "example": 514
+          {
+            "name": "country",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Z]{2}$",
+              "example": "US"
+            },
+            "description": "The country code of the identified customer location"
           },
-          "errorMessage": {
-            "type": "string",
-            "description": "error message",
-            "example": "No Quote Found"
+          {
+            "name": "state",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "AL"
+            },
+            "description": "The state code of the identified customer location"
+          },
+          {
+            "name": "sbCategoryId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "4c3103e4-38dc-4171-96e5-b4b77ab0e96f"
+            },
+            "description": "The URL containing the product page that is shown to the customer"
+          },
+          {
+            "name": "price",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "float",
+              "example": 230.54
+            },
+            "description": "The price of the product in the currency of the country specified in the above parameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Quotes Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "warrantyQuoteId",
+                    "warrantyQuoteItemList",
+                    "coverageWidgetHeading",
+                    "coveragePopupHeading",
+                    "coverageList"
+                  ],
+                  "properties": {
+                    "warrantyQuoteId": {
+                      "type": "string",
+                      "description": "A unique ID representing this specific return quote in this particular API call",
+                      "example": "929d14dd-2937-4290-9818-8fca2a00a9a3"
+                    },
+                    "warrantyQuoteItemList": {
+                      "type": "array",
+                      "description": "A list of warranty offers generated for this particular request",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "warrantyTenure": {
+                            "type": "integer",
+                            "description": "Duration of the warranty in years",
+                            "example": 2
+                          },
+                          "warrantyPrice": {
+                            "type": "number",
+                            "format": "float",
+                            "description": "Price of the warranty",
+                            "example": 64.99
+                          },
+                          "warrantyQuoteItemId": {
+                            "type": "string",
+                            "description": "Unique identifier for the warranty quote item",
+                            "example": "8c78bc1a-0790-4cd3-a3f9-5ed97bbe59f5"
+                          }
+                        }
+                      }
+                    },
+                    "tncLink": {
+                      "type": "string",
+                      "description": "Unique link for legal Terms & Conditions of the warranty for each product Category",
+                      "example": "https://customer.surebright.com/t-c/098e0e696f20839479dfe4a2804756233d32130f068441e24c6c0dbbc790677ff9718e04396a18dac753d0cf92bcaf63a26d2b666e5326475d0b2ed7475ad7fc"
+                    },
+                    "coverageWidgetHeading": {
+                      "type": "string",
+                      "description": "Heading for the various tenure options shown to a customer on the product page",
+                      "example": "Add premium product protection"
+                    },
+                    "coveragePopupHeading": {
+                      "type": "string",
+                      "description": "Title that nudges the customers to buy a warranty for their product purchase",
+                      "example": "Don’t want to spend extra on this product for the next few years? We've got you covered!"
+                    },
+                    "coverageList": {
+                      "type": "array",
+                      "description": "List of coverage options grouped under different sections",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "coverageItemType": {
+                            "type": "string",
+                            "enum": [
+                              "COVERAGE_OPTION",
+                              "WHY_SUREBRIGHT"
+                            ],
+                            "example": "COVERAGE_OPTION"
+                          },
+                          "coverageItemTitle": {
+                            "type": "string",
+                            "example": "Your warranty plan provides,"
+                          },
+                          "coverageItemList": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "example": [
+                              "Protection against everyday spills (food, beverages, human or pet biological stains, cosmetics, etc)."
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "511": {
+            "description": "Insufficient Parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 511
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Insufficient Parameters"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "512": {
+            "description": "Validation Failed for Input Parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 512
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Validation Failed for Input Parameters"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "513": {
+            "description": "Product Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 513
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Product Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "514": {
+            "description": "No Quote Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 514
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "No Quote Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "515": {
+            "description": "Store Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 515
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Store Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "516": {
+            "description": "Not Eligible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 516
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Not Eligible"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "517": {
+            "description": "Category Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 517
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Category Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Something Unexpectedly Went Wrong",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 500
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Something Unexpectedly Went Wrong"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
     }
-  }
-},
-"515": {
-  "description": "Store Not Found",
-  "content": {
-    "application/json": {
-      "schema": {
-        "type": "object",
-        "properties": {
-          "isError": {
-            "type": "boolean",
-            "description": "true"
-          },
-          "errorType": {
-            "type": "integer",
-            "description": "error type",
-            "example": 515
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "error message",
-            "example": "Store Not Found"
-          }
-        }
-      }
-    }
-  }
-},
-"516": {
-  "description": "Not Eligible",
-  "content": {
-    "application/json": {
-      "schema": {
-        "type": "object",
-        "properties": {
-          "isError": {
-            "type": "boolean",
-            "description": "true"
-          },
-          "errorType": {
-            "type": "integer",
-            "description": "error type",
-            "example": 516
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "error message",
-            "example": "Not Eligible"
-          }
-        }
-      }
-    }
-  }
-},
-"517": {
-  "description": "Category Not Found",
-  "content": {
-    "application/json": {
-      "schema": {
-        "type": "object",
-        "properties": {
-          "isError": {
-            "type": "boolean",
-            "description": "true"
-          },
-          "errorType": {
-            "type": "integer",
-            "description": "error type",
-            "example": 517
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "error message",
-            "example": "Category Not Found"
-          }
-        }
-      }
-    }
-  }
-},
-"500": {
-  "description": "Something Unexpectedly Went Wrong",
-  "content": {
-    "application/json": {
-      "schema": {
-        "type": "object",
-        "properties": {
-          "isError": {
-            "type": "boolean",
-            "description": "true"
-          },
-          "errorType": {
-            "type": "integer",
-            "description": "error type",
-            "example": 500
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "error message",
-            "example": "Something Unexpectedly Went Wrong"
-          }
-        }
-      }
-    }
-  }
-}
-        }
-      }
-    },
+    ,
     "/platform/api/v1/order": {
       "post": {
         "summary": "Create Warranty",
@@ -674,17 +1483,20 @@
                 "properties": {
                   "storeId": {
                     "type": "string",
-                    "description": "A unique identifier for a store will be shared as part of the integration kit"
+                    "description": "A unique identifier for a store will be shared as part of the integration kit",
+                    "example": "f4c059b2-5b74-4e4c-a3c5-85bc80cf8a09"
                   },
                   "partnerOrderId": {
                     "type": "string",
                     "description": "Unique identifier for the complete successful order placed by a customer on the merchant site. This represents the whole order that can have multiple line items of different quantities.",
-                    "maxLength": 48
+                    "maxLength": 48,
+                    "example": "83737121380"
                   },
                   "orderPurchaseDateTime": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "Date time at which the order was purchased by customer."
+                    "description": "Date time at which the order was purchased by customer.",
+                    "example": "2024-01-07T10:15:30Z"
                   },
                   "lineItemList": {
                     "type": "array",
@@ -709,44 +1521,57 @@
                       "properties": {
                         "lineItemId": {
                           "type": "string",
-                          "maxLength": 48
+                          "maxLength": 48,
+                          "example": "374dc3c3-94a3-4b85-a876-8651e461446d"
                         },
                         "policyPurchaseDate": {
                           "type": "string",
-                          "format": "date-time"
+                          "format": "date-time",
+                          "example": "2024-01-07T10:15:30Z"
                         },
                         "warrantyQuoteId": {
-                          "type": "string"
+                          "type": "string",
+                          "example": "929d14dd-2937-4290-9818-8fca2a00a9a3"
                         },
                         "warrantyQuoteItemId": {
-                          "type": "string"
+                          "type": "string",
+                          "example": "8c78bc1a-0790-4cd3-a3f9-5ed97bbe59f5"
                         },
                         "totalPrice": {
-                          "type": "number"
+                          "type": "number",
+                          "example": 99
                         },
                         "warrantyQuantity": {
-                          "type": "integer"
+                          "type": "integer",
+                          "example": 3
                         },
                         "unitSalePrice": {
-                          "type": "number"
+                          "type": "number",
+                          "example": 33
                         },
                         "productTitle": {
-                          "type": "string"
+                          "type": "string",
+                          "example": "GreatCircleUSA 3-in-1 Wood Chipper - 7HP Engine, 3 Max Branch Capacity"
                         },
                         "productId": {
-                          "type": "string"
+                          "type": "string",
+                          "example": "6673746231399"
                         },
                         "optionId": {
-                          "type": "string"
+                          "type": "string",
+                          "example": "8577825144935"
                         },
                         "productSKU": {
-                          "type": "string"
+                          "type": "string",
+                          "example": "ALH05"
                         },
                         "productPrice": {
-                          "type": "number"
+                          "type": "number",
+                          "example": 1299
                         },
                         "productURL": {
-                          "type": "string"
+                          "type": "string",
+                          "example": "https://example.com/products/wood-chipper-alh05"
                         }
                       }
                     }
@@ -765,37 +1590,47 @@
                     ],
                     "properties": {
                       "firstName": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "John"
                       },
                       "lastName": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "Doe"
                       },
                       "addressLine1": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "123 Hathway Street"
                       },
                       "addressLine2": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "Apt 4B"
                       },
                       "city": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "New York City"
                       },
                       "state": {
                         "type": "string",
-                        "description": "ISO 3166-2 code"
+                        "description": "ISO 3166-2 code",
+                        "example": "NY"
                       },
                       "country": {
                         "type": "string",
-                        "description": "Country code for USA is US"
+                        "description": "Country code for USA is US",
+                        "example": "US"
                       },
                       "zipCode": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "10005"
                       },
                       "customerEmail": {
                         "type": "string",
-                        "format": "email"
+                        "format": "email",
+                        "example": "johndoe@gmail.com"
                       },
                       "mobileNumber": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "7872323781"
                       }
                     }
                   }
@@ -819,12 +1654,14 @@
                   "properties": {
                     "storeId": {
                       "type": "string",
-                      "description": "A unique identifier for a store will be shared as part of the integration kit"
+                      "description": "A unique identifier for a store will be shared as part of the integration kit",
+                      "example": "f4c059b2-5b74-4e4c-a3c5-85bc80cf8a09"
                     },
                     "partnerOrderId": {
                       "type": "string",
                       "description": "A unique identifier for the complete successful order placed by a customer on the merchant site. This represents the whole order that can have multiple line items of different quantities.",
-                      "maxLength": 48
+                      "maxLength": 48,
+                      "example": "83737121380"
                     },
                     "contractList": {
                       "type": "array",
@@ -839,25 +1676,32 @@
                         ],
                         "properties": {
                           "lineItemId": {
-                            "type": "string"
+                            "type": "string",
+                            "example": "374dc3c3-94a3-4b85-a876-8651e461446d"
                           },
                           "contractId": {
-                            "type": "string"
+                            "type": "string",
+                            "example": "abc12345-6789-4abc-bcde-ef1234567890"
                           },
                           "warrantyQuoteId": {
-                            "type": "string"
+                            "type": "string",
+                            "example": "929d14dd-2937-4290-9818-8fca2a00a9a3"
                           },
                           "warrantyQuoteItemId": {
-                            "type": "string"
+                            "type": "string",
+                            "example": "8c78bc1a-0790-4cd3-a3f9-5ed97bbe59f5"
                           },
                           "isCancelled": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "example": false
                           },
                           "errorCode": {
-                            "type": "integer"
+                            "type": "integer",
+                            "example": 101
                           },
                           "errorMessage": {
-                            "type": "string"
+                            "type": "string",
+                            "example": "Failed to create contract due to invalid quote ID"
                           }
                         }
                       }
@@ -894,187 +1738,187 @@
             }
           },
           "512": {
-  "description": "Validation Failed for Input Parameters",
-  "content": {
-    "application/json": {
-      "schema": {
-        "type": "object",
-        "properties": {
-          "isError": {
-            "type": "boolean",
-            "description": "true"
+            "description": "Validation Failed for Input Parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 512
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Validation Failed for Input Parameters"
+                    }
+                  }
+                }
+              }
+            }
           },
-          "errorType": {
-            "type": "integer",
-            "description": "error type",
-            "example": 512
+          "513": {
+            "description": "Product Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 513
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Product Not Found"
+                    }
+                  }
+                }
+              }
+            }
           },
-          "errorMessage": {
-            "type": "string",
-            "description": "error message",
-            "example": "Validation Failed for Input Parameters"
+          "514": {
+            "description": "No Quote Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 514
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "No Quote Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "515": {
+            "description": "Store Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 515
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Store Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "516": {
+            "description": "Not Eligible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 516
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Not Eligible"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "517": {
+            "description": "Category Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 517
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Category Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Something Unexpectedly Went Wrong",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 500
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Something Unexpectedly Went Wrong"
+                    }
+                  }
+                }
+              }
+            }
           }
-        }
-      }
-    }
-  }
-},
-"513": {
-  "description": "Product Not Found",
-  "content": {
-    "application/json": {
-      "schema": {
-        "type": "object",
-        "properties": {
-          "isError": {
-            "type": "boolean",
-            "description": "true"
-          },
-          "errorType": {
-            "type": "integer",
-            "description": "error type",
-            "example": 513
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "error message",
-            "example": "Product Not Found"
-          }
-        }
-      }
-    }
-  }
-},
-"514": {
-  "description": "No Quote Found",
-  "content": {
-    "application/json": {
-      "schema": {
-        "type": "object",
-        "properties": {
-          "isError": {
-            "type": "boolean",
-            "description": "true"
-          },
-          "errorType": {
-            "type": "integer",
-            "description": "error type",
-            "example": 514
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "error message",
-            "example": "No Quote Found"
-          }
-        }
-      }
-    }
-  }
-},
-"515": {
-  "description": "Store Not Found",
-  "content": {
-    "application/json": {
-      "schema": {
-        "type": "object",
-        "properties": {
-          "isError": {
-            "type": "boolean",
-            "description": "true"
-          },
-          "errorType": {
-            "type": "integer",
-            "description": "error type",
-            "example": 515
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "error message",
-            "example": "Store Not Found"
-          }
-        }
-      }
-    }
-  }
-},
-"516": {
-  "description": "Not Eligible",
-  "content": {
-    "application/json": {
-      "schema": {
-        "type": "object",
-        "properties": {
-          "isError": {
-            "type": "boolean",
-            "description": "true"
-          },
-          "errorType": {
-            "type": "integer",
-            "description": "error type",
-            "example": 516
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "error message",
-            "example": "Not Eligible"
-          }
-        }
-      }
-    }
-  }
-},
-"517": {
-  "description": "Category Not Found",
-  "content": {
-    "application/json": {
-      "schema": {
-        "type": "object",
-        "properties": {
-          "isError": {
-            "type": "boolean",
-            "description": "true"
-          },
-          "errorType": {
-            "type": "integer",
-            "description": "error type",
-            "example": 517
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "error message",
-            "example": "Category Not Found"
-          }
-        }
-      }
-    }
-  }
-},
-"500": {
-  "description": "Something Unexpectedly Went Wrong",
-  "content": {
-    "application/json": {
-      "schema": {
-        "type": "object",
-        "properties": {
-          "isError": {
-            "type": "boolean",
-            "description": "true"
-          },
-          "errorType": {
-            "type": "integer",
-            "description": "error type",
-            "example": 500
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "error message",
-            "example": "Something Unexpectedly Went Wrong"
-          }
-        }
-      }
-    }
-  }
-}
         }
       },
       "put": {
@@ -1100,17 +1944,20 @@
                 "properties": {
                   "storeId": {
                     "type": "string",
-                    "description": "A unique identifier for a store will be shared as part of the integration kit"
+                    "description": "A unique identifier for a store will be shared as part of the integration kit",
+                    "example": "f4c059b2-5b74-4e4c-a3c5-85bc80cf8a09"
                   },
                   "partnerOrderId": {
                     "type": "string",
                     "description": "Unique identifier for the complete successful order placed by a customer on the merchant site. This represents the whole order that can have multiple line items of different quantities.",
-                    "maxLength": 48
+                    "maxLength": 48,
+                    "example": "83737121380"
                   },
                   "orderPurchaseDate": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "Date time at which the order was purchased by customer."
+                    "description": "Date time at which the order was purchased by customer.",
+                    "example": "2024-01-07T10:15:30Z"
                   },
                   "lineItemList": {
                     "type": "array",
@@ -1134,41 +1981,53 @@
                       "properties": {
                         "lineItemId": {
                           "type": "string",
-                          "maxLength": 48
+                          "maxLength": 48,
+                          "example": "374dc3c3-94a3-4b85-a876-8651e461446d"
                         },
                         "policyPurchaseDate": {
                           "type": "string",
-                          "format": "date-time"
+                          "format": "date-time",
+                          "example": "2024-01-07T10:15:30Z"
                         },
                         "warrantyQuoteId": {
-                          "type": "string"
+                          "type": "string",
+                          "example": "929d14dd-2937-4290-9818-8fca2a00a9a3"
                         },
                         "warrantyQuoteItemId": {
-                          "type": "string"
+                          "type": "string",
+                          "example": "8c78bc1a-0790-4cd3-a3f9-5ed97bbe59f5"
                         },
                         "totalWarrantyPrice": {
-                          "type": "number"
+                          "type": "number",
+                          "example": 99
                         },
                         "warrantyQuantity": {
-                          "type": "integer"
+                          "type": "integer",
+                          "example": 1
                         },
                         "unitWarrantySalePrice": {
-                          "type": "number"
+                          "type": "number",
+                          "example": 33
                         },
                         "productTitle": {
-                          "type": "string"
+                          "type": "string",
+                          "example": "GreatCircleUSA 3-in-1 Wood Chipper - 7HP Engine, 3 Max Branch Capacity"
                         },
                         "productId": {
-                          "type": "string"
+                          "type": "string",
+                          "example": "6673746231399"
                         },
                         "optionId": {
-                          "type": "string"
+                          "type": "string",
+                          "example": "8577825144935"
                         },
                         "productSKU": {
-                          "type": "string"
+                          "type": "string",
+                          "example": "ALH05"
                         },
                         "productPrice": {
-                          "type": "number"
+                          "type": "number",
+                          "example": 1299
                         }
                       }
                     }
@@ -1187,37 +2046,47 @@
                     ],
                     "properties": {
                       "firstName": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "John"
                       },
                       "lastName": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "Doe"
                       },
                       "addressLine1": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "123 Hathway Street"
                       },
                       "addressLine2": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "Apt 4B"
                       },
                       "city": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "New York City"
                       },
                       "state": {
                         "type": "string",
-                        "description": "ISO 3166-2 code"
+                        "description": "ISO 3166-2 code",
+                        "example": "NY"
                       },
                       "country": {
                         "type": "string",
-                        "description": "Country code for USA is US"
+                        "description": "Country code for USA is US",
+                        "example": "US"
                       },
                       "zipCode": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "10005"
                       },
                       "customerEmail": {
                         "type": "string",
-                        "format": "email"
+                        "format": "email",
+                        "example": "johndoe@gmail.com"
                       },
                       "mobileNumber": {
-                        "type": "string"
+                        "type": "string",
+                        "example": "7872323781"
                       }
                     }
                   }
@@ -1241,12 +2110,14 @@
                   "properties": {
                     "storeId": {
                       "type": "string",
-                      "description": "A unique identifier for a store will be shared as part of the integration kit"
+                      "description": "A unique identifier for a store will be shared as part of the integration kit",
+                      "example": "f4c059b2-5b74-4e4c-a3c5-85bc80cf8a09"
                     },
                     "partnerOrderId": {
                       "type": "string",
                       "description": "A unique identifier for the complete successful order placed by a customer on the merchant site. This represents the whole order that can have multiple line items of different quantities.",
-                      "maxLength": 48
+                      "maxLength": 48,
+                      "example": "83737121380"
                     },
                     "contractList": {
                       "type": "array",
@@ -1261,19 +2132,24 @@
                         ],
                         "properties": {
                           "lineItemId": {
-                            "type": "string"
+                            "type": "string",
+                            "example": "374dc3c3-94a3-4b85-a876-8651e461446d"
                           },
                           "contractId": {
-                            "type": "string"
+                            "type": "string",
+                            "example": "eb46a2ba-050f-4d40-9105-02ccd497d99e"
                           },
                           "warrantyQuoteId": {
-                            "type": "string"
+                            "type": "string",
+                            "example": "929d14dd-2937-4290-9818-8fca2a00a9a3"
                           },
                           "warrantyQuoteItemId": {
-                            "type": "string"
+                            "type": "string",
+                            "example": "8c78bc1a-0790-4cd3-a3f9-5ed97bbe59f5"
                           },
                           "isCancelled": {
-                            "type": "boolean"
+                            "type": "boolean",
+                            "example": true
                           }
                         }
                       }
@@ -1310,187 +2186,187 @@
             }
           },
           "512": {
-  "description": "Validation Failed for Input Parameters",
-  "content": {
-    "application/json": {
-      "schema": {
-        "type": "object",
-        "properties": {
-          "isError": {
-            "type": "boolean",
-            "description": "true"
+            "description": "Validation Failed for Input Parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 512
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Validation Failed for Input Parameters"
+                    }
+                  }
+                }
+              }
+            }
           },
-          "errorType": {
-            "type": "integer",
-            "description": "error type",
-            "example": 512
+          "513": {
+            "description": "Product Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 513
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Product Not Found"
+                    }
+                  }
+                }
+              }
+            }
           },
-          "errorMessage": {
-            "type": "string",
-            "description": "error message",
-            "example": "Validation Failed for Input Parameters"
+          "514": {
+            "description": "No Quote Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 514
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "No Quote Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "515": {
+            "description": "Store Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 515
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Store Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "516": {
+            "description": "Not Eligible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 516
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Not Eligible"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "517": {
+            "description": "Category Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 517
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Category Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Something Unexpectedly Went Wrong",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 500
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Something Unexpectedly Went Wrong"
+                    }
+                  }
+                }
+              }
+            }
           }
-        }
-      }
-    }
-  }
-},
-"513": {
-  "description": "Product Not Found",
-  "content": {
-    "application/json": {
-      "schema": {
-        "type": "object",
-        "properties": {
-          "isError": {
-            "type": "boolean",
-            "description": "true"
-          },
-          "errorType": {
-            "type": "integer",
-            "description": "error type",
-            "example": 513
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "error message",
-            "example": "Product Not Found"
-          }
-        }
-      }
-    }
-  }
-},
-"514": {
-  "description": "No Quote Found",
-  "content": {
-    "application/json": {
-      "schema": {
-        "type": "object",
-        "properties": {
-          "isError": {
-            "type": "boolean",
-            "description": "true"
-          },
-          "errorType": {
-            "type": "integer",
-            "description": "error type",
-            "example": 514
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "error message",
-            "example": "No Quote Found"
-          }
-        }
-      }
-    }
-  }
-},
-"515": {
-  "description": "Store Not Found",
-  "content": {
-    "application/json": {
-      "schema": {
-        "type": "object",
-        "properties": {
-          "isError": {
-            "type": "boolean",
-            "description": "true"
-          },
-          "errorType": {
-            "type": "integer",
-            "description": "error type",
-            "example": 515
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "error message",
-            "example": "Store Not Found"
-          }
-        }
-      }
-    }
-  }
-},
-"516": {
-  "description": "Not Eligible",
-  "content": {
-    "application/json": {
-      "schema": {
-        "type": "object",
-        "properties": {
-          "isError": {
-            "type": "boolean",
-            "description": "true"
-          },
-          "errorType": {
-            "type": "integer",
-            "description": "error type",
-            "example": 516
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "error message",
-            "example": "Not Eligible"
-          }
-        }
-      }
-    }
-  }
-},
-"517": {
-  "description": "Category Not Found",
-  "content": {
-    "application/json": {
-      "schema": {
-        "type": "object",
-        "properties": {
-          "isError": {
-            "type": "boolean",
-            "description": "true"
-          },
-          "errorType": {
-            "type": "integer",
-            "description": "error type",
-            "example": 517
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "error message",
-            "example": "Category Not Found"
-          }
-        }
-      }
-    }
-  }
-},
-"500": {
-  "description": "Something Unexpectedly Went Wrong",
-  "content": {
-    "application/json": {
-      "schema": {
-        "type": "object",
-        "properties": {
-          "isError": {
-            "type": "boolean",
-            "description": "true"
-          },
-          "errorType": {
-            "type": "integer",
-            "description": "error type",
-            "example": 500
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "error message",
-            "example": "Something Unexpectedly Went Wrong"
-          }
-        }
-      }
-    }
-  }
-}
         }
       }
     }
