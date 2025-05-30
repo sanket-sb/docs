@@ -22,7 +22,7 @@ This enables you to craft dynamic, timely, and relevant messages to drive conver
 
 ### Overview
 
-To engage customers with eligible warranty options, you’ll set up a custom flow in Klaviyo triggered by SureBright’s eligibility events. This involves:
+To engage customers with eligible warranty options, you'll set up a custom flow in Klaviyo triggered by SureBright's eligibility events. This involves:
 
 - Creating a new flow tailored for warranty outreach.
 - Selecting the specific **SureBright: Eligible Order** event as the trigger.
@@ -50,14 +50,14 @@ To engage customers with eligible warranty options, you’ll set up a custom flo
 - In the dropdown, \*\*choose \*\*`SureBright: Eligible Order`.
 
 <Warning>
-  _Do not use the generic “Placed Order” trigger—this will not capture warranty-eligible events._
+  _Do not use the generic "Placed Order" trigger—this will not capture warranty-eligible events._
 </Warning>
 
 ---
 
 ### 3. Add a Trigger Filter
 
-- After selecting the trigger, click **“Trigger Filters”**.
+- After selecting the trigger, click **"Trigger Filters"**.
 - Add a condition:
   - **Field:** `is_eligible`
   - **Condition:** `equals`
@@ -106,7 +106,7 @@ Before activating the flow, please submit a preview or test email to the SureBri
 This event is triggered when a customer purchases a product that is eligible for a SureBright warranty. Here are the attributes available to you in Klaviyo about SureBright eligibility on your store's orders:
 
 <ParamField path="order_id" type="string">
-  Platform Order Id (Example: Shopify)
+  Platform Order Id (Example: Shopify Order Id)
 </ParamField>
 
 <ParamField path="order_amount" type="string">
@@ -167,6 +167,47 @@ This event is triggered when a customer purchases a product that is eligible for
   </Expandable>
 </ParamField>
 
+**Example Payload:**
+
+```json SureBright: Eligible Order [expandable]
+    {
+      "order_id": "1234567890",
+      "order_amount": "199.99",
+      "currency": "USD",
+      "created_at": "2025-04-10T14:57:11.451046",
+      "merchant_logo_url": "https://yourstore.com/logo.png",
+      "merchant_name": "Your Store Name",
+      "post_purchase_url": "https://yourstore.com/?quoteLeadId=1234567890",
+      "product_title": "Sample Product Name",
+      "is_eligible": true,
+      "coverage_type": "AD",
+      "coverage_option_title": "Your Accidental Damage Protection Plan ensures:",
+      "coverage_options": [
+        {
+          "icon_url": "https://cdn.example.com/icons/damage.png",
+          "text": "Protection against unforeseen damage such as drops, spills, and falls."
+        },
+        {
+          "icon_url": "https://cdn.example.com/icons/breakdown.png",
+          "text": "Coverage for mechanical and electrical breakdowns, including power surges."
+        },
+        {
+          "icon_url": "https://cdn.example.com/icons/repair.png",
+          "text": "Full coverage for parts, labor, and repairs."
+        },
+        {
+          "icon_url": "https://cdn.example.com/icons/wear.png",
+          "text": "Protection against wear and tear impacting functionality."
+        },
+        {
+          "icon_url": "https://cdn.example.com/icons/replace.png",
+          "text": "If it can't be repaired, it will be replaced."
+        }
+      ]
+  }
+```
+
+
 ### **Event - SureBright: Policy Purchased**
 
 This event is triggered when a customer successfully purchases a warranty for their product. Most merchants use this event to stop further warranty marketing once coverage has been bought.
@@ -174,7 +215,7 @@ This event is triggered when a customer successfully purchases a warranty for th
 Here are the attributes available in Klaviyo when a policy is purchased:
 
 <ParamField path="order_id" type="string">
-  Shopify Order Id
+  Platform Order Id (Example: Shopify Order Id)
 </ParamField>
 
 <ParamField path="contract_id" type="string">
@@ -201,11 +242,25 @@ Here are the attributes available in Klaviyo when a policy is purchased:
   Type of warranty coverage (e.g., AD for Accidental Damage, B for Breakdown)
 </ParamField>
 
+**Example Payload:**
+
+```json SureBright: Policy Purchased [expandable]
+    {
+      "order_id": "1234567890",
+      "contract_id": "4efcf6ce8f7b465da14fe1d65c64dsd",
+      "product_title": "Sample Product Title",
+      "policy_tenure": "1 year",
+      "policy_price": "29.99",
+      "warranty_purchase_date": "2025-04-10T15:00:41.301007",
+      "coverage_type": "AD"
+}
+```
+
 ## Implementation Use Cases
 
 ### SureBright: Eligible Order
 
-Use this event to drive engagement and conversion among customers who didn’t buy a warranty at checkout:
+Use this event to drive engagement and conversion among customers who didn't buy a warranty at checkout:
 
 - **Timed Drip Flows:** Create flows that trigger based on time elapsed since purchase, nudging non-buyers at key intervals.
 - **Follow-up Campaigns:** Send reminder emails prompting customers to purchase protection for eligible products.
