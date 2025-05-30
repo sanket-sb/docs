@@ -48,10 +48,10 @@
                 ]
               },
               {
-                "group": "Quotes",
+                "group": "Quote",
                 "pages": [
-                  "api-reference/endpoint/Quotes/index",
-                  "api-reference/endpoint/Quotes/listwarrantyquotesbyCategory"
+                  "api-reference/endpoint/Quote/index",
+                  "api-reference/endpoint/Quote/listwarrantyquotesbyCategory"
                 ]
               },
               {
