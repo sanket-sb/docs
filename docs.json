@@ -31,12 +31,7 @@
               {
                 "group": "Magento",
                 "pages":[
-                  {
-                    "group": "Install Guide",
-                    "pages": [
                       "magento/InstallGuide"
-                    ]
-                  }
                 ]
               }
             ]
