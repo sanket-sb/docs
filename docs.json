@@ -31,7 +31,7 @@
               {
                 "group": "Magento",
                 "pages":[
-                      "magento/InstallGuide"
+                  "magento/InstallGuide"
                 ]
               }
             ]
@@ -57,7 +57,9 @@
                 "group": "Quote",
                 "pages": [
                   "api-reference/endpoint/Quote/index",
-                  "api-reference/endpoint/Quote/listwarrantyquotesbyCategory"
+                  "api-reference/endpoint/Quote/listWarrantyQuotesByCategory",
+                  "api-reference/endpoint/Quote/listWarrantyQuotesByProduct",
+                  "api-reference/endpoint/Quote/listWarrantyQuotesByUrl"
                 ]
               },
               {
