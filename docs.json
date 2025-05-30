@@ -35,12 +35,6 @@
                     ]
                   }
                 ]
-              },
-              {
-                "group": "Magento",
-                "pages":[
-                  "magento/InstallGuide"
-                ]
               }
             ]
           }
