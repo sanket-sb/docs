@@ -5,18 +5,18 @@ description: "Re-install or Uninstall guide to disable and re-enable SureBright 
 
 ## A. Uninstall SureBright module
 
-<Accordion title=" Turn Off SureBright Integration" icon="sparkles">
+<Accordion title=" Turn Off SureBright Integration">
   Run this command to disable the module and remove old files:
 
   > php bin/magento module:disable Surebright_Integration --clear-static-content
 </Accordion>
 
-**That's all \!\! you have disabled SureBright module from your website.**
+****That's all 🎉\!\! you have disabled SureBright module from your website.****
 
 Follow below steps if you want to remove the SureBright module from website.
 
 <AccordionGroup>
-  <Accordion title=" Rebuild Code" icon="sparkles">
+  <Accordion title=" Rebuild Code">
     Run this to rebuild the necessary files:
 
     > bin/magento setup:di:compile
@@ -42,7 +42,7 @@ Follow below steps if you want to re-install SureBright module.
 
 ## B. Re-Install Steps
 
-<Accordion title="Re-Install SureBright" description="Skip this step if you only disbaled the mdule and haven't removed it yet." icon="sparkles">
+<Accordion title="Re-Install SureBright" description="Skip this step if you only disbaled the mdule and haven't removed it yet.">
   Run this to add SureBright back:
 
   > composer require surebright/integration
@@ -50,7 +50,7 @@ Follow below steps if you want to re-install SureBright module.
 
 **If you have only disbaled the app then just follow below step and ignore rest of guide.**
 
-<Accordion title=" Turn SureBright Back On" icon="sparkles">
+<Accordion title=" Turn SureBright Back On">
   Run this to enable the module:
 
   > php bin/magento module:enable Surebright_Integration
@@ -59,7 +59,7 @@ Follow below steps if you want to re-install SureBright module.
 **Follow below guide only if you had removed the module.**
 
 <AccordionGroup>
-  <Accordion title=" Update Magento and Rebuild Code" icon="sparkles">
+  <Accordion title=" Update Magento and Rebuild Code">
     Run this to finalize the reinstall:
 
     > bin/magento setup:upgrade
