@@ -17,6 +17,12 @@
             "group": " ",
             "pages": [
               {
+                "group": "Shopify",
+                "pages":[
+                      "draft-order-guide/SurebrightwithDraftOrders"
+                ]
+              },
+              {
                 "group": "Magento",
                 "pages":[
                       "magento/install-guide",
