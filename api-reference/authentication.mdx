@@ -27,10 +27,12 @@ Authentication is required only for secure endpoints, such as those involving or
 ### Sandbox Environment
 
 ```bash
-curl -X GET \
-https://{HOST_NAME}/api/v1/quote/listWarrantyQuotes \\
+curl -X POST \
+ https://{HOST_NAME}/platform/api/v1/order \\
   -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json'
+  -H 'Content-Type: application/json' \\
+  -H 'X-SureBright-Access-Token: {sandbox access token}'
+
 ```
 
 ## Required Credentials
@@ -38,7 +40,6 @@ https://{HOST_NAME}/api/v1/quote/listWarrantyQuotes \\
 The following values will be provided as part of the SureBright Integration Kit for both staging and production environments:
 
 - `storeId`
-- `SUREBRIGHT_CDN_URL`
 - `X-SureBright-Access-Token`
 - `HOST_NAME`
 
