@@ -342,7 +342,7 @@
         }
       }
     },
-    "/api/v1/quote/listWarrantyQuotes/storeId={storeId}?country={country}&productUrl={PRODUCT_URL}&price={price}": {
+    "/api/v1/quote/listWarrantyQuotes?storeId={storeId}&country={country}&productUrl={PRODUCT_URL}&price={price}": {
       "get": {
         "summary": "List Warranty Quotes by Product",
         "description": "This endpoint retrieves a list of warranty quotes for a specific product and its price.",
@@ -716,7 +716,7 @@
       }
     }
     ,
-    "/api/v1/quote/listCategoryWarrantyQuotes/storeId={storeId}?country={country}&productUrl={PRODUCT_URL}": {
+    "/api/v1/quote/listCategoryWarrantyQuotes?storeId={storeId}&country={country}&productUrl={PRODUCT_URL}": {
       "get": {
         "summary": "List Quotes by URL",
         "description": "This endpoint fetches all warranty quotes for the product category to which product in the sent URL belongs.",
@@ -1090,7 +1090,7 @@
       }
     }
     ,
-    "/quote/api/v1/category/listWarrantyQuotes/{storeId}?country={country}&sbCategoryId={sbCategoryId}&price={price}": {
+    "/quote/api/v1/category/listWarrantyQuotes?storeId={storeId}&country={country}&sbCategoryId={sbCategoryId}&price={price}": {
       "get": {
         "summary": "List Quotes by Category",
         "description": "This endpoint retrieves a list of warranty quotes for a specific store and category. The response includes detailed warranty options, pricing, and coverage information.",

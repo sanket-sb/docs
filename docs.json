@@ -7,7 +7,7 @@
     "light": "#07C983",
     "dark": "#15803D"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/images/sb-favicon.png",
   "navigation": {
     "tabs": [
       {
@@ -19,7 +19,7 @@
               {
                 "group": "Shopify",
                 "pages":[
-                      "draft-order-guide/SurebrightwithDraftOrders"
+                      "draft-order-guide/shopify-draft-order"
                 ]
               },
               {
@@ -36,8 +36,8 @@
                   {
                     "group": "Klaviyo",
                     "pages": [
-                      "klaviyo-integration/IntegrationGuide",
-                      "klaviyo-integration/brandManagedCampaignGuide"
+                      "klaviyo-integration/integration-guide",
+                      "klaviyo-integration/brand-managed-campaign-guide"
                     ]
                   }
                 ]
@@ -64,18 +64,18 @@
               {
                 "group": "Quote",
                 "pages": [
-                  "api-reference/endpoint/Quote/index",
-                  "api-reference/endpoint/Quote/list-warranty-quotes-by-category",
-                  "api-reference/endpoint/Quote/list-warranty-quotes-by-product",
-                  "api-reference/endpoint/Quote/list-warranty-quotes-by-url"
+                  "api-reference/endpoint/quote/index",
+                  "api-reference/endpoint/quote/list-warranty-quotes-by-category",
+                  "api-reference/endpoint/quote/list-warranty-quotes-by-product",
+                  "api-reference/endpoint/quote/list-warranty-quotes-by-url"
                 ]
               },
               {
                 "group": "Order",
                 "pages": [
-                  "api-reference/endpoint/Order/index",
-                  "api-reference/endpoint/Order/create-contract",
-                  "api-reference/endpoint/Order/update-contract"
+                  "api-reference/endpoint/order/index",
+                  "api-reference/endpoint/order/create-contract",
+                  "api-reference/endpoint/order/update-contract"
                 ]
               },
               "api-reference/http-status-codes"
