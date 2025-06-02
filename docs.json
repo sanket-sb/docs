@@ -19,7 +19,7 @@
               {
                 "group": "Shopify",
                 "pages":[
-                      "draft-order-guide/SurebrightwithDraftOrders"
+                      "draft-order-guide/shopify-draft-order"
                 ]
               },
               {
@@ -36,8 +36,8 @@
                   {
                     "group": "Klaviyo",
                     "pages": [
-                      "klaviyo-integration/IntegrationGuide",
-                      "klaviyo-integration/brandManagedCampaignGuide"
+                      "klaviyo-integration/integration-guide",
+                      "klaviyo-integration/brand-managed-campaign-guide"
                     ]
                   }
                 ]
