@@ -19,8 +19,7 @@
               {
                 "group": "Shopify",
                 "pages":[
-                      "shopify/draft-order-guide/shopify-draft-order",
-                      "shopify/pos-extension"
+                      "draft-order-guide/shopify-draft-order"
                 ]
               },
               {
