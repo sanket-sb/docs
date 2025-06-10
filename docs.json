@@ -27,7 +27,7 @@
                 "pages":[
                       "magento/install-guide",
                       "magento/disable-guide",
-                      "magento/reinstall-guide"
+                      "magento/uninstall-guide"
                 ]
               },
               {
