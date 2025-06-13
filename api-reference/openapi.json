@@ -1627,7 +1627,7 @@
                         "description": "Country code for USA is US",
                         "example": "US"
                       },
-                      "zipCode": {
+                      "pinCode": {
                         "type": "string",
                         "example": "10005"
                       },
@@ -1694,15 +1694,16 @@
                         "type": "object",
                       
                         "properties": {
-                          "lineItemId": {
-                            "type": "string",
-                            "example": "374dc3c3-94a3-4b85-a876-8651e461446d"
-                          },
                           "contractId": {
                             "type": "string",
                             "example": "abc12345-6789-4abc-bcde-ef1234567890"
                           },
                          
+                          "lineItemId": {
+                            "type": "string",
+                            "example": "374dc3c3-94a3-4b85-a876-8651e461446d"
+                          },
+                          
                           "isCancelled": {
                             "type": "boolean",
                             "example": false
