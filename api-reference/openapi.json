@@ -1459,7 +1459,7 @@
       }
     }
     ,
-    "/partner/api/contract/createUpdate": {
+    "/partner/api/v1/order": {
       "post": {
         "summary": "Create/Update Warranty",
         "description": "This endpoint creates/updates warranty contracts for a specific order. To cancel a specific line item, set the field 'quantity' in lineItem inside orderLineItemList to 0 as part of the lineItem details as shown below. If a contract has been cancelled, it cannot be marked as active again. To only remove the warranty from product remove the planDetails object from that lineItem. ",
@@ -1537,13 +1537,13 @@
                             "policySKU": {
                               "type": "string",
                               "description": "The SKU id of the policy purchased by the customer, this will only be required if warranty to be selected is based on the policy SKU ids shared with the store",
-                              "example": "SBW_1U_SHAB_2900"
+                              "example": "SBW-1U-SHAB-2900"
                             }
                           }
                         },
                         "totalPrice": {
                           "type": "number",
-                          "example": 99
+                          "example": 3300
                         },
                         "quantity": {
                           "type": "integer",
@@ -1565,9 +1565,9 @@
                           "type": "string",
                           "example": "ALH05"
                         },
-                        "productPrice": {
+                        "salePrice": {
                           "type": "number",
-                          "example": 1299
+                          "example": 1100
                         },
                         "listPrice": {
                           "type": "number",
@@ -1692,12 +1692,7 @@
                       "description": "The list of contracts generated for each quantity in each line item. If any error in generating a contract, the error code and msg will be added for that item instead of the contract id.",
                       "items": {
                         "type": "object",
-                        "required": [
-                          "lineItemId",
-                          "warrantyQuoteId",
-                          "warrantyQuoteItemId",
-                          "isCancelled"
-                        ],
+                      
                         "properties": {
                           "lineItemId": {
                             "type": "string",
@@ -1707,25 +1702,10 @@
                             "type": "string",
                             "example": "abc12345-6789-4abc-bcde-ef1234567890"
                           },
-                          "warrantyQuoteId": {
-                            "type": "string",
-                            "example": "929d14dd-2937-4290-9818-8fca2a00a9a3"
-                          },
-                          "warrantyQuoteItemId": {
-                            "type": "string",
-                            "example": "8c78bc1a-0790-4cd3-a3f9-5ed97bbe59f5"
-                          },
+                         
                           "isCancelled": {
                             "type": "boolean",
                             "example": false
-                          },
-                          "errorCode": {
-                            "type": "integer",
-                            "example": 101
-                          },
-                          "errorMessage": {
-                            "type": "string",
-                            "example": "Failed to create contract due to invalid quote ID"
                           }
                         }
                       }
