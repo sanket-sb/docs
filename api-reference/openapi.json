@@ -467,7 +467,7 @@
                     "coveragePopupHeading": {
                       "type": "string",
                       "description": "Title that nudges the customers to buy a warranty for their product purchase",
-                      "example": "Don’t want to spend extra on this product for the next few years? We've got you covered!"
+                      "example": "Don't want to spend extra on this product for the next few years? We've got you covered!"
                     },
                     "coverageList": {
                       "type": "array",
@@ -841,7 +841,7 @@
                     "coveragePopupHeading": {
                       "type": "string",
                       "description": "Title that nudges the customers to buy a warranty for their product purchase",
-                      "example": "Don’t want to spend extra on this product for the next few years? We've got you covered!"
+                      "example": "Don't want to spend extra on this product for the next few years? We've got you covered!"
                     },
                     "coverageList": {
                       "type": "array",
@@ -1210,7 +1210,7 @@
                     "coveragePopupHeading": {
                       "type": "string",
                       "description": "Title that nudges the customers to buy a warranty for their product purchase",
-                      "example": "Don’t want to spend extra on this product for the next few years? We've got you covered!"
+                      "example": "Don't want to spend extra on this product for the next few years? We've got you covered!"
                     },
                     "coverageList": {
                       "type": "array",
@@ -1459,11 +1459,11 @@
       }
     }
     ,
-    "/platform/api/v1/order": {
+    "/partner/api/contract/createUpdate": {
       "post": {
-        "summary": "Create Warranty",
-        "description": "This endpoint creates warranty contracts for a specific order.",
-        "operationId": "createWarranty",
+        "summary": "Create/Update Warranty",
+        "description": "This endpoint creates/updates warranty contracts for a specific order.",
+        "operationId": "createUpdateWarranty",
         "tags": [
           "orders"
         ],
@@ -1475,9 +1475,9 @@
                 "type": "object",
                 "required": [
                   "storeId",
-                  "partnerOrderId",
-                  "orderPurchaseDateTime",
-                  "lineItemList",
+                  "orderId",
+                  "orderPurchaseDate",
+                  "orderLineItemList",
                   "customerDetails"
                 ],
                 "properties": {
@@ -1486,37 +1486,37 @@
                     "description": "A unique identifier for a store will be shared as part of the integration kit",
                     "example": "f4c059b2-5b74-4e4c-a3c5-85bc80cf8a09"
                   },
-                  "partnerOrderId": {
+                  "orderId": {
                     "type": "string",
                     "description": "Unique identifier for the complete successful order placed by a customer on the merchant site. This represents the whole order that can have multiple line items of different quantities.",
                     "maxLength": 48,
                     "example": "83737121380"
                   },
-                  "orderPurchaseDateTime": {
+                  "orderPurchaseDate": {
                     "type": "string",
                     "format": "date-time",
                     "description": "Date time at which the order was purchased by customer.",
                     "example": "2024-01-07T10:15:30Z"
                   },
-                  "lineItemList": {
+                  "orderLineItemList": {
                     "type": "array",
-                    "description": "The lineItemList consists of individual line items representing purchased policies. Each line item is uniquely identified by a lineItemId (String: maximum length 48 characters). The warrantyQuoteId and warrantyQuoteItemId serve to identify the specific quote option acquired by the customer. A line item must include warrantyQuoteItemId and warrantyQuoteId. The unitSalePrice and totalPrice indicate the price at which the policy was purchased by the customer. Please refrain from sending a line item in which no policy sales have been made. OptionId is the combination of product attributes separated by #.",
+                    "description": "The lineItemList consists of individual line items representing purchased products and/or products with policies. Each line item is uniquely identified by a lineItemId (String: maximum length 48 characters). The planDetails serve to identify the specific quote option acquired by the customer. OptionId is the combination of product attributes separated by #.",
                     "items": {
                       "type": "object",
                       "required": [
                         "lineItemId",
-                        "policyPurchaseDate",
-                        "warrantyQuoteId",
-                        "warrantyQuoteItemId",
+                        "planDetails",
                         "totalPrice",
-                        "warrantyQuantity",
-                        "unitSalePrice",
+                        "quantity",
                         "productTitle",
                         "productId",
                         "optionId",
                         "productSKU",
-                        "productPrice",
-                        "productURL"
+                        "productURL",
+                        "discount",
+                        "totalOrderValue",
+                        "isTestOrder",
+                        "tax"
                       ],
                       "properties": {
                         "lineItemId": {
@@ -1524,30 +1524,52 @@
                           "maxLength": 48,
                           "example": "374dc3c3-94a3-4b85-a876-8651e461446d"
                         },
-                        "policyPurchaseDate": {
-                          "type": "string",
-                          "format": "date-time",
-                          "example": "2024-01-07T10:15:30Z"
-                        },
-                        "warrantyQuoteId": {
-                          "type": "string",
-                          "example": "929d14dd-2937-4290-9818-8fca2a00a9a3"
-                        },
-                        "warrantyQuoteItemId": {
-                          "type": "string",
-                          "example": "8c78bc1a-0790-4cd3-a3f9-5ed97bbe59f5"
+                        "planDetails": {
+                          "type": "object",
+                          "required": [
+                            "policyPurchaseDate"
+                          ],
+                          "properties": {
+                            "policyPurchaseDate": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "Date time at which the policy was purchased by the customer.",
+                              "example": "2024-01-07T10:15:30Z"
+                            },
+                            "quoteId": {
+                              "type": "string",
+                              "description": "A unique identifier for a warranty quote will be shared as part of listing the quote to the customer. This will only be required if quotes were shown to the customer at the time of purchase.",
+                              "example": "929d14dd-2937-4290-9818-8fca2a00a9a3"
+                            },
+                            "quoteItemId": {
+                              "type": "string",
+                              "description": "A unique identifier for a warranty quote item in the warranty quote at the time of purchase. This will only be required if quotes were shown to the customer at the time of purchase.",
+                              "example": "8c78bc1a-0790-4cd3-a3f9-5ed97bbe59f5"
+                            },
+                            "categoryId": {
+                              "type": "string",
+                              "description": "A unique identifier for a category will be shared as part of the integration kit, this will only be required if warranty to be picked up based on  the category and tenure ",
+                              "example": "d2e9e90b-c57f-41e2-8560-6fc62cd8d5de"
+                            },
+                            "tenure": {
+                              "type": "integer",
+                              "description": "The tenure of the policy in years, only applicable if categoryId is present. This will only be required if warranty to be selected based on the category and tenure were shown to the customer at the time of purchase.",
+                              "example": 2
+                            },
+                            "policySKU": {
+                              "type": "string",
+                              "description": "The SKU id of the policy purchased by the customer, this will only be required if warranty to be selected is based on the policy SKU ids shared with the store",
+                              "example": "SBW_1U_SHAB_2900"
+                            }
+                          }
                         },
                         "totalPrice": {
                           "type": "number",
                           "example": 99
                         },
-                        "warrantyQuantity": {
+                        "quantity": {
                           "type": "integer",
                           "example": 3
-                        },
-                        "unitSalePrice": {
-                          "type": "number",
-                          "example": 33
                         },
                         "productTitle": {
                           "type": "string",
@@ -1633,6 +1655,27 @@
                         "example": "7872323781"
                       }
                     }
+                  },
+                  "discount": {
+                    "type": "object",
+                    "properties": {
+                      "discountAmount": {
+                        "type": "number",
+                        "example": 10
+                      }
+                    }
+                  },
+                  "totalOrderValue": {
+                    "type": "number",
+                    "example": 1000
+                  },
+                  "isTestOrder": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "tax": {
+                    "type": "number",
+                    "example": 100
                   }
                 }
               }
@@ -1648,7 +1691,7 @@
                   "type": "object",
                   "required": [
                     "storeId",
-                    "partnerOrderId",
+                    "orderId",
                     "contractList"
                   ],
                   "properties": {
@@ -1657,7 +1700,7 @@
                       "description": "A unique identifier for a store will be shared as part of the integration kit",
                       "example": "f4c059b2-5b74-4e4c-a3c5-85bc80cf8a09"
                     },
-                    "partnerOrderId": {
+                    "orderId": {
                       "type": "string",
                       "description": "A unique identifier for the complete successful order placed by a customer on the merchant site. This represents the whole order that can have multiple line items of different quantities.",
                       "maxLength": 48,
@@ -1923,7 +1966,7 @@
       },
       "put": {
         "summary": "Cancel/Update Line Item",
-        "description": "To cancel a specific line item, Using PUT method of order API, set the field 'warrantyQuantity' in lineItem inside lineItemList to 0 as part of the lineItem details as shown below. If a contract has been cancelled, it cannot be marked as active again.",
+        "description": "To cancel a specific line item, Using PUT method of order API, set the field 'quantity' in lineItem inside lineItemList to 0 as part of the lineItem details as shown below. If a contract has been cancelled, it cannot be marked as active again. To only remove the warranty from product remove the planDetails object from that lineItem. ",
         "operationId": "updateWarranty",
         "tags": [
           "orders"
@@ -1936,9 +1979,9 @@
                 "type": "object",
                 "required": [
                   "storeId",
-                  "partnerOrderId",
+                  "orderId",
                   "orderPurchaseDate",
-                  "lineItemList",
+                  "orderLineItemList",
                   "customerDetails"
                 ],
                 "properties": {
@@ -1947,7 +1990,7 @@
                     "description": "A unique identifier for a store will be shared as part of the integration kit",
                     "example": "f4c059b2-5b74-4e4c-a3c5-85bc80cf8a09"
                   },
-                  "partnerOrderId": {
+                  "orderId": {
                     "type": "string",
                     "description": "Unique identifier for the complete successful order placed by a customer on the merchant site. This represents the whole order that can have multiple line items of different quantities.",
                     "maxLength": 48,
@@ -1959,24 +2002,25 @@
                     "description": "Date time at which the order was purchased by customer.",
                     "example": "2024-01-07T10:15:30Z"
                   },
-                  "lineItemList": {
+                  "orderLineItemList": {
                     "type": "array",
-                    "description": "The lineItemList consists of individual line items representing purchased policies. Each line item is uniquely identified by a lineItemId (String: maximum length 48 characters). The warrantyQuoteId and warrantyQuoteItemId serve to identify the specific quote option acquired by the customer. A line item must include warrantyQuoteItemId and warrantyQuoteId. The unitWarrantySalePrice and totalWarrantyPrice indicate the price at which the policy was purchased by the customer. Please refrain from sending a line item in which no policy sales have been made. OptionId is the combination of product attributes separated by #.",
+                    "description": "The lineItemList consists of individual line items representing purchased products and/or products with policies. Each line item is uniquely identified by a lineItemId (String: maximum length 48 characters). The planDetails serve to identify the specific policy option used for the customer. OptionId is the combination of product attributes separated by #.",
                     "items": {
                       "type": "object",
                       "required": [
                         "lineItemId",
-                        "policyPurchaseDate",
-                        "warrantyQuoteId",
-                        "warrantyQuoteItemId",
-                        "totalWarrantyPrice",
-                        "warrantyQuantity",
-                        "unitWarrantySalePrice",
+                        "planDetails",
+                        "totalPrice",
+                        "quantity",
                         "productTitle",
                         "productId",
                         "optionId",
                         "productSKU",
-                        "productPrice"
+                        "productURL",
+                        "discount",
+                        "totalOrderValue",
+                        "isTestOrder",
+                        "tax"
                       ],
                       "properties": {
                         "lineItemId": {
@@ -1984,30 +2028,52 @@
                           "maxLength": 48,
                           "example": "374dc3c3-94a3-4b85-a876-8651e461446d"
                         },
-                        "policyPurchaseDate": {
-                          "type": "string",
-                          "format": "date-time",
-                          "example": "2024-01-07T10:15:30Z"
+                        "planDetails": {
+                          "type": "object",
+                          "required": [
+                            "policyPurchaseDate"
+                          ],
+                          "properties": {
+                            "policyPurchaseDate": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "Date time at which the policy was purchased by the customer.",
+                              "example": "2024-01-07T10:15:30Z"
+                            },
+                            "quoteId": {
+                              "type": "string",
+                              "description": "A unique identifier for a warranty quote will be shared as part of listing the quote to the customer. This will only be required if quotes were shown to the customer at the time of purchase.",
+                              "example": "929d14dd-2937-4290-9818-8fca2a00a9a3"
+                            },
+                            "quoteItemId": {
+                              "type": "string",
+                              "description": "A unique identifier for a warranty quote item in the warranty quote at the time of purchase. This will only be required if quotes were shown to the customer at the time of purchase.",
+                              "example": "8c78bc1a-0790-4cd3-a3f9-5ed97bbe59f5"
+                            },
+                            "categoryId": {
+                              "type": "string",
+                              "description": "A unique identifier for a category will be shared as part of the integration kit, this will only be required if warranty to be picked up based on  the category and tenure ",
+                              "example": "d2e9e90b-c57f-41e2-8560-6fc62cd8d5de"
+                            },
+                            "tenure": {
+                              "type": "integer",
+                              "description": "The tenure of the policy in years, only applicable if categoryId is present. This will only be required if warranty to be selected based on the category and tenure were shown to the customer at the time of purchase.",
+                              "example": 2
+                            },
+                            "policySKU": {
+                              "type": "string",
+                              "description": "The SKU id of the policy purchased by the customer, this will only be required if warranty to be selected is based on the policy SKU ids shared with the store",
+                              "example": "SBW_1U_SHAB_2900"
+                            }
+                          }
                         },
-                        "warrantyQuoteId": {
-                          "type": "string",
-                          "example": "929d14dd-2937-4290-9818-8fca2a00a9a3"
-                        },
-                        "warrantyQuoteItemId": {
-                          "type": "string",
-                          "example": "8c78bc1a-0790-4cd3-a3f9-5ed97bbe59f5"
-                        },
-                        "totalWarrantyPrice": {
+                        "totalPrice": {
                           "type": "number",
                           "example": 99
                         },
-                        "warrantyQuantity": {
+                        "quantity": {
                           "type": "integer",
-                          "example": 1
-                        },
-                        "unitWarrantySalePrice": {
-                          "type": "number",
-                          "example": 33
+                          "example": 3
                         },
                         "productTitle": {
                           "type": "string",
@@ -2028,6 +2094,10 @@
                         "productPrice": {
                           "type": "number",
                           "example": 1299
+                        },
+                        "productURL": {
+                          "type": "string",
+                          "example": "https://example.com/products/wood-chipper-alh05"
                         }
                       }
                     }
@@ -2089,6 +2159,27 @@
                         "example": "7872323781"
                       }
                     }
+                  },
+                  "discount": {
+                    "type": "object",
+                    "properties": {
+                      "discountAmount": {
+                        "type": "number",
+                        "example": 10
+                      }
+                    }
+                  },
+                  "totalOrderValue": {
+                    "type": "number",
+                    "example": 1000
+                  },
+                  "isTestOrder": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "tax": {
+                    "type": "number",
+                    "example": 100
                   }
                 }
               }
