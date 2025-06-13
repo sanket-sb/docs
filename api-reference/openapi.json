@@ -1500,7 +1500,7 @@
                   },
                   "orderLineItemList": {
                     "type": "array",
-                    "description": "The lineItemList consists of individual line items representing purchased products and/or products with policies. Each line item is uniquely identified by a lineItemId (String: maximum length 48 characters). The planDetails serve to identify the specific quote option acquired by the customer. A line item must include warrantyQuoteItemId and warrantyQuoteId. The unitSalePrice and totalPrice indicate the price at which the policy was purchased by the customer. Please refrain from sending a line item in which no policy sales have been made. OptionId is the combination of product attributes separated by #.",
+                    "description": "The lineItemList consists of individual line items representing purchased products and/or products with policies. Each line item is uniquely identified by a lineItemId (String: maximum length 48 characters). The planDetails serve to identify the specific quote option acquired by the customer. OptionId is the combination of product attributes separated by #.",
                     "items": {
                       "type": "object",
                       "required": [
@@ -2004,7 +2004,7 @@
                   },
                   "orderLineItemList": {
                     "type": "array",
-                    "description": "The lineItemList consists of individual line items representing purchased products and/or products with policies. Each line item is uniquely identified by a lineItemId (String: maximum length 48 characters). The planDetails serve to identify the specific quote option acquired by the customer. A line item must include warrantyQuoteItemId and warrantyQuoteId. The unitSalePrice and totalPrice indicate the price at which the policy was purchased by the customer. Please refrain from sending a line item in which no policy sales have been made. OptionId is the combination of product attributes separated by #.",
+                    "description": "The lineItemList consists of individual line items representing purchased products and/or products with policies. Each line item is uniquely identified by a lineItemId (String: maximum length 48 characters). The planDetails serve to identify the specific policy option used for the customer. OptionId is the combination of product attributes separated by #.",
                     "items": {
                       "type": "object",
                       "required": [
