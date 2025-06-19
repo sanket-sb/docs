@@ -1716,182 +1716,109 @@
               }
             }
           },
-          "511": {
-            "description": "Insufficient Parameters",
+          "207": {
+            "description": "Partial order processing",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
                     "isError": {
-                      "type": "boolean",
-                      "description": "true"
+                            "type": "boolean",
+                            "example": true
                     },
-                    "errorCode": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 511
-                    },
-                    "errorMessage": {
+                    "storeId": {
                       "type": "string",
-                      "description": "error message",
-                      "example": "Insufficient Parameters"
+                      "description": "A unique identifier for a store will be shared as part of the integration kit",
+                      "example": "f4c059b2-5b74-4e4c-a3c5-85bc80cf8a09"
+                    },
+                    "orderId": {
+                      "type": "string",
+                      "description": "A unique identifier for the complete successful order placed by a customer on the merchant site. This represents the whole order that can have multiple line items of different quantities.",
+                      "maxLength": 48,
+                      "example": "83737121380"
+                    },
+                    "contractList": {
+                      "type": "array",
+                      "description": "The list of contracts generated for each quantity in each line item. If any error in generating a contract, the error code and msg will be added for that item instead of the contract id.",
+                      "items": {
+                        "type": "object",
+                      
+                        "properties": {
+                          "lineItemId": {
+                            "type": "string",
+                            "example": "374dc3c3-94a3-4b85-a876-8651e461446d"
+                          },
+                          "contractId": {
+                            "type": "string",
+                            "example": "abc12345-6789-4abc-bcde-ef1234567890"
+                          },
+                         
+                          "isCancelled": {
+                            "type": "boolean",
+                            "example": false
+                          }
+                        }
+                      }
+                    },
+                    "errorList": {
+                      "type": "array",
+                      "description": "The list of contracts generated for each quantity in each line item. If any error in generating a contract, the error code and msg will be added for that item instead of the contract id.",
+                      "items": {
+                        "type": "object",
+                      
+                        "properties": {
+                          "lineItemId": {
+                            "type": "string",
+                            "example": "374dc3c3-94a3-4b85-a876-8651e461446d"
+                          },
+                          "error": {
+                            "type": "string",
+                            "example": "planDetails.policyPurchaseDate is required"
+                          }
+                        }
+                      }
                     }
                   }
                 }
               }
             }
           },
-          "512": {
-            "description": "Validation Failed for Input Parameters",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
-                    },
-                    "errorCode": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 512
-                    },
-                    "errorMessage": {
+                    "storeId": {
                       "type": "string",
-                      "description": "error message",
-                      "example": "Validation Failed for Input Parameters"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "513": {
-            "description": "Product Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
+                      "description": "A unique identifier for a store will be shared as part of the integration kit",
+                      "example": "f4c059b2-5b74-4e4c-a3c5-85bc80cf8a09"
                     },
-                    "errorCode": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 513
-                    },
-                    "errorMessage": {
+                    "orderId": {
                       "type": "string",
-                      "description": "error message",
-                      "example": "Product Not Found"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "514": {
-            "description": "No Quote Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
+                      "description": "A unique identifier for the complete successful order placed by a customer on the merchant site. This represents the whole order that can have multiple line items of different quantities.",
+                      "maxLength": 48,
+                      "example": "83737121380"
                     },
-                    "errorCode": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 514
-                    },
-                    "errorMessage": {
-                      "type": "string",
-                      "description": "error message",
-                      "example": "No Quote Found"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "515": {
-            "description": "Store Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
-                    },
-                    "errorCode": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 515
-                    },
-                    "errorMessage": {
-                      "type": "string",
-                      "description": "error message",
-                      "example": "Store Not Found"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "516": {
-            "description": "Not Eligible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
-                    },
-                    "errorCode": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 516
-                    },
-                    "errorMessage": {
-                      "type": "string",
-                      "description": "error message",
-                      "example": "Not Eligible"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "517": {
-            "description": "Category Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
-                    },
-                    "errorCode": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 517
-                    },
-                    "errorMessage": {
-                      "type": "string",
-                      "description": "error message",
-                      "example": "Category Not Found"
+                    "errorList": {
+                      "type": "array",
+                      "description": "The list of contracts generated for each quantity in each line item. If any error in generating a contract, the error code and msg will be added for that item instead of the contract id.",
+                      "items": {
+                        "type": "object",
+                      
+                        "properties": {
+                          "lineItemId": {
+                            "type": "string",
+                            "example": "374dc3c3-94a3-4b85-a876-8651e461446d"
+                          },
+                          "error": {
+                            "type": "string",
+                            "example": "planDetails.policyPurchaseDate is required"
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -1899,15 +1826,16 @@
             }
           },
           "500": {
-            "description": "Something Unexpectedly Went Wrong",
+            "description": "Internal Server Error",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
+                    "storeId": {
+                      "type": "string",
+                      "description": "Store Id",
+                      "example":"8577825144935"
                     },
                     "errorCode": {
                       "type": "integer",
@@ -1917,13 +1845,13 @@
                     "errorMessage": {
                       "type": "string",
                       "description": "error message",
-                      "example": "Something Unexpectedly Went Wrong"
+                      "example": "Failed to process order with internal service"
                     }
                   }
                 }
               }
             }
-          }
+          },
         }
       },
       "put": {
@@ -2161,16 +2089,15 @@
                         "type": "object",
                       
                         "properties": {
+                          "lineItemId": {
+                            "type": "string",
+                            "example": "374dc3c3-94a3-4b85-a876-8651e461446d"
+                          },
                           "contractId": {
                             "type": "string",
                             "example": "abc12345-6789-4abc-bcde-ef1234567890"
                           },
                          
-                          "lineItemId": {
-                            "type": "string",
-                            "example": "374dc3c3-94a3-4b85-a876-8651e461446d"
-                          },
-                          
                           "isCancelled": {
                             "type": "boolean",
                             "example": false
@@ -2183,182 +2110,109 @@
               }
             }
           },
-          "511": {
-            "description": "Insufficient Parameters",
+          "207": {
+            "description": "Partial order processing",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
                     "isError": {
-                      "type": "boolean",
-                      "description": "true"
+                            "type": "boolean",
+                            "example": true
                     },
-                    "errorCode": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 511
-                    },
-                    "errorMessage": {
+                    "storeId": {
                       "type": "string",
-                      "description": "error message",
-                      "example": "Insufficient Parameters"
+                      "description": "A unique identifier for a store will be shared as part of the integration kit",
+                      "example": "f4c059b2-5b74-4e4c-a3c5-85bc80cf8a09"
+                    },
+                    "orderId": {
+                      "type": "string",
+                      "description": "A unique identifier for the complete successful order placed by a customer on the merchant site. This represents the whole order that can have multiple line items of different quantities.",
+                      "maxLength": 48,
+                      "example": "83737121380"
+                    },
+                    "contractList": {
+                      "type": "array",
+                      "description": "The list of contracts generated for each quantity in each line item. If any error in generating a contract, the error code and msg will be added for that item instead of the contract id.",
+                      "items": {
+                        "type": "object",
+                      
+                        "properties": {
+                          "lineItemId": {
+                            "type": "string",
+                            "example": "374dc3c3-94a3-4b85-a876-8651e461446d"
+                          },
+                          "contractId": {
+                            "type": "string",
+                            "example": "abc12345-6789-4abc-bcde-ef1234567890"
+                          },
+                         
+                          "isCancelled": {
+                            "type": "boolean",
+                            "example": false
+                          }
+                        }
+                      }
+                    },
+                    "errorList": {
+                      "type": "array",
+                      "description": "The list of contracts generated for each quantity in each line item. If any error in generating a contract, the error code and msg will be added for that item instead of the contract id.",
+                      "items": {
+                        "type": "object",
+                      
+                        "properties": {
+                          "lineItemId": {
+                            "type": "string",
+                            "example": "374dc3c3-94a3-4b85-a876-8651e461446d"
+                          },
+                          "error": {
+                            "type": "string",
+                            "example": "planDetails.policyPurchaseDate is required"
+                          }
+                        }
+                      }
                     }
                   }
                 }
               }
             }
           },
-          "512": {
-            "description": "Validation Failed for Input Parameters",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
-                    },
-                    "errorCode": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 512
-                    },
-                    "errorMessage": {
+                    "storeId": {
                       "type": "string",
-                      "description": "error message",
-                      "example": "Validation Failed for Input Parameters"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "513": {
-            "description": "Product Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
+                      "description": "A unique identifier for a store will be shared as part of the integration kit",
+                      "example": "f4c059b2-5b74-4e4c-a3c5-85bc80cf8a09"
                     },
-                    "errorCode": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 513
-                    },
-                    "errorMessage": {
+                    "orderId": {
                       "type": "string",
-                      "description": "error message",
-                      "example": "Product Not Found"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "514": {
-            "description": "No Quote Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
+                      "description": "A unique identifier for the complete successful order placed by a customer on the merchant site. This represents the whole order that can have multiple line items of different quantities.",
+                      "maxLength": 48,
+                      "example": "83737121380"
                     },
-                    "errorCode": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 514
-                    },
-                    "errorMessage": {
-                      "type": "string",
-                      "description": "error message",
-                      "example": "No Quote Found"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "515": {
-            "description": "Store Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
-                    },
-                    "errorCode": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 515
-                    },
-                    "errorMessage": {
-                      "type": "string",
-                      "description": "error message",
-                      "example": "Store Not Found"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "516": {
-            "description": "Not Eligible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
-                    },
-                    "errorCode": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 516
-                    },
-                    "errorMessage": {
-                      "type": "string",
-                      "description": "error message",
-                      "example": "Not Eligible"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "517": {
-            "description": "Category Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
-                    },
-                    "errorCode": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 517
-                    },
-                    "errorMessage": {
-                      "type": "string",
-                      "description": "error message",
-                      "example": "Category Not Found"
+                    "errorList": {
+                      "type": "array",
+                      "description": "The list of contracts generated for each quantity in each line item. If any error in generating a contract, the error code and msg will be added for that item instead of the contract id.",
+                      "items": {
+                        "type": "object",
+                      
+                        "properties": {
+                          "lineItemId": {
+                            "type": "string",
+                            "example": "374dc3c3-94a3-4b85-a876-8651e461446d"
+                          },
+                          "error": {
+                            "type": "string",
+                            "example": "planDetails.policyPurchaseDate is required"
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -2366,15 +2220,16 @@
             }
           },
           "500": {
-            "description": "Something Unexpectedly Went Wrong",
+            "description": "Internal Server Error",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
+                    "storeId": {
+                      "type": "string",
+                      "description": "Store Id",
+                      "example":"8577825144935"
                     },
                     "errorCode": {
                       "type": "integer",
@@ -2384,7 +2239,7 @@
                     "errorMessage": {
                       "type": "string",
                       "description": "error message",
-                      "example": "Something Unexpectedly Went Wrong"
+                      "example": "Failed to process order with internal service"
                     }
                   }
                 }
