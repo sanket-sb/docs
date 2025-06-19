@@ -1525,7 +1525,8 @@
                           "type": "object",
                           "required": [
                             "policyPurchaseDate",
-                            "policySKU"
+                            "policySKU",
+                            "policyPrice"
                           ],
                           "properties": {
                             "policyPurchaseDate": {
@@ -1539,6 +1540,11 @@
                               "type": "string",
                               "description": "The SKU id of the policy purchased by the customer, this will only be required if warranty to be selected is based on the policy SKU ids shared with the store",
                               "example": "SBW-1U-SHAB-2900"
+                            },
+                            "policyPrice": {
+                               "type": "number",
+                               "description":"The price of policy purchased by the customer. ",
+                              "example": 29
                             }
                           }
                         },
@@ -1946,7 +1952,8 @@
                           "type": "object",
                           "required": [
                             "policyPurchaseDate",
-                            "policySKU"
+                            "policySKU",
+                            "policyPrice"
                           ],
                           "properties": {
                             "policyPurchaseDate": {
@@ -1960,6 +1967,11 @@
                               "type": "string",
                               "description": "The SKU id of the policy purchased by the customer, this will only be required if warranty to be selected is based on the policy SKU ids shared with the store",
                               "example": "SBW-1U-SHAB-2900"
+                            },
+                            "policyPrice": {
+                              "type": "number",
+                              "description":"The price of policy purchased by the customer. ",
+                              "example": 29
                             }
                           }
                         },
