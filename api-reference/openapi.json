@@ -1852,6 +1852,33 @@
               }
             }
           },
+          "401": {
+            "description": "Authorization Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "storeId": {
+                      "type": "string",
+                      "description": "Store Id",
+                      "example":"8577825144935"
+                    },
+                    "errorCode": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 401
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "X-SureBright-Access-Token header is required"
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       },
       "put": {
@@ -2240,6 +2267,33 @@
                       "type": "string",
                       "description": "error message",
                       "example": "Failed to process order with internal service"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "storeId": {
+                      "type": "string",
+                      "description": "Store Id",
+                      "example":"8577825144935"
+                    },
+                    "errorCode": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 401
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "X-SureBright-Access-Token header is required"
                     }
                   }
                 }
