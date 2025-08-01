@@ -32,8 +32,10 @@ description: "Re-install guide to disable and re-enable SureBright module for Ma
 </Accordion>
 
 <Accordion title=" Clear Cache" iconType="duotone">
-  Run this to clean up the cache:
+  Run this to clean up the cache and setup your store visuals:
 
+  > bin/magento setup:static-content:deploy -f -j5
+  >
   > bin/magento cache:clean
 </Accordion>
 
@@ -60,8 +62,10 @@ description: "Re-install guide to disable and re-enable SureBright module for Ma
 </Accordion>
 
 <Accordion title=" Clear Cache Again" iconType="duotone">
-  Run this to finish the reinstall:
+  Run this to finish the reinstall and setup your store visuals:
 
+  > bin/magento setup:static-content:deploy -f -j5
+  >
   > bin/magento cache:clean
 </Accordion>
 
