@@ -342,7 +342,7 @@
         }
       }
     },
-    "/quote/api/quote/listWarrantyQuotes?platform={platform}&storeId={storeId}&productId={productId}&variantId={variantId}&country={country}&price={price}": {
+    "/quote/api/quote/listWarrantyQuotes?platform={platform}&storeId={storeId}&productId={productId}&variantId={variantId}&country={country}": {
       "get": {
         "summary": "List Warranty Quotes by Product",
         "description": "This endpoint retrieves a list of warranty quotes for a specific product and its price.",
@@ -411,17 +411,6 @@
               "example": "AL"
             },
             "description": "The state code of the identified customer location"
-          },
-          {
-            "name": "price",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "number",
-              "format": "float",
-              "example": 230.54
-            },
-            "description": "The price of the product in the currency of the country specified in the above parameter"
           }
         ],
         "responses": {
