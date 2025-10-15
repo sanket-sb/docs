@@ -35,6 +35,12 @@
                     ]
                   }
                 ]
+              },
+              {
+                "group": "Salesforce Commerce Cloud",
+                "pages": [
+                    "salesforce-commerce-cloud/IntegrationGuide"
+                ]
               }
             ]
           }
