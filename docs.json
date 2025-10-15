@@ -69,6 +69,7 @@
                   "api-reference/endpoint/quote/index",
                   "api-reference/endpoint/quote/list-warranty-quotes-by-category",
                   "api-reference/endpoint/quote/list-warranty-quotes-by-product",
+                  "api-reference/endpoint/quote/list-warranty-quotes-by-product-sku",
                   "api-reference/endpoint/quote/list-warranty-quotes-by-url"
                 ]
               },
