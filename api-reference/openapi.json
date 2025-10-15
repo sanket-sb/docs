@@ -359,7 +359,11 @@
               "type": "string",
               "example": "SHOPIFY"
             },
+<<<<<<< HEAD
             "description": "The platform of the product that is shown to the customer"
+=======
+            "description": "The platform of the merchant's store."
+>>>>>>> 1c30397e80f9985c8d6185d8034691433aef104c
           },
           {
             "name": "storeId",
@@ -369,7 +373,27 @@
               "type": "string",
               "example": "strictlyapple.myshopify.com"
             },
-            "description": "A unique identifier for a store will be shared as part of the integration kit. this will be added as path variable"
+            "description": "The unique identifier for the merchant's store. This is typically the store's domain name (e.g., 'yourstore.myshopify.com' for Shopify stores)."
+          },
+          {
+            "name": "productId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "8606368530686"
+            },
+            "description": "The ID of the product that is shown to the customer"
+          },
+          {
+            "name": "variantId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "45667967238398"
+            },
+            "description": "The ID of the variant that is shown to the customer"
           },
           {
             "name": "productId",
@@ -413,6 +437,7 @@
             "description": "The state code of the identified customer location"
           },
           {
+<<<<<<< HEAD
             "name": "price",
             "in": "query",
             "required": true,
@@ -797,6 +822,8 @@
             "description": "The state code of the identified customer location"
           },
           {
+=======
+>>>>>>> 1c30397e80f9985c8d6185d8034691433aef104c
             "name": "price",
             "in": "query",
             "required": true,
@@ -834,6 +861,16 @@
                       "items": {
                         "type": "object",
                         "properties": {
+                          "warrantyProductId":{
+                            "type": "integer",
+                            "description": "Product ID of the warranty item",
+                            "example": 7080029454439
+                          },
+                          "warrantyVariantId":{
+                            "type": "integer",
+                            "description": "Variant ID of the warranty item",
+                            "example": 40937702359143
+                          },
                           "warrantyTenure": {
                             "type": "integer",
                             "description": "Duration of the warranty in years",
@@ -858,10 +895,15 @@
                       "description": "Unique link for legal Terms & Conditions of the warranty for each product Category",
                       "example": "https://customer.surebright.com/t-c/098e0e696f20839479dfe4a2804756233d32130f068441e24c6c0dbbc790677ff9718e04396a18dac753d0cf92bcaf63a26d2b666e5326475d0b2ed7475ad7fc"
                     },
+                    "sbCategoryId":{
+                      "type": "string",
+                      "description": "SureBright Category ID of the warranty item",
+                      "example": "4c3103e4-38dc-4171-96e5-b4b77ab0e96f"
+                    },
                     "productImageUrl":{
                       "type": "string",
                       "description": "Link of the product image that can be show as part of the warranty offer UI",
-                      "example": "<https://cdn.shopify.com/s/files/1/0254/6227/6182/products/bedbathandimage.jpg?v=1664467971>"
+                      "example": "https://cdn.shopify.com/s/files/1/0254/6227/6182/products/bedbathandimage.jpg?v=1664467971"
                     },
                     "coverageWidgetHeading": {
                       "type": "string",
