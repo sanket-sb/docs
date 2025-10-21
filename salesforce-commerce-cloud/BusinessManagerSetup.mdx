@@ -1,0 +1,138 @@
+---
+title: "Business Manager Setup"
+description: "Step-by-step guide for setting up SureBright integration in SFCC Business Manager including cartridge upload, metadata import, and catalog configuration."
+---
+
+# Business Manager Setup
+
+The integration follows SFRA’s extensibility and modularity principles and is built on top of app_storefront_base and related modules. It must be implemented in an environment that adheres to SFRA guidelines.
+
+<Info>
+  **Prerequisites**: Ensure you have administrative access to your SFCC Business Manager instance before proceeding with these steps.
+</Info>
+
+---
+
+## Upload Cartridge & Include in Cartridge Path
+
+1. Upload the **surebright_sfra** cartridge to your SFRA sandbox environment.
+2. Go to Business Manager **→** Administration **→** Site **→** Manage Sites. Select your desired site and go to Settings.
+3. At the beginning of the Cartridge Path, add `surebright_sfra:` to include the cartridge in your current site's configuration.
+
+![SFRA Cartridge Configuration](/images/sfra_cartridge.png)
+
+<Warning>
+  **Important**: Always test in your sandbox environment first before deploying to production. Ensure the cartridge is compatible with your SFCC version.
+</Warning>
+
+---
+
+## Import Metadata
+
+1. Go to Business Manager **→** Administration **→** Site Development **→** Import & Export
+2. Upload the following files from the SureBright integration package:
+   - **system-objecttype-extensions.xml**
+   - **custom-objecttype-definitions.xml**
+3. Go to Business Manager **→** Administration **→** Site Development **→** Import & Export **→** Metadata **→** Import
+4. You should see both files as available for import. Proceed to importing both files.
+![SFRA Cartridge Configuration](/images/sfra_systemobject.png)
+
+<Note>
+  These files contain custom object definitions and system extensions required for the SureBright integration to function properly.
+</Note>
+
+---
+
+## Import Custom Jobs
+
+1. Go to Business Manager **→** Administration **→** Operations **→** Import & Export
+2. Upload the following file: **jobs.xml**
+3. Go to Business Manager **→** Administration **→** Operations **→** Import & Export **→** Jobs **→** Import
+4. You should see the jobs file as available for import. Proceed to importing it.
+
+<Info>
+  The jobs file contains automated job definitions for product synchronization, order processing, and contract creation. These will be configured in detail in the [Jobs Guide](./Jobs).
+</Info>
+
+
+## Import SureBright Product Catalog
+
+1. Select your site integrating with SureBright
+2. Go to Business Manager **→** Merchant Tools **→** Products and Catalogs **→** Inventory List Import
+3. Upload the following file: **catalog.xml**
+4. This will import variant products according to unique warranty tenure and price.
+
+<Info>
+  We recommend keeping the surebright products as a separate master catalog for better visibility and management.
+</Info>
+
+---
+
+## Verify Installation
+
+After completing all import steps, verify the installation by checking:
+
+### 1. Cartridge Status
+- Go to `Administration → Sites → [Your Site] → Cartridges`
+- Verify `surebright_sfra` cartridge is listed and active
+- Check for any compatibility warnings or conflicts
+
+
+### 2. Job Definitions
+- Go to `Administration → Jobs → Job Definitions`
+- Verify SureBright jobs are imported:
+  - `SureBrightProductsExport`
+  - `SureBrightOrdersCreation`
+
+
+### 3. Product Catalog
+- Go to `Merchant Tools → Products → Product Catalog`
+- Verify warranty products are imported with correct SKUs
+- Check that products are assigned to your site's catalog
+
+---
+
+## Next Steps
+
+Once you have completed the Business Manager setup:
+
+1. **Configure User Access**: Follow the [Configuration Guide](./Configuration) to set up API clients and user accounts
+2. **Set Up Data Sync**: Use the [Jobs Guide](./Jobs) to configure automated synchronization jobs
+3. **Test Integration**: Run comprehensive tests using the [Testing Guide](./Testing)
+
+---
+
+## Troubleshooting
+
+### Common Issues
+
+**Cartridge Upload Fails**
+- Verify you have administrative permissions
+- Check cartridge compatibility with your SFCC version
+- Ensure sufficient disk space in your sandbox
+
+**Metadata Import Errors**
+- Verify XML file format and structure
+- Check for existing conflicting custom objects
+- Review import logs for specific error messages
+
+**Product Catalog Import Issues**
+- Verify inventory list and pricebook assignments
+- Check product SKU naming conventions
+- Ensure site configuration is complete
+
+### Getting Help
+
+If you encounter issues during setup:
+
+1. Check the [FAQs](./FAQs) for detailed answered questions
+2. Contact your SureBright representative for immediate assistance
+3. Email [support@surebright.com](mailto:support@surebright.com) for technical support
+
+---
+
+## ✅ Setup Complete
+
+Great job! You have successfully completed the Business Manager setup phase. The SureBright integration foundation is now in place and ready for configuration.
+
+**What's Next**: Proceed to the [Jobs Guide](./Jobs) to configure automated data synchronization jobs.

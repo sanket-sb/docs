@@ -1,0 +1,268 @@
+---
+title: "Configuration"
+description: "User and API configuration guide for SureBright SFCC integration including user account creation, API client setup, and credential management."
+---
+
+# Configuration
+
+This phase involves setting up proper user access and API credentials within your SFCC Account Manager to enable the SureBright integration.
+
+<Info>
+  **Prerequisites**: Ensure you have completed the [Business Manager Setup](./BusinessManagerSetup) before proceeding with configuration.
+</Info>
+
+---
+
+## Integration Approaches
+
+Choose the configuration approach that best fits your team's technical capabilities:
+
+<CardGroup cols={2}>
+  <Card title="Full Business Manager Access" icon="shield-check">
+    **Recommended for most merchants**
+    
+    SureBright handles all technical configurations while you focus on business requirements.
+    
+    *Best for: Merchants with limited technical resources*
+  </Card>
+  <Card title="API-Only Access" icon="code">
+    **For technical teams**
+    
+    Your development team handles SFCC configuration while SureBright provides integration support.
+    
+    *Best for: Merchants with dedicated SFCC development teams*
+  </Card>
+</CardGroup>
+
+---
+
+## Full Business Manager Access
+
+This approach provides SureBright with comprehensive access to your SFCC environment, enabling our team to handle all technical configurations.
+
+<Warning>
+  This approach requires granting SureBright administrative access to your SFCC Business Manager. All activities will be logged and auditable.
+</Warning>
+
+### Create SureBright User Account
+
+**Purpose**: Create a dedicated SFCC user account for SureBright with appropriate permissions for integration management.
+
+**Step-by-Step Instructions**:
+
+1. **Access Account Manager**
+   - Log into your SFCC Account Manager (separate from Business Manager)
+   - Navigate to `Administration → Users and Roles`
+   - Click "Add User" button to create a new user account
+![SFRA Add User](/images/sfra_adduser.png)
+   
+
+2. **Configure User Details**
+   - **Username**: `surebright-integration` (must be unique)
+   - **Email**: Use the email address provided by your SureBright representative
+   - **First Name**: `SureBright`
+   - **Last Name**: `Integration`
+   - **Password**: Create a strong password (you'll share this securely with SureBright)
+   - **Status**: Set to "Active" to enable immediate access
+
+3. **Assign Required Roles**
+   In the "Roles" section, select these specific roles:
+   - **Administrator**: Provides full access to Business Manager configuration, cartridge management, and system settings
+   - **API User**: Enables programmatic access to SFCC APIs for data synchronization
+   - **Job Manager**: Allows import/export operations and job management for data sync processes
+
+4. **Verify and Save**
+   - Review all user details and role assignments
+   - Click "Save" to create the user account
+   - Note the username and password for secure sharing with SureBright
+
+<Warning>
+  **Security Note**: This user account will have administrative access to your SFCC instance. Only share credentials through secure, encrypted channels and verify the recipient's identity before sharing.
+</Warning>
+
+### Configure API Client
+
+**Purpose**: Create an API client that enables programmatic access to your SFCC instance for data synchronization and integration management.
+
+**Step-by-Step Instructions**:
+
+1. **Access API Settings in Account Manager**
+   - In your Account Manager, navigate to `Administration → API Settings`
+   - Click "Create API Client" button
+   - You'll need Account Manager administrative access to perform this step
+
+2. **Configure Client Settings**
+   Fill in the following information:
+   - **Client Name**: `SureBright Integration`
+   - **Client Type**: Select "Public" (this allows the client to be used by external applications)
+   - **Description**: `API access for SureBright Product Protection integration`
+   - **Redirect URI**: Leave blank (not required for this integration type)
+
+![SFRA API Client](/images/sfra_apiclient.png)
+
+3. **Assign Required OAuth Scopes**
+   In the "Scopes" section, check the following boxes to grant necessary permissions:
+   - `sfcc.catalogs.rw` - Read/Write access to product catalogs (allows product data sync)
+   - `sfcc.products.rw` - Read/Write access to product data (enables product management)
+   - `sfcc.orders.rw` - Read/Write access to order information (for warranty order processing)
+   - `sfcc.custom-objects.rw` - Read/Write access to custom objects (for warranty data structures)
+   - `sfcc.jobs.rw` - Read/Write access to job management (for data synchronization jobs)
+
+4. **Save and Retrieve Credentials**
+   - Click "Save" to create the API client
+   - **Important**: Copy and securely store these values immediately:
+     - **Client ID**: Unique identifier for API authentication (you'll need this)
+     - **Client Secret**: Secret key for API authentication (you'll need this)
+     - **Organization ID**: Found in `Administration → Organization → Organization Settings`
+     - **Realm**: Part of your SFCC URL (e.g., if URL is `https://your-realm.demandware.net`, realm is `your-realm`)
+     - **Short Code**: Your site identifier (found in `Administration → Sites → [Your Site] → Settings`)
+
+<Info>
+  **Finding Your Organization Details**: If you're unsure about Organization ID, Realm, or Short Code, refer to the FAQ section in the [FAQs Page](./FAQs) for detailed instructions.
+</Info>
+
+### Share Credentials Securely
+
+**Purpose**: Provide SureBright with the necessary credentials to establish secure API connectivity with your SFCC instance.
+
+**Required Information**:
+```
+Client ID: [Your Client ID]
+Client Secret: [Your Client Secret]
+Organization ID: [Your Organization ID]
+Realm: [Your Realm]
+Short Code: [Your Short Code]
+```
+
+**Security Requirements**:
+- Use encrypted communication channels (encrypted email or secure file sharing)
+- Never share credentials via unsecured email or chat platforms
+- Consider using a password manager or secure note-sharing service
+- Verify the recipient's identity before sharing sensitive information
+
+<Warning>
+  These credentials provide access to your SFCC instance. Treat them as sensitive business information and ensure they are shared only with authorized SureBright personnel.
+</Warning>
+
+---
+
+## API-Only Access
+
+This approach is designed for merchants with dedicated SFCC development teams who prefer to maintain full control over their SFCC environment.
+
+<Info>
+  This approach requires your development team to have experience with SFCC cartridge deployment, job management, and custom object configuration.
+</Info>
+
+### Create SFCC API Client
+
+**Purpose**: Create an API client that enables SureBright to provide integration support and data synchronization guidance.
+
+**Development Team Tasks**:
+
+1. **Access Account Manager**
+   - Navigate to `Account Manager → Administration → API Settings`
+   - Click "Create API Client"
+
+2. **Configure API Client**
+   ```
+   Client Name: SureBright Integration
+   Client Type: Public
+   Description: API access for SureBright Product Protection integration support
+   ```
+
+3. **Assign Required OAuth Scopes**
+   ```
+   sfcc.catalogs.rw     - Read/Write access to product catalogs
+   sfcc.products.rw     - Read/Write access to product data
+   sfcc.orders.rw       - Read/Write access to order information
+   sfcc.custom-objects.rw - Read/Write access to custom objects
+   sfcc.jobs.rw         - Read/Write access to job management
+   ```
+
+4. **Document Credentials**
+   - Securely store all generated credentials
+   - Prepare for secure sharing with SureBright team
+
+### Share Integration Information
+
+**Purpose**: Provide SureBright with necessary credentials and site configuration details for integration support.
+
+**Required Information**:
+```
+API Credentials:
+- Client ID: [Your Client ID]
+- Client Secret: [Your Client Secret]
+- Organization ID: [Your Organization ID]
+- Realm: [Your Realm]
+- Short Code: [Your Short Code]
+
+Site Configuration:
+- Inventory List ID: [Your Inventory List ID]
+- Pricebook ID: [Your Pricebook ID]
+- Site ID: [Your Site ID]
+```
+
+**Prerequisites**:
+- Ensure inventory list and pricebook are properly assigned to your site
+- Verify all site configurations are complete and active
+- Confirm API client has been tested and is functional
+
+<Warning>
+  Share this information only through secure, encrypted channels. Verify the recipient's identity before sharing sensitive credentials.
+</Warning>
+
+---
+
+## Integration File Distribution
+
+For API-Only Access, SureBright will provide your development team with all necessary integration files and detailed technical documentation for SFCC deployment.
+
+### Integration Package Contents
+
+**Package Contents**:
+
+1. **SureBright Integration Cartridge**
+   - Complete SFCC cartridge with warranty functionality
+   - Compatible with your SFCC version
+   - Includes all necessary controllers, models, and templates
+
+2. **Data Import XML Files**
+   - **Job Import XMLs**: Product sync and order sync job configurations
+   - **Custom Fields XML**: Line item and product attribute definitions
+   - **Pricing XML**: Warranty plan pricing configurations
+   - **Inventory XML**: Warranty product availability settings
+
+3. **Technical Documentation**
+   - Detailed deployment instructions
+   - Configuration parameters and settings
+   - API integration specifications
+
+
+---
+
+## Next Steps
+
+Once you have completed the configuration:
+
+1. **Set Up Data Sync**: Use the [Jobs Guide](./Jobs) to configure automated synchronization jobs
+2. **Test Integration**: Run comprehensive tests using the [Testing Guide](./Testing)
+3. **Go Live**: Deploy to production and monitor.
+
+---
+
+### Getting Help
+
+If you encounter issues during configuration:
+
+1. Check the [FAQs Page](./FAQs) for detailed solutions
+2. Contact your SureBright representative for immediate assistance
+3. Email [support@surebright.com](mailto:support@surebright.com) for technical support
+
+---
+
+## ✅ Configuration Complete
+
+Great job! You have successfully completed the configuration phase. The SureBright integration is now ready for data synchronization setup.
+
+**What's Next**: Proceed to the [Business Manager Setup](./BusinessManagerSetup) to set up Business Manager.
