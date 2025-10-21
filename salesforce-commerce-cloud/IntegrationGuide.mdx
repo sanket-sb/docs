@@ -1,15 +1,18 @@
 ---
 title: "SFCC Integration Guide"
-description: "Complete merchant onboarding guide for SureBright Product Protection integration with Salesforce Commerce Cloud (SFCC). This guide covers both scenarios: when SureBright gets Business Manager access and when only API access is provided."
+description: "Complete guide to onboard SureBright Product Protection within Salesforce Commerce Cloud (SFCC) SFRA store. This guide covers both scenarios: when SureBright gets Business Manager access and when only API access is provided."
 ---
 
-## What is SFCC Integration?
 
-SureBright Product Protection seamlessly integrates with Salesforce Commerce Cloud (SFCC) to enable merchants to offer comprehensive warranty and protection plans directly within their e-commerce storefront. This integration leverages SFCC's robust API framework and cartridge system to provide a native shopping experience for warranty products.
+The SureBright Product Protection integration with Salesforce Commerce Cloud (SFCC) follows a structured, phase-based approach designed to ensure successful deployment and configuration. This guide provides comprehensive instructions for merchants to integrate warranty and protection plans directly within their SFCC storefront.
 
 <Info>
   **Integration Timeline**: The complete setup typically takes 2-3 business days, depending on your SFCC environment complexity and chosen integration approach.
 </Info>
+
+## Integration Overview
+
+SureBright Product Protection seamlessly integrates with Salesforce Commerce Cloud (SFCC) to enable merchants to offer comprehensive product protection plans directly within their e-commerce storefront. This integration leverages SFCC's robust API framework and cartridge system to provide a native shopping experience for warranty products.
 
 ## Choose Your Integration Path
 
@@ -37,11 +40,11 @@ Based on your team's technical capabilities and security requirements, select th
 Before beginning the integration, ensure you have access to:
 
 <Steps>
-  <Step title="SFCC Business Manager Access">
-    Administrative access to your SFCC Business Manager instance
-  </Step>
   <Step title="Account Manager Permissions">
     Ability to create users and API clients in Account Manager
+  </Step>
+  <Step title="SFCC Business Manager Access">
+    Administrative access to your SFCC Business Manager instance
   </Step>
   <Step title="Product Catalog Data">
     Your complete product catalog with SKUs, pricing, and categories
@@ -51,501 +54,42 @@ Before beginning the integration, ensure you have access to:
   </Step>
 </Steps>
 
-## Scenario 1: Full Business Manager Access
 
-This approach provides SureBright with comprehensive access to your SFCC environment, enabling our team to handle all technical configurations while you focus on business requirements.
-
-<Warning>
-  This approach requires granting SureBright administrative access to your SFCC Business Manager. All activities will be logged and auditable.
-</Warning>
-
-### Phase 1: SFCC User and API Configuration
-
-The first phase involves setting up proper user access and API credentials within your SFCC Account Manager.
-
-<Accordion title="Create SureBright User Account" iconType="duotone">
-  **Purpose**: Create a dedicated SFCC user account for SureBright with appropriate permissions for integration management.
-
-  **Step-by-Step Instructions**:
-  1. **Access Account Manager**
-     - Log into your SFCC Account Manager (separate from Business Manager)
-     - Navigate to `Administration → Users and Roles`
-     - Click "Add User" button to create a new user account
-
-  2. **Configure User Details**
-     - **Username**: `surebright-integration` (must be unique)
-     - **Email**: Use the email address provided by your SureBright representative
-     - **First Name**: `SureBright`
-     - **Last Name**: `Integration`
-     - **Password**: Create a strong password (you'll share this securely with SureBright)
-     - **Status**: Set to "Active" to enable immediate access
-
-  3. **Assign Required Roles**
-     In the "Roles" section, select these specific roles:
-     - **Administrator**: Provides full access to Business Manager configuration, cartridge management, and system settings
-     - **API User**: Enables programmatic access to SFCC APIs for data synchronization
-     - **Job Manager**: Allows import/export operations and job management for data sync processes
-
-  4. **Verify and Save**
-     - Review all user details and role assignments
-     - Click "Save" to create the user account
-     - Note the username and password for secure sharing with SureBright
-
-  <Warning>
-    **Security Note**: This user account will have administrative access to your SFCC instance. Only share credentials through secure, encrypted channels and verify the recipient's identity before sharing.
-  </Warning>
-</Accordion>
-
-<Accordion title="Configure API Client" iconType="duotone">
-  **Purpose**: Create an API client that enables programmatic access to your SFCC instance for data synchronization and integration management.
-
-  **Step-by-Step Instructions**:
-  1. **Access API Settings in Account Manager**
-     - In your Account Manager, navigate to `Administration → API Settings`
-     - Click "Create API Client" button
-     - You'll need Account Manager administrative access to perform this step
-
-  2. **Configure Client Settings**
-     Fill in the following information:
-     - **Client Name**: `SureBright Integration`
-     - **Client Type**: Select "Public" (this allows the client to be used by external applications)
-     - **Description**: `API access for SureBright Product Protection integration`
-     - **Redirect URI**: Leave blank (not required for this integration type)
-
-  3. **Assign Required OAuth Scopes**
-     In the "Scopes" section, check the following boxes to grant necessary permissions:
-     - `sfcc.catalogs.rw` - Read/Write access to product catalogs (allows product data sync)
-     - `sfcc.products.rw` - Read/Write access to product data (enables product management)
-     - `sfcc.orders.rw` - Read/Write access to order information (for warranty order processing)
-     - `sfcc.custom-objects.rw` - Read/Write access to custom objects (for warranty data structures)
-     - `sfcc.jobs.rw` - Read/Write access to job management (for data synchronization jobs)
-
-  4. **Save and Retrieve Credentials**
-     - Click "Save" to create the API client
-     - **Important**: Copy and securely store these values immediately:
-       - **Client ID**: Unique identifier for API authentication (you'll need this)
-       - **Client Secret**: Secret key for API authentication (you'll need this)
-       - **Organization ID**: Found in `Administration → Organization → Organization Settings`
-       - **Realm**: Part of your SFCC URL (e.g., if URL is `https://your-realm.demandware.net`, realm is `your-realm`)
-       - **Short Code**: Your site identifier (found in `Administration → Sites → [Your Site] → Settings`)
-
-  <Info>
-    **Finding Your Organization Details**: If you're unsure about Organization ID, Realm, or Short Code, refer to the FAQ section for detailed instructions on locating these values in your SFCC Business Manager.
-  </Info>
-</Accordion>
-
-<Accordion title="Share Credentials Securely" iconType="duotone">
-  **Purpose**: Provide SureBright with the necessary credentials to establish secure API connectivity with your SFCC instance.
-
-  **Required Information**:
-  ```
-  Client ID: [Your Client ID]
-  Client Secret: [Your Client Secret]
-  Organization ID: [Your Organization ID]
-  Realm: [Your Realm]
-  Short Code: [Your Short Code]
-  ```
-
-  **Security Requirements**:
-  - Use encrypted communication channels (encrypted email or secure file sharing)
-  - Never share credentials via unsecured email or chat platforms
-  - Consider using a password manager or secure note-sharing service
-  - Verify the recipient's identity before sharing sensitive information
-
-  <Warning>
-    These credentials provide access to your SFCC instance. Treat them as sensitive business information and ensure they are shared only with authorized SureBright personnel.
-  </Warning>
-</Accordion>
-
-### Phase 2: SureBright Integration Deployment
-
-Once credentials are securely shared, SureBright will handle all technical configurations within your SFCC environment. This phase includes cartridge deployment, job configuration, and data structure setup.
-
-<Accordion title="SFCC Cartridge Deployment" iconType="duotone">
-  **Purpose**: Deploy the SureBright integration cartridge to enable warranty functionality within your SFCC storefront.
-
-  **SureBright will handle**:
-  - Upload and deploy the integration cartridge
-  - Configure cartridge priority and compatibility
-  - Set up storefront-specific parameters
-</Accordion>
-
-<Accordion title="Data Synchronization Jobs Setup" iconType="duotone">
-  **Purpose**: Configure automated jobs to synchronize product and order data between SFCC and SureBright systems.
-
-  **SureBright will configure**:
-  - Product catalog sync job (runs every 4-6 hours)
-  - Order synchronization job (real-time processing)
-  - Job scheduling and error handling
-</Accordion>
-
-<Accordion title="Custom Objects and Data Structures" iconType="duotone">
-  **Purpose**: Create necessary custom objects and fields to support warranty product data within your SFCC instance.
-
-  **SureBright will create**:
-  - Line item custom fields for warranty tracking
-  - Product attribute definitions for warranty plans
-  - Custom object definitions for warranty contracts
-</Accordion>
-
-<Accordion title="Warranty Product and Pricing Configuration" iconType="duotone">
-  **Purpose**: Set up warranty products, pricing, and inventory within your SFCC catalog.
-
-  **SureBright will configure**:
-  - Warranty product creation in your catalog
-  - Dynamic pricing based on product value
-  - Inventory management for warranty plans
-</Accordion>
-
-## Scenario 2: API-Only Access
-
-This approach is designed for merchants with dedicated SFCC development teams who prefer to maintain full control over their SFCC environment while leveraging SureBright's integration expertise.
-
-<Info>
-  This approach requires your development team to have experience with SFCC cartridge deployment, job management, and custom object configuration.
-</Info>
-
-### Phase 1: API Client and Credential Setup
-
-Your development team will create the necessary API client and share credentials with SureBright for integration support.
-
-<Accordion title="Create SFCC API Client" iconType="duotone">
-  **Purpose**: Create an API client that enables SureBright to provide integration support and data synchronization guidance.
-
-  **Development Team Tasks**:
-  1. **Access Account Manager**
-     - Navigate to `Account Manager → Administration → API Settings`
-     - Click "Create API Client"
-
-  2. **Configure API Client**
-     ```
-     Client Name: SureBright Integration
-     Client Type: Public
-     Description: API access for SureBright Product Protection integration support
-     ```
-
-  3. **Assign Required OAuth Scopes**
-     ```
-     sfcc.catalogs.rw     - Read/Write access to product catalogs
-     sfcc.products.rw     - Read/Write access to product data
-     sfcc.orders.rw       - Read/Write access to order information
-     sfcc.custom-objects.rw - Read/Write access to custom objects
-     sfcc.jobs.rw         - Read/Write access to job management
-     ```
-
-  4. **Document Credentials**
-     - Securely store all generated credentials
-     - Prepare for secure sharing with SureBright team
-</Accordion>
-
-<Accordion title="Share Integration Information" iconType="duotone">
-  **Purpose**: Provide SureBright with necessary credentials and site configuration details for integration support.
-
-  **Required Information**:
-  ```
-  API Credentials:
-  - Client ID: [Your Client ID]
-  - Client Secret: [Your Client Secret]
-  - Organization ID: [Your Organization ID]
-  - Realm: [Your Realm]
-  - Short Code: [Your Short Code]
-
-  Site Configuration:
-  - Inventory List ID: [Your Inventory List ID]
-  - Pricebook ID: [Your Pricebook ID]
-  - Site ID: [Your Site ID]
-  ```
-
-  **Prerequisites**:
-  - Ensure inventory list and pricebook are properly assigned to your site
-  - Verify all site configurations are complete and active
-  - Confirm API client has been tested and is functional
-
-  <Warning>
-    Share this information only through secure, encrypted channels. Verify the recipient's identity before sharing sensitive credentials.
-  </Warning>
-</Accordion>
-
-### Phase 2: Integration File Distribution and Deployment
-
-SureBright will provide your development team with all necessary integration files and detailed technical documentation for SFCC deployment.
-
-<Accordion title="Integration Package Contents" iconType="duotone">
-  **Purpose**: Receive all necessary files and documentation for SFCC integration deployment.
-
-  **Package Contents**:
-  1. **SureBright Integration Cartridge**
-     - Complete SFCC cartridge with warranty functionality
-     - Compatible with your SFCC version
-     - Includes all necessary controllers, models, and templates
-
-  2. **Data Import XML Files**
-     - **Job Import XMLs**: Product sync and order sync job configurations
-     - **Custom Fields XML**: Line item and product attribute definitions
-     - **Pricing XML**: Warranty plan pricing configurations
-     - **Inventory XML**: Warranty product availability settings
-
-  3. **Technical Documentation**
-     - Detailed deployment instructions
-     - Configuration parameters and settings
-     - Troubleshooting guide and best practices
-     - API integration specifications
-
-  4. **Testing Resources**
-     - Test data sets for validation
-     - Sample configurations for different scenarios
-     - Performance testing guidelines
-</Accordion>
-
-<Accordion title="Development Team Deployment Tasks" iconType="duotone">
-  **Purpose**: Deploy and configure the SureBright integration within your SFCC environment.
-
-  **Detailed Deployment Steps**:
-  1. **Cartridge Deployment in Business Manager**
-     - Navigate to `Administration → Sites → [Your Site] → Cartridges`
-     - Click "Upload Cartridge" and select the SureBright cartridge file
-     - Verify cartridge appears in the list and is marked as "Active"
-     - Check for any compatibility warnings or conflicts with existing cartridges
-     - Test in your development/staging environment before production deployment
-
-  2. **Data Structure Setup via XML Import**
-     - Go to `Administration → Site Development → Import & Export`
-     - Import the custom object definitions XML file provided by SureBright
-     - Import the line item custom fields XML for warranty tracking
-     - Import the product attribute definitions XML for warranty plans
-     - Verify all imports completed successfully in the import logs
-
-  3. **Job Configuration and Scheduling**
-     - Navigate to `Administration → Jobs → Job Definitions`
-     - Import the product synchronization job XML provided by SureBright
-     - Import the order synchronization job XML for warranty processing
-     - Configure job scheduling (product sync: every 4-6 hours, order sync: real-time)
-     - Set up error handling and retry mechanisms in job parameters
-     - Test job execution in development environment
-
-  4. **Product and Pricing Configuration**
-     - Go to `Merchant Tools → Products → Product Catalog`
-     - Import warranty product configurations using the provided XML
-     - Verify warranty products appear in your catalog with correct SKUs
-     - Check `Merchant Tools → Pricing → Price Books` for warranty pricing
-     - Ensure warranty products are assigned to your site's pricebook
-     - Configure product relationships and bundles as needed
-
-  5. **Storefront Configuration and Testing**
-     - Set SureBright cartridge priority in `Administration → Sites → [Your Site] → Cartridges`
-     - Ensure SureBright cartridge has higher priority than conflicting cartridges
-     - Configure storefront-specific settings in the cartridge configuration
-     - Test warranty widget display on product pages
-     - Verify mobile responsiveness and cross-browser compatibility
-     - Test warranty selection and cart integration functionality
-
-  6. **Integration Testing and Validation**
-     - Place test orders with warranty products to verify order sync
-     - Check that warranty contracts are created in SureBright system
-     - Verify product data synchronization between SFCC and SureBright
-     - Test warranty product display and purchase flow end-to-end
-     - Validate order processing and contract creation workflow
-     - Monitor job logs for any synchronization errors
-
-  <Info>
-    **Testing Environment**: Always test the complete integration in your development/staging environment before deploying to production. This ensures all components work correctly with your specific SFCC configuration.
-  </Info>
-</Accordion>
-
-## Post-Integration Validation and Go-Live
-
-### Phase 3: Integration Testing and Validation
-
-Before going live, comprehensive testing ensures all integration components function correctly within your SFCC environment.
-
-<Accordion title="Product Data Synchronization Testing" iconType="duotone">
-  **Purpose**: Verify that product data flows correctly between SFCC and SureBright systems.
-
-  **Test Scenarios**:
-  1. **Product Catalog Sync**
-     - Verify products sync from SFCC to SureBright
-     - Check product attribute mapping accuracy
-     - Confirm pricing information synchronization
-     - Test product update propagation
-
-  2. **Warranty Product Configuration**
-     - Verify warranty products appear in SFCC catalog
-     - Check warranty plan options and pricing
-     - Confirm product relationships and bundles
-     - Test warranty product availability
-</Accordion>
-
-<Accordion title="Order Processing and Contract Creation" iconType="duotone">
-  **Purpose**: Ensure warranty orders are processed correctly and contracts are created automatically.
-
-  **Test Scenarios**:
-  1. **Order Placement Testing**
-     - Place test orders with warranty products
-     - Verify order data synchronization to SureBright
-     - Check warranty contract creation
-     - Test order status updates and tracking
-
-  2. **Payment and Billing Testing**
-     - Verify warranty product pricing in cart
-     - Test checkout process with warranty products
-     - Confirm payment processing and billing
-     - Check order confirmation and receipt generation
-</Accordion>
-
-<Accordion title="Storefront Display and User Experience" iconType="duotone">
-  **Purpose**: Validate that warranty options display correctly and provide a seamless user experience.
-
-  **Test Scenarios**:
-  1. **Product Page Display**
-     - Check warranty options appear on product pages
-     - Verify warranty plan descriptions and pricing
-     - Test warranty selection and configuration
-     - Confirm mobile responsiveness
-
-  2. **Cart and Checkout Integration**
-     - Verify warranty products add to cart correctly
-     - Check cart display and warranty information
-     - Test checkout flow with warranty products
-     - Confirm order summary accuracy
-</Accordion>
-
-### Phase 4: Go-Live Configuration
-
-Final configuration steps to ensure production readiness and optimal performance.
-
-<Accordion title="Production Environment Setup" iconType="duotone">
-  **Purpose**: Configure the integration for production use with proper monitoring and performance optimization.
-
-  **Configuration Steps**:
-  1. **Cartridge Priority Configuration**
-     - Set SureBright cartridge priority in Business Manager
-     - Ensure proper precedence over conflicting cartridges
-     - Verify cartridge loading order and dependencies
-
-  2. **Job Scheduling and Monitoring**
-     - Configure production job schedules
-     - Set up job failure monitoring and alerts
-     - Implement error handling and retry mechanisms
-     - Monitor job performance and execution times
-
-  3. **Performance Optimization**
-     - Configure caching for warranty data
-     - Optimize API call frequency and timing
-     - Set up performance monitoring and metrics
-     - Test under expected production load
-
-  4. **Security and Compliance**
-     - Verify secure credential handling
-     - Implement proper access controls
-     - Ensure data privacy compliance
-     - Set up audit logging and monitoring
-</Accordion>
-
-## Troubleshooting and Support
-
-### Common Integration Issues
-
-<Accordion title="SFCC Cartridge Deployment Issues" iconType="duotone">
-  **Problem**: Cartridge fails to upload, activate, or function properly
-
-  **Diagnostic Steps**:
-  1. **Check User Permissions**
-     - Verify SureBright user has Administrator role
-     - Confirm cartridge upload permissions
-     - Check Business Manager access rights
-
-  2. **Verify Cartridge Compatibility**
-     - Ensure cartridge is compatible with your SFCC version
-     - Check for conflicting cartridges
-     - Verify cartridge dependencies
-
-  3. **Review Cartridge Priority**
-     - Check cartridge priority settings
-     - Ensure proper loading order
-     - Verify no cartridge conflicts
-
-  **Resolution**:
-  - Contact SureBright support with error logs
-  - Provide SFCC version and cartridge details
-  - Share Business Manager configuration screenshots
-</Accordion>
-
-<Accordion title="API Authentication and Connectivity Issues" iconType="duotone">
-  **Problem**: API calls fail with authentication errors or connectivity issues
-
-  **Diagnostic Steps**:
-  1. **Verify API Credentials**
-     - Check Client ID and Client Secret accuracy
-     - Verify Organization ID, Realm, and Short Code
-     - Confirm API client is active and enabled
-
-  2. **Check OAuth Scopes**
-     - Verify all required scopes are assigned
-     - Confirm scope permissions are correct
-     - Check for scope changes or updates
-
-  3. **Test API Connectivity**
-     - Test API endpoints independently
-     - Check network connectivity and firewall settings
-     - Verify SFCC instance availability
-
-  **Resolution**:
-  - Regenerate API credentials if necessary
-  - Update OAuth scopes as required
-  - Contact SFCC support for connectivity issues
-</Accordion>
-
-<Accordion title="Data Synchronization Job Failures" iconType="duotone">
-  **Problem**: Product or order sync jobs fail to import, run, or complete successfully
-
-  **Diagnostic Steps**:
-  1. **Check Job Configuration**
-     - Verify XML format and structure
-     - Check job parameters and settings
-     - Confirm job permissions and access
-
-  2. **Review Job Logs**
-     - Check Business Manager job logs
-     - Look for specific error messages
-     - Identify failure patterns or timing
-
-  3. **Validate Data Format**
-     - Check product data format and structure
-     - Verify required fields are present
-     - Confirm data type compatibility
-
-  **Resolution**:
-  - Review and correct XML configuration
-  - Update job parameters as needed
-  - Contact SureBright support for job-specific issues
-</Accordion>
-
-<Accordion title="Storefront Display and Functionality Issues" iconType="duotone">
-  **Problem**: Warranty options don't display correctly or functionality is broken
-
-  **Diagnostic Steps**:
-  1. **Check Cartridge Priority**
-     - Verify SureBright cartridge priority
-     - Check for conflicting cartridges
-     - Confirm proper loading order
-
-  2. **Validate Storefront Configuration**
-     - Check cartridge settings and parameters
-     - Verify site-specific configurations
-     - Confirm template and controller setup
-
-  3. **Test Product Configuration**
-     - Verify warranty products are properly configured
-     - Check product relationships and bundles
-     - Confirm pricing and availability settings
-
-  **Resolution**:
-  - Adjust cartridge priority settings
-  - Update storefront configurations
-  - Contact SureBright support for display issues
-</Accordion>
-
-## Support and Next Steps
+## Quick Start Checklist
+
+<Steps>
+  <Step title="Configure User Access">
+    Use the [Configuration Guide](./Configuration) to set up API clients and user accounts.
+  </Step>
+  <Step title="Complete Business Manager Setup">
+    Follow the [Business Manager Setup Guide](./BusinessManagerSetup) to upload cartridges and import metadata.
+  </Step>
+  <Step title="Set Up Data Sync Jobs">
+    Configure automated jobs using the [Jobs Guide](./Jobs) for product and order synchronization.
+  </Step>
+  <Step title="Test Integration">
+    Run comprehensive tests using the [Testing Guide](./Testing) to validate all functionality.
+  </Step>
+  <Step title="Go Live">
+    Deploy to production and refer to the [FAQs](./FAQs) for common questions and answers.
+  </Step>
+</Steps>
+
+---
+
+## What's Next
+
+Great job! Now that you have uploaded the necessary files from the cartridge, you will begin configuring the various settings for your SureBright offerings. First, you will tackle the SureBright products you just uploaded, and then work with the various different Custom Preferences available within the integration.
+
+**Next Steps:**
+1. Configure your [User and API Settings](./Configuration)
+2. Complete the [Business Manager Setup](./BusinessManagerSetup)
+3. Set up [Data Synchronization Jobs](./Jobs)
+4. Run [Integration Tests](./Testing)
+
+---
+
+## Support and Resources
 
 ### Getting Technical Support
 
@@ -570,171 +114,11 @@ If you encounter any issues during the integration process, we provide comprehen
 
 ### Additional Resources
 
-<Accordion title="SFCC Platform Documentation" iconType="duotone">
   **Salesforce Commerce Cloud Resources**:
   - [SFCC Developer Center](https://developer.salesforce.com/commerce-cloud)
   - [SFCC API Documentation](https://documentation.b2c.commercecloud.salesforce.com/)
   - [SFCC Business Manager Guide](https://documentation.b2c.commercecloud.salesforce.com/DOC1/topic/com.demandware.dochelp/content/b2c_commerce/topics/admin/business_manager.html)
 
-  **Platform-Specific Issues**:
-  - Cartridge development and deployment
-  - API authentication and OAuth configuration
-  - Job management and scheduling
-  - Custom object and field configuration
-</Accordion>
+---
 
-
-
-
-## Frequently Asked Questions
-
-### General Integration Questions
-
-
-<Accordion title="What SFCC permissions does SureBright need?" iconType="duotone">
-  **Answer**: SureBright requires specific OAuth scopes for full integration functionality:
-  
-  **Required Scopes**:
-  - `sfcc.catalogs.rw` - Read/Write access to product catalogs
-  - `sfcc.products.rw` - Read/Write access to product data
-  - `sfcc.orders.rw` - Read/Write access to order information
-  - `sfcc.custom-objects.rw` - Read/Write access to custom objects
-  - `sfcc.jobs.rw` - Read/Write access to job management
-  
-  **User Roles Required** (for Full Access approach):
-  - Administrator (for cartridge deployment and configuration)
-  - API User (for programmatic access)
-  - Job Manager (for import/export operations)
-</Accordion>
-
-<Accordion title="Will the SureBright cartridge conflict with my existing cartridges?" iconType="duotone">
-  **Answer**: The SureBright cartridge is designed to be compatible with most SFCC setups, but we take precautions:
-  
-  **Compatibility Measures**:
-  - Cartridge is tested with common SFCC cartridges
-  - Proper cartridge priority configuration prevents conflicts
-  - Namespaced code prevents function and variable conflicts
-  - Modular design allows selective feature activation
-  
-  **If Conflicts Occur**:
-  - SureBright will adjust cartridge priority settings
-  - We can modify specific functions if needed
-  - Alternative deployment methods are available
-  - Your existing functionality remains unaffected
-</Accordion>
-
-### Technical Setup Questions
-
-<Accordion title="How do I find my Organization ID, Realm, and Short Code in SFCC?" iconType="duotone">
-  **Answer**: These values are located in different parts of your SFCC Business Manager:
-  
-  **Organization ID**:
-  - Go to `Administration → Organization → Organization Settings`
-  - Look for "Organization ID" field
-  
-  **Realm**:
-  - Found in your SFCC instance URL: `https://[realm].demandware.net`
-  - Also visible in `Administration → Organization → Organization Settings`
-  
-  **Short Code**:
-  - Go to `Administration → Sites → [Your Site] → Settings`
-  - Look for "Site ID" or "Short Code" field
-  - Usually matches your site's identifier
-</Accordion>
-
-<Accordion title="What if I don't have access to create API clients in Account Manager?" iconType="duotone">
-  **Answer**: You'll need to request access from your SFCC administrator or use the Full Business Manager Access approach:
-  
-  **Required Permissions**:
-  - Account Manager access with API client creation rights
-  - User management permissions for creating SureBright user account
-  - Business Manager administrative access
-  
-  **Alternative Solutions**:
-  - Request temporary elevated permissions for integration setup
-  - Use the Full Business Manager Access approach instead
-  - Have your SFCC administrator create the API client and share credentials
-  - Contact Salesforce support for permission escalation if needed
-</Accordion>
-
-<Accordion title="How do I verify my inventory list and pricebook are properly assigned?" iconType="duotone">
-  **Answer**: Follow these steps in your SFCC Business Manager:
-  
-  **Check Inventory List Assignment**:
-  1. Go to `Merchant Tools → Inventory → Inventory Lists`
-  2. Select your inventory list
-  3. Check "Sites" tab to ensure your site is assigned
-  4. Note the Inventory List ID for sharing with SureBright
-  
-  **Check Pricebook Assignment**:
-  1. Go to `Merchant Tools → Pricing → Price Books`
-  2. Select your pricebook
-  3. Check "Sites" tab to ensure your site is assigned
-  4. Note the Pricebook ID for sharing with SureBright
-  
-  **Verify Site Configuration**:
-  1. Go to `Administration → Sites → [Your Site] → Settings`
-  2. Confirm inventory list and pricebook are properly configured
-  3. Check that the site is active and properly set up
-</Accordion>
-
-### Product and Pricing Questions
-
-<Accordion title="How are warranty products created in my SFCC catalog?" iconType="duotone">
-  **Answer**: SureBright creates warranty products using SFCC's standard product creation process:
-  
-  **Product Creation Process**:
-  - Warranty products are created as regular SFCC products
-  - They're assigned to a dedicated warranty category
-  - Custom attributes define warranty plan types and coverage
-  - Products are linked to your main products via relationships
-  
-  **Product Configuration**:
-  - SKUs follow a consistent naming convention
-  - Pricing is dynamically calculated based on product value
-  - Inventory is managed through your existing inventory system
-  - Products are automatically assigned to your site's catalog
-  
-  **Merchant Control**:
-  - You can modify warranty product descriptions
-  - Pricing can be adjusted through your pricebook
-  - Product availability can be controlled via inventory lists
-  - Warranty products integrate with your existing product management workflow
-</Accordion>
-
-
-
-### Troubleshooting Questions
-
-<Accordion title="What should I do if warranty products don't appear on my storefront?" iconType="duotone">
-  **Answer**: This is usually a cartridge priority or configuration issue. Follow these steps:
-  
-  **Immediate Checks**:
-  1. **Verify Cartridge Priority**: Ensure SureBright cartridge has proper priority in Business Manager
-  2. **Check Site Assignment**: Confirm warranty products are assigned to your site
-  3. **Review Product Status**: Ensure warranty products are active and available
-  4. **Check Inventory**: Verify inventory levels are sufficient
-  
-  **Business Manager Steps**:
-  1. Go to `Administration → Sites → [Your Site] → Cartridges`
-  2. Check that SureBright cartridge is listed and active
-  3. Verify cartridge priority is set correctly
-  4. Check for any error messages or conflicts
-  
-  **If Issues Persist**:
-  - Contact SureBright support with specific error details
-  - Provide screenshots of Business Manager configuration
-  - Share any error logs from your SFCC instance
-  - Test in a different browser or incognito mode
-</Accordion>
-
-
-## ✅ Integration Complete
-
-🎉 **Congratulations!** Your SureBright Product Protection integration with Salesforce Commerce Cloud is now complete and ready to help you increase revenue through warranty sales.
-
-
-
-<Note>
-  **Important**: Remember to test the integration thoroughly before going live and keep your SureBright representative informed of any issues or questions. We're here to support your success!
-</Note>
+**What's Next**: Proceed to the [Configuration Guide](./Configuration) to set up user access and API credentials.

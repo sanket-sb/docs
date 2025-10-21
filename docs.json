@@ -47,7 +47,12 @@
               {
                 "group": "Salesforce Commerce Cloud",
                 "pages": [
-                    "salesforce-commerce-cloud/IntegrationGuide"
+                    "salesforce-commerce-cloud/IntegrationGuide",
+                    "salesforce-commerce-cloud/Configuration",
+                    "salesforce-commerce-cloud/BusinessManagerSetup",
+                    "salesforce-commerce-cloud/Jobs",
+                    "salesforce-commerce-cloud/Testing",
+                    "salesforce-commerce-cloud/FAQs"
                 ]
               }
             ]
