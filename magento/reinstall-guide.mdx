@@ -1,19 +1,17 @@
 ---
-title: "Uninstall/Re-Install Guide"
-description: "Re-install or Uninstall guide to disable and re-enable SureBright module for Magento."
+title: "Re-Install Guide"
+description: "Re-install guide to disable and re-enable SureBright module for Magento."
 ---
 
-## A. Uninstall SureBright module
+## Re-Installation Steps
+
+### A. Uninstall SureBright module
 
 <Accordion title=" Turn Off SureBright Integration">
   Run this command to disable the module and remove old files:
 
   > php bin/magento module:disable Surebright_Integration --clear-static-content
 </Accordion>
-
-### ****That's all 🎉 \!\! you have disabled SureBright module from your website.****
-
-Follow below steps if you want to remove the SureBright module from website.
 
 <Accordion title=" Rebuild Code" iconType="duotone">
   Run this to rebuild the necessary files:
@@ -27,27 +25,27 @@ Follow below steps if you want to remove the SureBright module from website.
   > composer remove surebright/integration
 </Accordion>
 
-<Accordion title=" Update Magento" iconType="duotone">
-  
+<Accordion title="Update Magento" iconType="duotone">
+  Run this to apply the changes
+
+  > bin/magento setup:upgrade
 </Accordion>
 
 <Accordion title=" Clear Cache" iconType="duotone">
-  Run this to clean up the cache:
+  Run this to clean up the cache and setup your store visuals:
+
+  > bin/magento setup:static-content:deploy -f -j5
 
   > bin/magento cache:clean
 </Accordion>
 
-Follow below steps if you want to re-install SureBright module.
+### B. Re-Install Steps
 
-## B. Re-Install Steps
+<Accordion title="Re-Install SureBright">
+  Run this to add SureBright again:
 
-<Accordion title="Re-Install SureBright" description="Skip this step if you only disbaled the mdule and haven't removed it yet.">
-  Run this to add SureBright back:
-
-  > composer require surebright/integration
+  > composer require surebright/integration:v1.3.9
 </Accordion>
-
-**If you have only disbaled the app then just follow below step and ignore rest of guide.**
 
 <Accordion title=" Turn SureBright Back On">
   Run this to enable the module:
@@ -55,18 +53,18 @@ Follow below steps if you want to re-install SureBright module.
   > php bin/magento module:enable Surebright_Integration
 </Accordion>
 
-**Follow below guide only if you had removed the module.**
-
 <Accordion title=" Update Magento and Rebuild Code" iconType="duotone">
   Run this to finalize the reinstall:
 
   > bin/magento setup:upgrade
-  >
+
   > bin/magento setup:di:compile
 </Accordion>
 
 <Accordion title=" Clear Cache Again" iconType="duotone">
-  Run this to finish the reinstall:
+  Run this to finish the reinstall and setup your store visuals:
+
+  > bin/magento setup:static-content:deploy -f -j5
 
   > bin/magento cache:clean
 </Accordion>

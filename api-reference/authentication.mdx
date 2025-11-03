@@ -5,15 +5,18 @@ description: 'Learn how to authenticate your requests to the SureBright API'
 
 ## Overview
 
-The SureBright API uses a private API key for authenticating requests. This key must be included in the request header using the X-SureBright-Access-Token field. You can view and manage your API key through the SureBright Merchant Portal under Account Settings.
+The SureBright API uses a private API key for authenticating requests to secure endpoints. This key must be included in the request header using the X-SureBright-Access-Token field. You can view and manage your API key through the SureBright Merchant Portal under Account Settings.
 
-🔒 **Important:**
+<Note>
+🔒 Important: 
+
 Your API key grants privileged access—treat it as sensitive information. Never expose your API key in public repositories (e.g., GitHub) or embed it in client-side code.
+</Note>
 
-All API requests must be made over HTTPS. Requests sent over plain HTTP will be rejected. Proper authentication is required for all interactions with the SureBright API.
+All API requests must be made over HTTPS. Requests sent over plain HTTP will be rejected.
 
-## Security Scheme
 
+Authentication is required only for secure endpoints, such as those involving order details, claims, and other sensitive merchant or customer data. Public or non-sensitive endpoints may not require authentication.
 
 | Type |  API key
 |------|----------------------|
@@ -24,11 +27,12 @@ All API requests must be made over HTTPS. Requests sent over plain HTTP will be 
 ### Sandbox Environment
 
 ```bash
-curl -X GET \
-https://{HOST_NAME}/api/v1/quote/listWarrantyQuotes \\
+curl -X POST \
+ https://{HOST_NAME}/platform/api/v1/order \\
   -H 'Accept: application/json' \\
   -H 'Content-Type: application/json' \\
   -H 'X-SureBright-Access-Token: {sandbox access token}'
+
 ```
 
 ## Required Credentials
@@ -36,7 +40,6 @@ https://{HOST_NAME}/api/v1/quote/listWarrantyQuotes \\
 The following values will be provided as part of the SureBright Integration Kit for both staging and production environments:
 
 - `storeId`
-- `SUREBRIGHT_CDN_URL`
 - `X-SureBright-Access-Token`
 - `HOST_NAME`
 

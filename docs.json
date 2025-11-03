@@ -7,7 +7,7 @@
     "light": "#07C983",
     "dark": "#15803D"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/images/sb-favicon.png",
   "navigation": {
     "tabs": [
       {
@@ -16,12 +16,20 @@
           {
             "group": " ",
             "pages": [
-              
+              {
+                "group": "Shopify",
+                "pages":[
+                      "draft-order-guide/shopify-draft-order",
+                      "shopify/online-sales-channel",
+                      "shopify/create-discount-excluding-surebright-products"
+                ]
+              },
               {
                 "group": "Magento",
                 "pages":[
-                      "magento/InstallGuide",
-                      "magento/UnInstallGuide"
+                      "magento/install-guide",
+                      "magento/disable-guide",
+                      "magento/reinstall-guide"
                 ]
               },
               {
@@ -30,8 +38,8 @@
                   {
                     "group": "Klaviyo",
                     "pages": [
-                      "klaviyo-integration/IntegrationGuide",
-                      "klaviyo-integration/brandManagedCampaignGuide"
+                      "klaviyo-integration/integration-guide",
+                      "klaviyo-integration/brand-managed-campaign-guide"
                     ]
                   }
                 ]
@@ -62,28 +70,28 @@
               {
                 "group": "Store Category",
                 "pages": [
-                  "api-reference/endpoint/storeCategory/index",
-                  "api-reference/endpoint/storeCategory/listCategory"
+                  "api-reference/endpoint/store-category/index",
+                  "api-reference/endpoint/store-category/list-category"
                 ]
               },
               {
                 "group": "Quote",
                 "pages": [
-                  "api-reference/endpoint/Quote/index",
-                  "api-reference/endpoint/Quote/listWarrantyQuotesByCategory",
-                  "api-reference/endpoint/Quote/listWarrantyQuotesByProduct",
-                  "api-reference/endpoint/Quote/listWarrantyQuotesByUrl"
+                  "api-reference/endpoint/quote/index",
+                  "api-reference/endpoint/quote/list-warranty-quotes-by-category",
+                  "api-reference/endpoint/quote/list-warranty-quotes-by-product",
+                  "api-reference/endpoint/quote/list-warranty-quotes-by-url"
                 ]
               },
               {
                 "group": "Order",
                 "pages": [
-                  "api-reference/endpoint/Order/index",
-                  "api-reference/endpoint/Order/createContract",
-                  "api-reference/endpoint/Order/updateContract"
+                  "api-reference/endpoint/order/index",
+                  "api-reference/endpoint/order/create-contract",
+                  "api-reference/endpoint/order/update-contract"
                 ]
               },
-              "api-reference/httpStatusCode"
+              "api-reference/http-status-codes"
             ]
           }
         ]
@@ -97,8 +105,8 @@
               {
                 "group": "Frontend Widget Kit",
                 "pages": [
-                  "frontend-widget-integration/frontend-widget-kit/javascriptInjection",
-                  "frontend-widget-integration/frontend-widget-kit/getCartItemList"
+                  "frontend-widget-integration/frontend-widget-kit/javascript-injection",
+                  "frontend-widget-integration/frontend-widget-kit/get-cart-item-list"
                 ]
               }
             ]

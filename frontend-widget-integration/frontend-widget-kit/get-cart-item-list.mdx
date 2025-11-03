@@ -20,22 +20,34 @@ SureBright.getCartItems((response) => {
       Details of the product added to the cart
       <Expandable title="properties">
         <ResponseField name="productId" type="integer">
-          Product ID
+          Product ID  
+
+          **Example:** <span style={{ color: 'grey' }}>6673746231399</span>
         </ResponseField>
         <ResponseField name="optionId" type="integer">
-          Variant/Option ID for the product
+          Option ID for the product  
+          
+          **Example:** <span style={{ color: 'grey' }}>8577825144935</span>
         </ResponseField>
         <ResponseField name="productTitle" type="string">
-          Title of the product
+          Title of the product  
+          
+          **Example:** <span style={{ color: 'grey' }}>"GreatCircleUSA 3-in-1 Wood Chipper - 7HP Engine, 3 Max Branch Capacity"</span>
         </ResponseField>
         <ResponseField name="productPrice" type="number">
-          Price of the product
+          Price of the product  
+          
+          **Example:** <span style={{ color: 'grey' }}>649.99</span>
         </ResponseField>
         <ResponseField name="productThumbnail" type="string">
-          URL of the product image
+          URL of the product image  
+          
+          **Example:** <span style={{ color: 'grey' }}>https://cdn.shopify.com/s/files/1/2134/2653/files/81wDzkJdj4L._AC_SL1500.jpg</span>
         </ResponseField>
         <ResponseField name="quantity" type="integer">
-          Quantity of the product in the cart
+          Quantity of the product in the cart  
+          
+          **Example:** <span style={{ color: 'grey' }}>2</span>
         </ResponseField>
       </Expandable>
     </ResponseField>
@@ -44,31 +56,49 @@ SureBright.getCartItems((response) => {
       Warranty details associated with the product
       <Expandable title="properties">
         <ResponseField name="warrantyProductId" type="integer">
-          Product ID of the warranty item
+          Product ID of the warranty item  
+
+          **Example:** <span style={{ color: 'grey' }}>7080029454439</span>
         </ResponseField>
         <ResponseField name="warrantyOptionId" type="integer">
-          Variant/Option ID of the warranty
+          Option ID of the warranty  
+          
+          **Example:** <span style={{ color: 'grey' }}>40937702359143</span>
         </ResponseField>
         <ResponseField name="warrantyPrice" type="number">
-          Price of the warranty
+          Price of the warranty  
+
+          **Example:** <span style={{ color: 'grey' }}>69</span>
         </ResponseField>
         <ResponseField name="warrantyTitle" type="string">
-          Title of the warranty
+          Title of the warranty  
+
+          **Example:** <span style={{ color: 'grey' }}>"Add premium product protection"</span>
         </ResponseField>
         <ResponseField name="warrantyImage" type="string">
-          Image URL for the warranty
+          Image URL for the warranty  
+
+          **Example:** <span style={{ color: 'grey' }}>https://www.surebright.com/_next/image?url=https%3A%2F%2Fdemtt2r26n0u0.cloudfront.net%2Fmisc%2Fsurebright_logo_v2.png&w=256&q=75</span>
         </ResponseField>
         <ResponseField name="warrantyTenure" type="integer">
-          Duration of the warranty in years
+          Duration of the warranty in years  
+
+          **Example:** <span style={{ color: 'grey' }}>2</span>
         </ResponseField>
         <ResponseField name="warrantyQuantity" type="integer">
-          Quantity of warranties added
+          Quantity of warranties added  
+
+          **Example:** <span style={{ color: 'grey' }}>2</span>
         </ResponseField>
         <ResponseField name="warrantyQuoteId" type="string">
-          ID of the warranty quote
+          ID of the warranty quote  
+
+          **Example:** <span style={{ color: 'grey' }}>"7b9a6c31-f6c5-4110-a1f4-c69dca10ab06"</span>
         </ResponseField>
         <ResponseField name="warrantyQuoteItemId" type="string">
           ID of the individual warranty quote item
+          
+          **Example:** <span style={{ color: 'grey' }}>"047cd751-8737-45cd-b113-227312a88d51"</span>
         </ResponseField>
       </Expandable>
     </ResponseField>

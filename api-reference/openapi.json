@@ -342,7 +342,7 @@
         }
       }
     },
-    "/api/v1/quote/listWarrantyQuotes/storeId={storeId}?country={country}&productUrl={PRODUCT_URL}&price={price}": {
+    "/quote/api/quote/listWarrantyQuotes?platform={platform}&storeId={storeId}&productId={productId}&variantId={variantId}&country={country}": {
       "get": {
         "summary": "List Warranty Quotes by Product",
         "description": "This endpoint retrieves a list of warranty quotes for a specific product and its price.",
@@ -352,14 +352,44 @@
         ],
         "parameters": [
           {
+            "name": "platform",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SHOPIFY"
+            },
+            "description": "The platform of the merchant's store."
+          },
+          {
             "name": "storeId",
             "in": "query",
             "required": true,
             "schema": {
               "type": "string",
-              "example": "ecca4210-09a4-446c-ad87-5e65bd50df12"
+              "example": "strictlyapple.myshopify.com"
             },
-            "description": "A unique identifier for a store will be shared as part of the integration kit. this will be added as path variable"
+            "description": "The unique identifier for the merchant's store. This is typically the store's domain name (e.g., 'yourstore.myshopify.com' for Shopify stores)."
+          },
+          {
+            "name": "productId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "8606368530686"
+            },
+            "description": "The ID of the product that is shown to the customer"
+          },
+          {
+            "name": "variantId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "45667967238398"
+            },
+            "description": "The ID of the variant that is shown to the customer"
           },
           {
             "name": "country",
@@ -381,27 +411,6 @@
               "example": "AL"
             },
             "description": "The state code of the identified customer location"
-          },
-          {
-            "name": "productUrl",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "4c3103e4-38dc-4171-96e5-b4b77ab0e96f"
-            },
-            "description": "The URL containing the product page that is shown to the customer"
-          },
-          {
-            "name": "price",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "number",
-              "format": "float",
-              "example": 230.54
-            },
-            "description": "The price of the product in the currency of the country specified in the above parameter"
           }
         ],
         "responses": {
@@ -430,6 +439,16 @@
                       "items": {
                         "type": "object",
                         "properties": {
+                          "warrantyProductId":{
+                            "type": "integer",
+                            "description": "Product ID of the warranty item",
+                            "example": 7080029454439
+                          },
+                          "warrantyVariantId":{
+                            "type": "integer",
+                            "description": "Variant ID of the warranty item",
+                            "example": 40937702359143
+                          },
                           "warrantyTenure": {
                             "type": "integer",
                             "description": "Duration of the warranty in years",
@@ -454,10 +473,15 @@
                       "description": "Unique link for legal Terms & Conditions of the warranty for each product Category",
                       "example": "https://customer.surebright.com/t-c/098e0e696f20839479dfe4a2804756233d32130f068441e24c6c0dbbc790677ff9718e04396a18dac753d0cf92bcaf63a26d2b666e5326475d0b2ed7475ad7fc"
                     },
+                    "sbCategoryId":{
+                      "type": "string",
+                      "description": "SureBright Category ID of the warranty item",
+                      "example": "4c3103e4-38dc-4171-96e5-b4b77ab0e96f"
+                    },
                     "productImageUrl":{
                       "type": "string",
                       "description": "Link of the product image that can be show as part of the warranty offer UI",
-                      "example": "<https://cdn.shopify.com/s/files/1/0254/6227/6182/products/bedbathandimage.jpg?v=1664467971>"
+                      "example": "https://cdn.shopify.com/s/files/1/0254/6227/6182/products/bedbathandimage.jpg?v=1664467971"
                     },
                     "coverageWidgetHeading": {
                       "type": "string",
@@ -467,7 +491,7 @@
                     "coveragePopupHeading": {
                       "type": "string",
                       "description": "Title that nudges the customers to buy a warranty for their product purchase",
-                      "example": "Don’t want to spend extra on this product for the next few years? We've got you covered!"
+                      "example": "Don't want to spend extra on this product for the next few years? We've got you covered!"
                     },
                     "coverageList": {
                       "type": "array",
@@ -841,7 +865,7 @@
                     "coveragePopupHeading": {
                       "type": "string",
                       "description": "Title that nudges the customers to buy a warranty for their product purchase",
-                      "example": "Don’t want to spend extra on this product for the next few years? We've got you covered!"
+                      "example": "Don't want to spend extra on this product for the next few years? We've got you covered!"
                     },
                     "coverageList": {
                       "type": "array",
@@ -1090,7 +1114,7 @@
       }
     }
     ,
-    "/quote/api/v1/category/listWarrantyQuotes/{storeId}?country={country}&sbCategoryId={sbCategoryId}&price={price}": {
+    "/quote/api/v1/category/listWarrantyQuotes?storeId={storeId}&country={country}&sbCategoryId={sbCategoryId}&price={price}": {
       "get": {
         "summary": "List Quotes by Category",
         "description": "This endpoint retrieves a list of warranty quotes for a specific store and category. The response includes detailed warranty options, pricing, and coverage information.",
@@ -1210,7 +1234,7 @@
                     "coveragePopupHeading": {
                       "type": "string",
                       "description": "Title that nudges the customers to buy a warranty for their product purchase",
-                      "example": "Don’t want to spend extra on this product for the next few years? We've got you covered!"
+                      "example": "Don't want to spend extra on this product for the next few years? We've got you covered!"
                     },
                     "coverageList": {
                       "type": "array",
@@ -1459,11 +1483,11 @@
       }
     }
     ,
-    "/platform/api/v1/order": {
+    "/partner/api/v1/order": {
       "post": {
-        "summary": "Create Warranty",
-        "description": "This endpoint creates warranty contracts for a specific order.",
-        "operationId": "createWarranty",
+        "summary": "Create/Update Warranty",
+        "description": "This endpoint is used to create warranty contracts for a specific order.\n\n🛠️ **Contract Creation Logic**\nWarranty contracts are created in a 1:1 ratio with the quantity of the associated product purchased.\nThe warranty quantity is automatically inferred from the product quantity.\nContracts are only created for the exact number of products purchased—warranty coverage cannot exceed or fall short of the product quantity.\n\n🏷️ **Using policySKU**\nThe `policySKU` is a required field that determines the parameters of each warranty contract, including:\n- Coverage Type (e.g., accidental damage, mechanical breakdown)\n- Tenure (duration of coverage)\n- Country (to apply relevant terms and conditions)\n- Category (product type classification)\nMerchants must ensure that the appropriate `policySKU` is used for each product to ensure accurate coverage assignment.\n\n🔁 **Handling Updates**\nIf this endpoint is called for an order where contracts already exist:\n- Existing contracts will be updated if the quantity or details have changed.\n- Warranty price, tenure, and coverage type are handled automatically based on the provided `policySKU`.",
+        "operationId": "createUpdateWarranty",
         "tags": [
           "orders"
         ],
@@ -1475,9 +1499,9 @@
                 "type": "object",
                 "required": [
                   "storeId",
-                  "partnerOrderId",
-                  "orderPurchaseDateTime",
-                  "lineItemList",
+                  "orderId",
+                  "orderPurchaseDate",
+                  "orderLineItemList",
                   "customerDetails"
                 ],
                 "properties": {
@@ -1486,37 +1510,34 @@
                     "description": "A unique identifier for a store will be shared as part of the integration kit",
                     "example": "f4c059b2-5b74-4e4c-a3c5-85bc80cf8a09"
                   },
-                  "partnerOrderId": {
+                  "orderId": {
                     "type": "string",
                     "description": "Unique identifier for the complete successful order placed by a customer on the merchant site. This represents the whole order that can have multiple line items of different quantities.",
                     "maxLength": 48,
                     "example": "83737121380"
                   },
-                  "orderPurchaseDateTime": {
+                  "orderPurchaseDate": {
                     "type": "string",
                     "format": "date-time",
                     "description": "Date time at which the order was purchased by customer.",
                     "example": "2024-01-07T10:15:30Z"
                   },
-                  "lineItemList": {
+                  "orderLineItemList": {
                     "type": "array",
-                    "description": "The lineItemList consists of individual line items representing purchased policies. Each line item is uniquely identified by a lineItemId (String: maximum length 48 characters). The warrantyQuoteId and warrantyQuoteItemId serve to identify the specific quote option acquired by the customer. A line item must include warrantyQuoteItemId and warrantyQuoteId. The unitSalePrice and totalPrice indicate the price at which the policy was purchased by the customer. Please refrain from sending a line item in which no policy sales have been made. OptionId is the combination of product attributes separated by #.",
+                    "description": "The lineItemList consists of individual line items representing purchased products and/or products with policies. Each line item is uniquely identified by a lineItemId (String: maximum length 48 characters). The planDetails serve to identify the specific quote option acquired by the customer. OptionId is the combination of product attributes separated by #.",
                     "items": {
                       "type": "object",
                       "required": [
                         "lineItemId",
-                        "policyPurchaseDate",
-                        "warrantyQuoteId",
-                        "warrantyQuoteItemId",
                         "totalPrice",
-                        "warrantyQuantity",
-                        "unitSalePrice",
+                        "salePrice",
+                        "quantity",
                         "productTitle",
                         "productId",
-                        "optionId",
                         "productSKU",
-                        "productPrice",
-                        "productURL"
+                        "totalOrderValue",
+                        "isTestOrder",
+                        "tax"
                       ],
                       "properties": {
                         "lineItemId": {
@@ -1524,30 +1545,40 @@
                           "maxLength": 48,
                           "example": "374dc3c3-94a3-4b85-a876-8651e461446d"
                         },
-                        "policyPurchaseDate": {
-                          "type": "string",
-                          "format": "date-time",
-                          "example": "2024-01-07T10:15:30Z"
-                        },
-                        "warrantyQuoteId": {
-                          "type": "string",
-                          "example": "929d14dd-2937-4290-9818-8fca2a00a9a3"
-                        },
-                        "warrantyQuoteItemId": {
-                          "type": "string",
-                          "example": "8c78bc1a-0790-4cd3-a3f9-5ed97bbe59f5"
+                        "planDetails": {
+                          "type": "object",
+                          "required": [
+                            "policyPurchaseDate",
+                            "policySKU",
+                            "policyPrice"
+                          ],
+                          "properties": {
+                            "policyPurchaseDate": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "Date time at which the policy was purchased by the customer.",
+                              "example": "2024-01-07T10:15:30Z"
+                            },
+                           
+                            "policySKU": {
+                              "type": "string",
+                              "description": "The SKU id of the policy purchased by the customer, this will only be required if warranty to be selected is based on the policy SKU ids shared with the store",
+                              "example": "SBW-1U-SHAB-2900"
+                            },
+                            "policyPrice": {
+                               "type": "number",
+                               "description":"The price of policy purchased by the customer. ",
+                              "example": 29
+                            }
+                          }
                         },
                         "totalPrice": {
                           "type": "number",
-                          "example": 99
+                          "example": 3300
                         },
-                        "warrantyQuantity": {
+                        "quantity": {
                           "type": "integer",
                           "example": 3
-                        },
-                        "unitSalePrice": {
-                          "type": "number",
-                          "example": 33
                         },
                         "productTitle": {
                           "type": "string",
@@ -1565,9 +1596,17 @@
                           "type": "string",
                           "example": "ALH05"
                         },
-                        "productPrice": {
+                        "salePrice": {
+                          "type": "number",
+                          "example": 1100
+                        },
+                        "listPrice": {
                           "type": "number",
                           "example": 1299
+                        },
+                        "discountAmount": {
+                          "type": "number",
+                          "example": 199
                         },
                         "productURL": {
                           "type": "string",
@@ -1633,6 +1672,27 @@
                         "example": "7872323781"
                       }
                     }
+                  },
+                  "discount": {
+                    "type": "object",
+                    "properties": {
+                      "discountAmount": {
+                        "type": "number",
+                        "example": 10
+                      }
+                    }
+                  },
+                  "totalOrderValue": {
+                    "type": "number",
+                    "example": 1000
+                  },
+                  "isTestOrder": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "taxAmount": {
+                    "type": "number",
+                    "example": 100
                   }
                 }
               }
@@ -1646,18 +1706,13 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "storeId",
-                    "partnerOrderId",
-                    "contractList"
-                  ],
                   "properties": {
                     "storeId": {
                       "type": "string",
                       "description": "A unique identifier for a store will be shared as part of the integration kit",
                       "example": "f4c059b2-5b74-4e4c-a3c5-85bc80cf8a09"
                     },
-                    "partnerOrderId": {
+                    "orderId": {
                       "type": "string",
                       "description": "A unique identifier for the complete successful order placed by a customer on the merchant site. This represents the whole order that can have multiple line items of different quantities.",
                       "maxLength": 48,
@@ -1668,12 +1723,7 @@
                       "description": "The list of contracts generated for each quantity in each line item. If any error in generating a contract, the error code and msg will be added for that item instead of the contract id.",
                       "items": {
                         "type": "object",
-                        "required": [
-                          "lineItemId",
-                          "warrantyQuoteId",
-                          "warrantyQuoteItemId",
-                          "isCancelled"
-                        ],
+                      
                         "properties": {
                           "lineItemId": {
                             "type": "string",
@@ -1683,25 +1733,10 @@
                             "type": "string",
                             "example": "abc12345-6789-4abc-bcde-ef1234567890"
                           },
-                          "warrantyQuoteId": {
-                            "type": "string",
-                            "example": "929d14dd-2937-4290-9818-8fca2a00a9a3"
-                          },
-                          "warrantyQuoteItemId": {
-                            "type": "string",
-                            "example": "8c78bc1a-0790-4cd3-a3f9-5ed97bbe59f5"
-                          },
+                         
                           "isCancelled": {
                             "type": "boolean",
                             "example": false
-                          },
-                          "errorCode": {
-                            "type": "integer",
-                            "example": 101
-                          },
-                          "errorMessage": {
-                            "type": "string",
-                            "example": "Failed to create contract due to invalid quote ID"
                           }
                         }
                       }
@@ -1711,182 +1746,109 @@
               }
             }
           },
-          "511": {
-            "description": "Insufficient Parameters",
+          "207": {
+            "description": "Partial order processing",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
                     "isError": {
-                      "type": "boolean",
-                      "description": "true"
+                            "type": "boolean",
+                            "example": true
                     },
-                    "errorType": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 511
-                    },
-                    "errorMessage": {
+                    "storeId": {
                       "type": "string",
-                      "description": "error message",
-                      "example": "Insufficient Parameters"
+                      "description": "A unique identifier for a store will be shared as part of the integration kit",
+                      "example": "f4c059b2-5b74-4e4c-a3c5-85bc80cf8a09"
+                    },
+                    "orderId": {
+                      "type": "string",
+                      "description": "A unique identifier for the complete successful order placed by a customer on the merchant site. This represents the whole order that can have multiple line items of different quantities.",
+                      "maxLength": 48,
+                      "example": "83737121380"
+                    },
+                    "contractList": {
+                      "type": "array",
+                      "description": "The list of contracts generated for each quantity in each line item. If any error in generating a contract, the error code and msg will be added for that item instead of the contract id.",
+                      "items": {
+                        "type": "object",
+                      
+                        "properties": {
+                          "lineItemId": {
+                            "type": "string",
+                            "example": "374dc3c3-94a3-4b85-a876-8651e461446d"
+                          },
+                          "contractId": {
+                            "type": "string",
+                            "example": "abc12345-6789-4abc-bcde-ef1234567890"
+                          },
+                         
+                          "isCancelled": {
+                            "type": "boolean",
+                            "example": false
+                          }
+                        }
+                      }
+                    },
+                    "errorList": {
+                      "type": "array",
+                      "description": "The list of contracts generated for each quantity in each line item. If any error in generating a contract, the error code and msg will be added for that item instead of the contract id.",
+                      "items": {
+                        "type": "object",
+                      
+                        "properties": {
+                          "lineItemId": {
+                            "type": "string",
+                            "example": "374dc3c3-94a3-4b85-a876-8651e461446d"
+                          },
+                          "error": {
+                            "type": "string",
+                            "example": "planDetails.policyPurchaseDate is required"
+                          }
+                        }
+                      }
                     }
                   }
                 }
               }
             }
           },
-          "512": {
-            "description": "Validation Failed for Input Parameters",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
-                    },
-                    "errorType": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 512
-                    },
-                    "errorMessage": {
+                    "storeId": {
                       "type": "string",
-                      "description": "error message",
-                      "example": "Validation Failed for Input Parameters"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "513": {
-            "description": "Product Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
+                      "description": "A unique identifier for a store will be shared as part of the integration kit",
+                      "example": "f4c059b2-5b74-4e4c-a3c5-85bc80cf8a09"
                     },
-                    "errorType": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 513
-                    },
-                    "errorMessage": {
+                    "orderId": {
                       "type": "string",
-                      "description": "error message",
-                      "example": "Product Not Found"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "514": {
-            "description": "No Quote Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
+                      "description": "A unique identifier for the complete successful order placed by a customer on the merchant site. This represents the whole order that can have multiple line items of different quantities.",
+                      "maxLength": 48,
+                      "example": "83737121380"
                     },
-                    "errorType": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 514
-                    },
-                    "errorMessage": {
-                      "type": "string",
-                      "description": "error message",
-                      "example": "No Quote Found"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "515": {
-            "description": "Store Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
-                    },
-                    "errorType": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 515
-                    },
-                    "errorMessage": {
-                      "type": "string",
-                      "description": "error message",
-                      "example": "Store Not Found"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "516": {
-            "description": "Not Eligible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
-                    },
-                    "errorType": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 516
-                    },
-                    "errorMessage": {
-                      "type": "string",
-                      "description": "error message",
-                      "example": "Not Eligible"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "517": {
-            "description": "Category Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
-                    },
-                    "errorType": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 517
-                    },
-                    "errorMessage": {
-                      "type": "string",
-                      "description": "error message",
-                      "example": "Category Not Found"
+                    "errorList": {
+                      "type": "array",
+                      "description": "The list of contracts generated for each quantity in each line item. If any error in generating a contract, the error code and msg will be added for that item instead of the contract id.",
+                      "items": {
+                        "type": "object",
+                      
+                        "properties": {
+                          "lineItemId": {
+                            "type": "string",
+                            "example": "374dc3c3-94a3-4b85-a876-8651e461446d"
+                          },
+                          "error": {
+                            "type": "string",
+                            "example": "planDetails.policyPurchaseDate is required"
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -1894,17 +1856,18 @@
             }
           },
           "500": {
-            "description": "Something Unexpectedly Went Wrong",
+            "description": "Internal Server Error",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
+                    "storeId": {
+                      "type": "string",
+                      "description": "Store Id",
+                      "example":"8577825144935"
                     },
-                    "errorType": {
+                    "errorCode": {
                       "type": "integer",
                       "description": "error type",
                       "example": 500
@@ -1912,7 +1875,34 @@
                     "errorMessage": {
                       "type": "string",
                       "description": "error message",
-                      "example": "Something Unexpectedly Went Wrong"
+                      "example": "Failed to process order with internal service"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "storeId": {
+                      "type": "string",
+                      "description": "Store Id",
+                      "example":"8577825144935"
+                    },
+                    "errorCode": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 401
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "X-SureBright-Access-Token header is required"
                     }
                   }
                 }
@@ -1922,9 +1912,9 @@
         }
       },
       "put": {
-        "summary": "Cancel/Update Line Item",
-        "description": "To cancel a specific line item, Using PUT method of order API, set the field 'warrantyQuantity' in lineItem inside lineItemList to 0 as part of the lineItem details as shown below. If a contract has been cancelled, it cannot be marked as active again.",
-        "operationId": "updateWarranty",
+        "summary": "Update Warranty",
+        "description": "This endpoint is used to create, update, or cancel warranty contracts for a specific order.\n\n🔄 **Updating Line Item Quantities**\nIf the quantity of a product in the original order is changed (e.g., reduced), the corresponding warranty contract quantity is automatically adjusted to match the updated product quantity.\n\nTo reduce or cancel warranty coverage for a line item, update the `quantity` field inside the relevant `lineItem` object in the `orderLineItemList`.\n\n❌ **Cancelling Line Items**\nTo cancel warranty coverage for a specific line item, set its `quantity` to 0 in the `orderLineItemList`.\nOnce cancelled, a warranty contract cannot be reactivated.\nThis applies to both partial cancellations (some items in the order) and full order cancellations.\n\n🧾 **Handling Full Order Cancellation**\nFor full order cancellations, merchants have two options:\n- Remove the `planDetails` object entirely from the request payload.\n- Set the `quantity` of each relevant `lineItem` in `orderLineItemList` to 0.\n\n⚙️ **Automatic Price and Tenure Updates**\nAny changes to warranty price or tenure (e.g., due to product updates or plan revisions) are handled automatically by the system.",
+        "operationId": "UpdateWarranty",
         "tags": [
           "orders"
         ],
@@ -1936,9 +1926,9 @@
                 "type": "object",
                 "required": [
                   "storeId",
-                  "partnerOrderId",
+                  "orderId",
                   "orderPurchaseDate",
-                  "lineItemList",
+                  "orderLineItemList",
                   "customerDetails"
                 ],
                 "properties": {
@@ -1947,7 +1937,7 @@
                     "description": "A unique identifier for a store will be shared as part of the integration kit",
                     "example": "f4c059b2-5b74-4e4c-a3c5-85bc80cf8a09"
                   },
-                  "partnerOrderId": {
+                  "orderId": {
                     "type": "string",
                     "description": "Unique identifier for the complete successful order placed by a customer on the merchant site. This represents the whole order that can have multiple line items of different quantities.",
                     "maxLength": 48,
@@ -1959,24 +1949,22 @@
                     "description": "Date time at which the order was purchased by customer.",
                     "example": "2024-01-07T10:15:30Z"
                   },
-                  "lineItemList": {
+                  "orderLineItemList": {
                     "type": "array",
-                    "description": "The lineItemList consists of individual line items representing purchased policies. Each line item is uniquely identified by a lineItemId (String: maximum length 48 characters). The warrantyQuoteId and warrantyQuoteItemId serve to identify the specific quote option acquired by the customer. A line item must include warrantyQuoteItemId and warrantyQuoteId. The unitWarrantySalePrice and totalWarrantyPrice indicate the price at which the policy was purchased by the customer. Please refrain from sending a line item in which no policy sales have been made. OptionId is the combination of product attributes separated by #.",
+                    "description": "The lineItemList consists of individual line items representing purchased products and/or products with policies. Each line item is uniquely identified by a lineItemId (String: maximum length 48 characters). The planDetails serve to identify the specific quote option acquired by the customer. OptionId is the combination of product attributes separated by #.",
                     "items": {
                       "type": "object",
                       "required": [
                         "lineItemId",
-                        "policyPurchaseDate",
-                        "warrantyQuoteId",
-                        "warrantyQuoteItemId",
-                        "totalWarrantyPrice",
-                        "warrantyQuantity",
-                        "unitWarrantySalePrice",
+                        "totalPrice",
+                        "salePrice",
+                        "quantity",
                         "productTitle",
                         "productId",
-                        "optionId",
                         "productSKU",
-                        "productPrice"
+                        "totalOrderValue",
+                        "isTestOrder",
+                        "tax"
                       ],
                       "properties": {
                         "lineItemId": {
@@ -1984,30 +1972,40 @@
                           "maxLength": 48,
                           "example": "374dc3c3-94a3-4b85-a876-8651e461446d"
                         },
-                        "policyPurchaseDate": {
-                          "type": "string",
-                          "format": "date-time",
-                          "example": "2024-01-07T10:15:30Z"
+                        "planDetails": {
+                          "type": "object",
+                          "required": [
+                            "policyPurchaseDate",
+                            "policySKU",
+                            "policyPrice"
+                          ],
+                          "properties": {
+                            "policyPurchaseDate": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "Date time at which the policy was purchased by the customer.",
+                              "example": "2024-01-07T10:15:30Z"
+                            },
+                           
+                            "policySKU": {
+                              "type": "string",
+                              "description": "The SKU id of the policy purchased by the customer, this will only be required if warranty to be selected is based on the policy SKU ids shared with the store",
+                              "example": "SBW-1U-SHAB-2900"
+                            },
+                            "policyPrice": {
+                              "type": "number",
+                              "description":"The price of policy purchased by the customer. ",
+                              "example": 29
+                            }
+                          }
                         },
-                        "warrantyQuoteId": {
-                          "type": "string",
-                          "example": "929d14dd-2937-4290-9818-8fca2a00a9a3"
-                        },
-                        "warrantyQuoteItemId": {
-                          "type": "string",
-                          "example": "8c78bc1a-0790-4cd3-a3f9-5ed97bbe59f5"
-                        },
-                        "totalWarrantyPrice": {
+                        "totalPrice": {
                           "type": "number",
-                          "example": 99
+                          "example": 3300
                         },
-                        "warrantyQuantity": {
+                        "quantity": {
                           "type": "integer",
-                          "example": 1
-                        },
-                        "unitWarrantySalePrice": {
-                          "type": "number",
-                          "example": 33
+                          "example": 3
                         },
                         "productTitle": {
                           "type": "string",
@@ -2025,9 +2023,21 @@
                           "type": "string",
                           "example": "ALH05"
                         },
-                        "productPrice": {
+                        "salePrice": {
+                          "type": "number",
+                          "example": 1100
+                        },
+                        "listPrice": {
                           "type": "number",
                           "example": 1299
+                        },
+                        "discountAmount": {
+                          "type": "number",
+                          "example": 199
+                        },
+                        "productURL": {
+                          "type": "string",
+                          "example": "https://example.com/products/wood-chipper-alh05"
                         }
                       }
                     }
@@ -2089,6 +2099,27 @@
                         "example": "7872323781"
                       }
                     }
+                  },
+                  "discount": {
+                    "type": "object",
+                    "properties": {
+                      "discountAmount": {
+                        "type": "number",
+                        "example": 10
+                      }
+                    }
+                  },
+                  "totalOrderValue": {
+                    "type": "number",
+                    "example": 1000
+                  },
+                  "isTestOrder": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "taxAmount": {
+                    "type": "number",
+                    "example": 100
                   }
                 }
               }
@@ -2097,23 +2128,18 @@
         },
         "responses": {
           "200": {
-            "description": "Line item updated successfully",
+            "description": "Warranty created successfully",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "storeId",
-                    "partnerOrderId",
-                    "contractList"
-                  ],
                   "properties": {
                     "storeId": {
                       "type": "string",
                       "description": "A unique identifier for a store will be shared as part of the integration kit",
                       "example": "f4c059b2-5b74-4e4c-a3c5-85bc80cf8a09"
                     },
-                    "partnerOrderId": {
+                    "orderId": {
                       "type": "string",
                       "description": "A unique identifier for the complete successful order placed by a customer on the merchant site. This represents the whole order that can have multiple line items of different quantities.",
                       "maxLength": 48,
@@ -2124,12 +2150,7 @@
                       "description": "The list of contracts generated for each quantity in each line item. If any error in generating a contract, the error code and msg will be added for that item instead of the contract id.",
                       "items": {
                         "type": "object",
-                        "required": [
-                          "lineItemId",
-                          "warrantyQuoteId",
-                          "warrantyQuoteItemId",
-                          "isCancelled"
-                        ],
+                      
                         "properties": {
                           "lineItemId": {
                             "type": "string",
@@ -2137,19 +2158,12 @@
                           },
                           "contractId": {
                             "type": "string",
-                            "example": "eb46a2ba-050f-4d40-9105-02ccd497d99e"
+                            "example": "abc12345-6789-4abc-bcde-ef1234567890"
                           },
-                          "warrantyQuoteId": {
-                            "type": "string",
-                            "example": "929d14dd-2937-4290-9818-8fca2a00a9a3"
-                          },
-                          "warrantyQuoteItemId": {
-                            "type": "string",
-                            "example": "8c78bc1a-0790-4cd3-a3f9-5ed97bbe59f5"
-                          },
+                         
                           "isCancelled": {
                             "type": "boolean",
-                            "example": true
+                            "example": false
                           }
                         }
                       }
@@ -2159,182 +2173,109 @@
               }
             }
           },
-          "511": {
-            "description": "Insufficient Parameters",
+          "207": {
+            "description": "Partial order processing",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
                     "isError": {
-                      "type": "boolean",
-                      "description": "true"
+                            "type": "boolean",
+                            "example": true
                     },
-                    "errorType": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 511
-                    },
-                    "errorMessage": {
+                    "storeId": {
                       "type": "string",
-                      "description": "error message",
-                      "example": "Insufficient Parameters"
+                      "description": "A unique identifier for a store will be shared as part of the integration kit",
+                      "example": "f4c059b2-5b74-4e4c-a3c5-85bc80cf8a09"
+                    },
+                    "orderId": {
+                      "type": "string",
+                      "description": "A unique identifier for the complete successful order placed by a customer on the merchant site. This represents the whole order that can have multiple line items of different quantities.",
+                      "maxLength": 48,
+                      "example": "83737121380"
+                    },
+                    "contractList": {
+                      "type": "array",
+                      "description": "The list of contracts generated for each quantity in each line item. If any error in generating a contract, the error code and msg will be added for that item instead of the contract id.",
+                      "items": {
+                        "type": "object",
+                      
+                        "properties": {
+                          "lineItemId": {
+                            "type": "string",
+                            "example": "374dc3c3-94a3-4b85-a876-8651e461446d"
+                          },
+                          "contractId": {
+                            "type": "string",
+                            "example": "abc12345-6789-4abc-bcde-ef1234567890"
+                          },
+                         
+                          "isCancelled": {
+                            "type": "boolean",
+                            "example": false
+                          }
+                        }
+                      }
+                    },
+                    "errorList": {
+                      "type": "array",
+                      "description": "The list of contracts generated for each quantity in each line item. If any error in generating a contract, the error code and msg will be added for that item instead of the contract id.",
+                      "items": {
+                        "type": "object",
+                      
+                        "properties": {
+                          "lineItemId": {
+                            "type": "string",
+                            "example": "374dc3c3-94a3-4b85-a876-8651e461446d"
+                          },
+                          "error": {
+                            "type": "string",
+                            "example": "planDetails.policyPurchaseDate is required"
+                          }
+                        }
+                      }
                     }
                   }
                 }
               }
             }
           },
-          "512": {
-            "description": "Validation Failed for Input Parameters",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
-                    },
-                    "errorType": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 512
-                    },
-                    "errorMessage": {
+                    "storeId": {
                       "type": "string",
-                      "description": "error message",
-                      "example": "Validation Failed for Input Parameters"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "513": {
-            "description": "Product Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
+                      "description": "A unique identifier for a store will be shared as part of the integration kit",
+                      "example": "f4c059b2-5b74-4e4c-a3c5-85bc80cf8a09"
                     },
-                    "errorType": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 513
-                    },
-                    "errorMessage": {
+                    "orderId": {
                       "type": "string",
-                      "description": "error message",
-                      "example": "Product Not Found"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "514": {
-            "description": "No Quote Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
+                      "description": "A unique identifier for the complete successful order placed by a customer on the merchant site. This represents the whole order that can have multiple line items of different quantities.",
+                      "maxLength": 48,
+                      "example": "83737121380"
                     },
-                    "errorType": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 514
-                    },
-                    "errorMessage": {
-                      "type": "string",
-                      "description": "error message",
-                      "example": "No Quote Found"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "515": {
-            "description": "Store Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
-                    },
-                    "errorType": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 515
-                    },
-                    "errorMessage": {
-                      "type": "string",
-                      "description": "error message",
-                      "example": "Store Not Found"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "516": {
-            "description": "Not Eligible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
-                    },
-                    "errorType": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 516
-                    },
-                    "errorMessage": {
-                      "type": "string",
-                      "description": "error message",
-                      "example": "Not Eligible"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "517": {
-            "description": "Category Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
-                    },
-                    "errorType": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 517
-                    },
-                    "errorMessage": {
-                      "type": "string",
-                      "description": "error message",
-                      "example": "Category Not Found"
+                    "errorList": {
+                      "type": "array",
+                      "description": "The list of contracts generated for each quantity in each line item. If any error in generating a contract, the error code and msg will be added for that item instead of the contract id.",
+                      "items": {
+                        "type": "object",
+                      
+                        "properties": {
+                          "lineItemId": {
+                            "type": "string",
+                            "example": "374dc3c3-94a3-4b85-a876-8651e461446d"
+                          },
+                          "error": {
+                            "type": "string",
+                            "example": "planDetails.policyPurchaseDate is required"
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -2342,17 +2283,18 @@
             }
           },
           "500": {
-            "description": "Something Unexpectedly Went Wrong",
+            "description": "Internal Server Error",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
+                    "storeId": {
+                      "type": "string",
+                      "description": "Store Id",
+                      "example":"8577825144935"
                     },
-                    "errorType": {
+                    "errorCode": {
                       "type": "integer",
                       "description": "error type",
                       "example": 500
@@ -2360,7 +2302,34 @@
                     "errorMessage": {
                       "type": "string",
                       "description": "error message",
-                      "example": "Something Unexpectedly Went Wrong"
+                      "example": "Failed to process order with internal service"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "storeId": {
+                      "type": "string",
+                      "description": "Store Id",
+                      "example":"8577825144935"
+                    },
+                    "errorCode": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 401
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "X-SureBright-Access-Token header is required"
                     }
                   }
                 }
