@@ -740,7 +740,7 @@
       }
     }
     ,
-    "/api/v1/quote/listWarrantyQuotes/storeId={storeId}?country={country}&productUrl={PRODUCT_URL}": {
+    "/api/v1/quote/listWarrantyQuotes?storeId={storeId}&country={country}&productUrl={PRODUCT_URL}": {
       "get": {
         "summary": "List Quotes by URL",
         "description": "This endpoint fetches all warranty quotes for the product category to which product in the sent URL belongs.",
