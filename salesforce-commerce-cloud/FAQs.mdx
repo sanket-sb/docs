@@ -1,0 +1,204 @@
+---
+title: "FAQs"
+description: "Frequently asked questions about SureBright SFCC integration including setup, configuration, and common issues."
+---
+---
+
+## General Integration Questions
+
+<Accordion title="What SFCC permissions does SureBright need?">
+SureBright requires specific OAuth scopes for full integration functionality:
+
+**Required Scopes**:
+- `sfcc.catalogs.rw` - Read/Write access to product catalogs
+- `sfcc.products.rw` - Read/Write access to product data
+- `sfcc.orders.rw` - Read/Write access to order information
+- `sfcc.custom-objects.rw` - Read/Write access to custom objects
+- `sfcc.jobs.rw` - Read/Write access to job management
+
+**User Roles Required** (for Full Access approach):
+- Administrator (for cartridge deployment and configuration)
+- API User (for programmatic access)
+- Job Manager (for import/export operations)
+</Accordion>
+
+<Accordion title="Will the SureBright cartridge conflict with my existing cartridges?">
+The SureBright cartridge is designed to be compatible with most SFCC setups, but we take precautions:
+
+**Compatibility Measures**:
+- Cartridge is tested with common SFCC cartridges
+- Proper cartridge priority configuration prevents conflicts
+- Namespaced code prevents function and variable conflicts
+- Modular design allows selective feature activation
+
+**If Conflicts Occur**:
+- SureBright will adjust cartridge priority settings
+- We can modify specific functions if needed
+- Alternative deployment methods are available
+- Your existing functionality remains unaffected
+</Accordion>
+<Accordion title="How do I find my Organization ID, Realm, and Short Code in SFCC?">
+These values are located in different parts of your SFCC Business Manager:
+
+**Organization ID**:
+- Go to `Administration → Organization → Organization Settings`
+- Look for "Organization ID" field
+
+**Realm**:
+- Found in your SFCC instance URL: `https://[realm].demandware.net`
+- Also visible in `Administration → Organization → Organization Settings`
+
+**Short Code**:
+- Go to `Administration → Sites → [Your Site] → Settings`
+- Look for "Site ID" or "Short Code" field
+- Usually matches your site's identifier
+</Accordion>
+---
+
+## Technical Setup Questions
+
+
+
+<Accordion title="What if I don't have access to create API clients in Account Manager?">
+You'll need to request access from your SFCC administrator or use the Full Business Manager Access approach:
+
+**Required Permissions**:
+- Account Manager access with API client creation rights
+- User management permissions for creating SureBright user account
+- Business Manager administrative access
+
+**Alternative Solutions**:
+- Request temporary elevated permissions for integration setup
+- Use the Full Business Manager Access approach instead
+- Have your SFCC administrator create the API client and share credentials
+- Contact Salesforce support for permission escalation if needed
+</Accordion>
+
+<Accordion title="How do I verify my inventory list and pricebook are properly assigned?">
+Follow these steps in your SFCC Business Manager:
+
+**Check Inventory List Assignment**:
+1. Go to `Merchant Tools → Inventory → Inventory Lists`
+2. Select your inventory list
+3. Check "Sites" tab to ensure your site is assigned
+4. Note the Inventory List ID for sharing with SureBright
+
+**Check Pricebook Assignment**:
+1. Go to `Merchant Tools → Pricing → Price Books`
+2. Select your pricebook
+3. Check "Sites" tab to ensure your site is assigned
+4. Note the Pricebook ID for sharing with SureBright
+
+**Verify Site Configuration**:
+1. Go to `Administration → Sites → [Your Site] → Settings`
+2. Confirm inventory list and pricebook are properly configured
+3. Check that the site is active and properly set up
+</Accordion>
+
+<Accordion title="What SFCC version is required for the integration?">
+The SureBright integration is compatible with SFCC versions that support SFRA (Storefront Reference Architecture). 
+
+**Minimum Requirements**:
+- SFCC version 20.1 or later
+- SFRA-based storefront
+- Business Manager administrative access
+
+**Recommended**:
+- Latest SFCC version for optimal performance
+- Sandbox environment for testing before production deployment
+</Accordion>
+
+
+<Accordion title="How are Surebright products created in my SFCC catalog?">
+SureBright creates warranty products using SFCC's standard product creation process:
+
+**Product Creation Process**:
+- Surebright products are created as regular SFCC products
+- They're assigned to a dedicated warranty category
+- Custom attributes define warranty plan types and coverage
+- Products are linked to your main products via relationships
+
+**Product Configuration**:
+- SKUs follow a consistent naming convention
+- Pricing is dynamically calculated based on product value
+- Inventory is managed through your existing inventory system
+- Products are automatically assigned to your site's catalog
+
+**Merchant Control**:
+- You can modify warranty product descriptions
+- Product availability can be controlled via inventory lists
+- Warranty products integrate with your existing product management workflow
+</Accordion>
+
+
+<Accordion title="How often does product data sync between SFCC and SureBright?">
+Product data synchronization follows this schedule:
+
+**Product Export Job**:
+- Runs daily (recommended)
+- Can be configured for different frequencies
+- Exports all merchandisable products
+- Updates product information in SureBright system
+
+**Order Synchronization**:
+- Real-time processing (every 15-30 minutes)
+- Immediate order data transfer
+- Contract creation processing
+- Status updates and tracking
+
+**Manual Sync**:
+- Available for immediate updates
+- Useful for testing and troubleshooting
+- Can be triggered from Business Manager
+</Accordion>
+
+
+
+---
+
+## Storefront Display Questions
+
+<Accordion title="What should I do if warranty products don't appear on my storefront?">
+This is usually a cartridge priority or configuration issue. Follow these steps:
+
+**Immediate Checks**:
+1. **Verify Cartridge Priority**: Ensure SureBright cartridge has proper priority in Business Manager
+2. **Check Site Assignment**: Confirm warranty products are assigned to your site
+3. **Review Product Status**: Ensure warranty products are active and available
+4. **Check Inventory**: Verify inventory levels are sufficient
+
+**Business Manager Steps**:
+1. Go to `Administration → Sites → [Your Site] → Cartridges`
+2. Check that SureBright cartridge is listed and active
+3. Verify cartridge priority is set correctly
+4. Check for any error messages or conflicts
+
+**If Issues Persist**:
+- Contact SureBright support with specific error details
+- Provide screenshots of Business Manager configuration
+- Share any error logs from your SFCC instance
+- Test in a different browser or incognito mode
+</Accordion>
+
+
+
+## Still Have Questions?
+
+If you don't see your question answered here, we're here to help:
+
+<CardGroup cols={2}>
+  <Card title="Contact Support" icon="envelope">
+    **Email Support Team**
+    
+    [support@surebright.com](mailto:support@surebright.com)
+    
+    *For detailed technical questions and assistance*
+  </Card>
+  <Card title="Contact Your Representative" icon="headset">
+    **Direct Support**
+    
+    Contact your assigned SureBright representative for immediate assistance.
+    
+    *For urgent issues and business questions*
+  </Card>
+</CardGroup>

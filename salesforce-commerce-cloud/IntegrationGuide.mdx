@@ -1,0 +1,124 @@
+---
+title: "SFCC Integration Guide"
+description: "Complete guide to onboard SureBright Product Protection within Salesforce Commerce Cloud (SFCC) SFRA store. This guide covers both scenarios: when SureBright gets Business Manager access and when only API access is provided."
+---
+
+
+The SureBright Product Protection integration with Salesforce Commerce Cloud (SFCC) follows a structured, phase-based approach designed to ensure successful deployment and configuration. This guide provides comprehensive instructions for merchants to integrate warranty and protection plans directly within their SFCC storefront.
+
+<Info>
+  **Integration Timeline**: The complete setup typically takes 2-3 business days, depending on your SFCC environment complexity and chosen integration approach.
+</Info>
+
+## Integration Overview
+
+SureBright Product Protection seamlessly integrates with Salesforce Commerce Cloud (SFCC) to enable merchants to offer comprehensive product protection plans directly within their e-commerce storefront. This integration leverages SFCC's robust API framework and cartridge system to provide a native shopping experience for warranty products.
+
+## Choose Your Integration Path
+
+Based on your team's technical capabilities and security requirements, select the most appropriate integration approach:
+
+<CardGroup cols={2}>
+  <Card title="Full Business Manager Access" icon="shield-check">
+    **Recommended for most merchants**
+    
+    SureBright handles the complete SFCC configuration including cartridge deployment, job setup, and custom object creation.
+    
+    *Best for: Merchants with limited technical resources*
+  </Card>
+  <Card title="API-Only Access" icon="code">
+    **For technical teams**
+    
+    Your development team handles SFCC configuration while SureBright provides integration files and technical guidance.
+    
+    *Best for: Merchants with dedicated SFCC development teams*
+  </Card>
+</CardGroup>
+
+## Prerequisites
+
+Before beginning the integration, ensure you have access to:
+
+<Steps>
+  <Step title="Account Manager Permissions">
+    Ability to create users and API clients in Account Manager
+  </Step>
+  <Step title="SFCC Business Manager Access">
+    Administrative access to your SFCC Business Manager instance
+  </Step>
+  <Step title="Product Catalog Data">
+    Your complete product catalog with SKUs, pricing, and categories
+  </Step>
+  <Step title="Site Configuration Details">
+    Your site's inventory list ID and pricebook assignments
+  </Step>
+</Steps>
+
+
+## Quick Start Checklist
+
+<Steps>
+  <Step title="Configure User Access">
+    Use the [Configuration Guide](./Configuration) to set up API clients and user accounts.
+  </Step>
+  <Step title="Complete Business Manager Setup">
+    Follow the [Business Manager Setup Guide](./BusinessManagerSetup) to upload cartridges and import metadata.
+  </Step>
+  <Step title="Set Up Data Sync Jobs">
+    Configure automated jobs using the [Jobs Guide](./Jobs) for product and order synchronization.
+  </Step>
+  <Step title="Test Integration">
+    Run comprehensive tests using the [Testing Guide](./Testing) to validate all functionality.
+  </Step>
+  <Step title="Go Live">
+    Deploy to production and refer to the [FAQs](./FAQs) for common questions and answers.
+  </Step>
+</Steps>
+
+---
+
+## What's Next
+
+Great job! Now that you have uploaded the necessary files from the cartridge, you will begin configuring the various settings for your SureBright offerings. First, you will tackle the SureBright products you just uploaded, and then work with the various different Custom Preferences available within the integration.
+
+**Next Steps:**
+1. Configure your [User and API Settings](./Configuration)
+2. Complete the [Business Manager Setup](./BusinessManagerSetup)
+3. Set up [Data Synchronization Jobs](./Jobs)
+4. Run [Integration Tests](./Testing)
+
+---
+
+## Support and Resources
+
+### Getting Technical Support
+
+If you encounter any issues during the integration process, we provide comprehensive support through multiple channels:
+
+<CardGroup cols={2}>
+  <Card title="Immediate Support" icon="headset">
+    **Contact Your SureBright Representative**
+    
+    For urgent issues or immediate assistance during integration setup.
+    
+    *Response time: Within 2 hours during business hours*
+  </Card>
+  <Card title="Technical Support" icon="envelope">
+    **Email Support Team**
+    
+    [support@surebright.com](mailto:support@surebright.com)
+    
+    *For detailed technical issues and documentation requests*
+  </Card>
+</CardGroup>
+
+### Additional Resources
+
+  **Salesforce Commerce Cloud Resources**:
+  - [SFCC Developer Center](https://developer.salesforce.com/commerce-cloud)
+  - [SFCC API Documentation](https://documentation.b2c.commercecloud.salesforce.com/)
+  - [SFCC Business Manager Guide](https://documentation.b2c.commercecloud.salesforce.com/DOC1/topic/com.demandware.dochelp/content/b2c_commerce/topics/admin/business_manager.html)
+
+---
+
+**What's Next**: Proceed to the [Configuration Guide](./Configuration) to set up user access and API credentials.
