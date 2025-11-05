@@ -1237,7 +1237,7 @@
       }
     }
     ,
-    "/api/v1/quote/listCategoryWarrantyQuotes?storeId={storeId}&country={country}&productUrl={PRODUCT_URL}": {
+    "/api/v1/quote/listWarrantyQuotes?storeId={storeId}&country={country}&productUrl={PRODUCT_URL}": {
       "get": {
         "summary": "List Quotes by URL",
         "description": "This endpoint fetches all warranty quotes for the product category to which product in the sent URL belongs.",
@@ -1283,9 +1283,9 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "4c3103e4-38dc-4171-96e5-b4b77ab0e96f"
+              "example": "aHR0cHM6Ly93d3cubWVkaWNhbGVzaG9wLmNvbS9xdWlja2llLXE1MC1yLWNhcmJvbi1mb2xkaW5nLXBvd2VyLXdoZWVsY2hhaXI="
             },
-            "description": "The URL containing the product page that is shown to the customer"
+            "description": "Base64 encoded URL containing the product page that is shown to the customer"
           }
         ],
         "responses": {
@@ -1349,7 +1349,7 @@
                       "description": "Unique link for legal Terms & Conditions of the warranty for each product Category",
                       "example": "https://customer.surebright.com/t-c/098e0e696f20839479dfe4a2804756233d32130f068441e24c6c0dbbc790677ff9718e04396a18dac753d0cf92bcaf63a26d2b666e5326475d0b2ed7475ad7fc"
                     },
-                    "productImageUrl":{
+                    "productImageURL":{
                       "type": "string",
                       "description": "Link of the product image that can be show as part of the warranty offer UI",
                       "example": "<https://cdn.shopify.com/s/files/1/0254/6227/6182/products/bedbathandimage.jpg?v=1664467971>"
