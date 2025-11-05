@@ -80,7 +80,8 @@
                   "api-reference/endpoint/quote/index",
                   "api-reference/endpoint/quote/list-warranty-quotes-by-category",
                   "api-reference/endpoint/quote/list-warranty-quotes-by-product",
-                  "api-reference/endpoint/quote/list-warranty-quotes-by-url"
+                  "api-reference/endpoint/quote/list-warranty-quotes-by-url",
+                  "api-reference/endpoint/quote/list-warranty-quotes-by-category-for-all-price-bands"
                 ]
               },
               {

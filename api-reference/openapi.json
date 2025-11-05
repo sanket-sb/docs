@@ -342,6 +342,466 @@
         }
       }
     },
+    "/quote/api/quote/category/listQuotes?payload={payload}": {
+      "get": {
+        "summary": "List Categories",
+        "description": "Retrieves a list of warranty quotes for all price bands based on Category. The response includes price bands details and warranty quotes details.The payload parameter must be sent as a Base64-encoded query string for secure transmission.",
+        "operationId": "listQuotes",
+        "tags": [
+          "storeCategory"
+        ],
+        "parameters": [
+          {
+            "name": "storeId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "strictlyapple.myshopify.com"
+            },
+            "description": "A unique identifier for a store will be shared as part of the integration kit.It is a path variable"
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SHOPIFY"
+            },
+            "description": "The platform of the merchant's store"
+          },
+          {
+            "name":"storeParentId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "ecca4210-09a4-446c-ad87-5e65bd50df12"
+            },
+            "description": "Unique identifier for the store parent"
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Z]{2}$",
+              "example": "US"
+            },
+            "description": "The country code of the merchant's store location"
+          },
+          {
+            "name":"visitId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "33f21a29-95ca-4150-b5df-afe36f5ef537"
+            },
+            "description": "Unique identifier of the visitor"
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "AL"
+            },
+            "description": "The state code of the merchant's store location"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "storeCategoryId": {
+                      "type": "string",
+                      "example": "ecca4210-09a4-446c-ad87-5e65bd50df12",
+                      "description": "A unique identifier for a store category"
+                    },
+                    "sbCategoryId": {
+                      "type": "string",
+                      "example": "4c3103e4-38dc-4171-96e5-b4b77ab0e96f",
+                      "description": "Unique identifier for the surebright category"
+                    },
+                    "country": {
+                      "type": "string",
+                      "example": "US",
+                      "description": "The country code of the merchant's store location"
+                    },
+                    "province": {
+                      "type": "string",
+                      "example": "AL",
+                      "description": "The province code of the merchant's store location"
+                    },
+                    "platform":{
+                      "type": "string",
+                      "example": "SHOPIFY",
+                      "description": "The platform of the merchant's store"
+                    },
+                    "sbProductId":{
+                      "type": "string",
+                      "example": "643bc477-0eec-4da1-946a-38ff7d1292c9",
+                      "description": "Unique identifier for the product"
+                    },
+                    "storeParentId":{
+                      "type": "string",
+                      "example": "ecca4210-09a4-446c-ad87-5e65bd50df12",
+                      "description": "Unique identifier for the store"
+                    },
+                    "allowDynamicPolicyPricing":{
+                      "type": "boolean",
+                      "example": true,
+                      "description": "Indicates if dynamic policy pricing is allowed"
+                    },
+                    "platformOrderDetails": {
+                      "type": "object",
+                      "example": null,
+                      "description": "The platform order details"
+                    },
+                    "quoteId":{
+                      "type": "string",
+                      "example": "33f21a29-95ca-4150-b5df-afe36f5ef537",
+                      "description": "Unique identifier for the quote"
+                    },
+                    "quoteItemList":{
+                      "type": "array",
+                      "description": "A list of quote item details",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "quoteId":{
+                            "type": "string",
+                            "example": "33f21a29-95ca-4150-b5df-afe36f5ef537",
+                            "description": "Unique identifier for the quote"
+                          },
+                          "quoteItemId":{
+                            "type": "string",
+                            "example": "33f21a29-95ca-4150-b5df-afe36f5ef537",
+                            "description": "Unique identifier for the quote item"
+                          },
+                          "lowerPrice":{
+                            "type": "number",
+                            "example": 123.45,
+                            "description": "The lower price of the quote item"
+                          },
+                          "upperPrice":{
+                            "type": "number",
+                            "example": 123.45,
+                            "description": "The upper price of the quote item"
+                          },
+                          "coverageYears":{
+                            "type": "string",
+                            "example": "1",
+                            "description": "The number of years of coverage in years"
+                          },
+                          "storeProductVariantPrice":{
+                            "type": "string",
+                            "example": "123.45",
+                            "description": "The price of the product variant"
+                          },
+                          "province":{
+                            "type": "string",
+                            "example": "AL",
+                            "description": "The province code of the merchant's store location"
+                          },
+                          "country":{
+                            "type": "string",
+                            "example": "US",
+                            "description": "The country code of the merchant's store location"
+                          },
+                          "isActive":{
+                            "type": "boolean",
+                            "example": true,
+                            "description": "Indicates if the quote item is active"
+                        }
+                      }
+                    }
+                  },
+                   "categoryList": {
+                      "type": "array",
+                      "description": "A list containing details of SureBright categories",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "sbCategoryName": {
+                            "type": "string",
+                            "example": "Small Home Appliance",
+                            "description": "Name of the SureBright category"
+                          },
+                          "sbCategoryId": {
+                            "type": "string",
+                            "example": "4c3103e4-38dc-4171-96e5-b4b77ab0e96f",
+                            "description": "Unique identifier for the category"
+                          },
+                          "labelList": {
+                            "type": "array",
+                            "description": "List of category labels",
+                            "items": {
+                              "type": "string",
+                              "example": "HOME_APPLIANCES"
+                            },
+                            "example": [
+                              "Ovens",
+                              "Microwaves",
+                              "Refrigerators"
+                            ]
+                          }
+                        },
+                        "example": {
+                          "sbCategoryName": "Small Home Appliance",
+                          "sbCategoryId": "4c3103e4-38dc-4171-96e5-b4b77ab0e96f",
+                          "labelList": [
+                            "Ovens",
+                            "Microwaves",
+                            "Refrigerators"
+                          ]
+                        }
+                      }
+                    },
+                    "coverageType":{
+                      "type": "string",
+                      "example": "AD",
+                      "description": "The type of coverage"
+                    }, 
+                    "policyId":{
+                      "type": "string",
+                      "example": "1234567890",
+                      "description": "Unique identifier for the policy"
+                    },
+                    "createdAt":{
+                      "type": "string",
+                      "example": "2021-01-01T00:00:00Z",
+                      "description": "The date and time the quote was created"
+                    },
+                    "updatedAt":{
+                      "type": "string",
+                      "example": "2021-01-01T00:00:00Z",
+                      "description": "The date and time the quote was updated"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "511": {
+            "description": "Insufficient Parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 511
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Insufficient Parameters"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "512": {
+            "description": "Validation Failed for Input Parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 512
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Validation Failed for Input Parameters"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "513": {
+            "description": "Product Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 513
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Product Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "514": {
+            "description": "No Quote Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 514
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "No Quote Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "515": {
+            "description": "Store Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 515
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Store Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "516": {
+            "description": "Not Eligible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 516
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Not Eligible"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "517": {
+            "description": "Category Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 517
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Category Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Something Unexpectedly Went Wrong",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 500
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Something Unexpectedly Went Wrong"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/quote/api/quote/listWarrantyQuotes?platform={platform}&storeId={storeId}&productId={productId}&variantId={variantId}&country={country}": {
       "get": {
         "summary": "List Warranty Quotes by Product",
