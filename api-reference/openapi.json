@@ -345,19 +345,30 @@
     "/quote/api/quote/category/listQuotes?payload={payload}": {
       "get": {
         "summary": "List Categories",
-        "description": "Retrieves a list of warranty quotes for all price bands based on Category. The response includes price bands details and warranty quotes details.The payload parameter must be sent as a Base64-encoded query string for secure transmission.",
+        "description": "Retrieves a list of warranty quotes for all price bands based on Category. The response includes price bands details and warranty quotes details.",
         "operationId": "listQuotes",
         "tags": [
           "storeCategory"
         ],
         "parameters": [
           {
+            "name": "payload",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "ewogICJzdG9yZVBhcmVudElkIjogIjEzNjEyZjI5LThlYzUtNDlhZC1iYWIxLTVhYjA5YjUxMzY3ZSIsCiAgImNvdW50cnkiOiAiVVMiLAogICJwcm92aW5jZSI6ICIiLAogICJ2aXNpdElkIjogIjNkOTlhNGFlLTVjZjAtNGQ4Ny04NDM2LTQ2YzBjZGMwMzY3NiIsCiAgInN0b3JlQ2F0ZWdvcnlMaXN0IjogWwogICAgewogICAgICAic3RvcmVDYXRlZ29yeUlkIjogIjA3YjFkY2IzLWZiZTUtNDZjNi1iNDJmLTY2ZDgyZTg5ZjJhNyIsCiAgICAgICJzYkNhdGVnb3J5SWQiOiAiMjkwZjhhMDQtMDQ2NC00MTQwLTkwNGItOGZhMzNkZjljYmQ5IiwKICAgICAgInNiUHJvZHVjdElkIjogIjY0M2JjNDc3LTBlZWMtNGRhMS05NDZhLTM4ZmY3ZDEyOTJjOSIsCiAgICAgICJhY3RpdmUiOiB0cnVlCiAgICB9CiAgXSwKICAicGxhdGZvcm0iOiAiUE9TVF9QVVJDSEFTRSIKfQ%27"
+            },
+            "description":"A Base64-encoded query string used for secure transmission. It includes the storeParentId, country, province, visitId, storeCategoryList, and platform details.\n\n**Example: Original JSON payload before Base64 encoding**\n```json\n{\n  \"storeParentId\": \"13612f29-8ec5-49ad-bab1-5ab09b51367e\",\n  \"country\": \"US\",\n  \"province\": \"\",\n  \"visitId\": \"3d99a4ae-5cf0-4d87-8436-46c0cdc03676\",\n  \"storeCategoryList\": [\n    {\n      \"storeCategoryId\": \"07b1dcb3-fbe5-46c6-b42f-66d82e89f2a7\",\n      \"sbCategoryId\": \"290f8a04-0464-4140-904b-8fa33df9cbd9\",\n      \"sbProductId\": \"643bc477-0eec-4da1-946a-38ff7d1292c9\",\n      \"active\": true\n    }\n  ],\n  \"platform\": \"POST_PURCHASE\"\n}\n```"
+
+          },
+          {
             "name": "storeId",
             "in": "query",
             "required": true,
             "schema": {
               "type": "string",
-              "example": "strictlyapple.myshopify.com"
+              "example": "surebright-test-1@myshopify.com"
             },
             "description": "A unique identifier for a store will be shared as part of the integration kit.It is a path variable"
           },
@@ -367,7 +378,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "SHOPIFY"
+              "example": "POST_PURCHASE"
             },
             "description": "The platform of the merchant's store"
           },
@@ -382,6 +393,49 @@
             "description": "Unique identifier for the store parent"
           },
           {
+            "name": "storeCategoryList",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "storeCategoryId": {
+                    "type": "string",
+                    "description": "Unique identifier for the store category",
+                    "example": "07b1dcb3-fbe5-46c6-b42f-66d82e89f2a7"
+                  },
+                  "sbCategoryId": {
+                    "type": "string",
+                    "description": "Unique identifier for the SureBright category",
+                    "example": "290f8a04-0464-4140-904b-8fa33df9cbd9"
+                  },
+                  "sbProductId": {
+                    "type": "string",
+                    "description": "Unique identifier for the product",
+                    "example": "643bc477-0eec-4da1-946a-38ff7d1292c9"
+                  },
+                  "active": {
+                    "type": "boolean",
+                    "example": true
+                  }
+                }
+              },
+              "example":{
+                "storeCategoryList": [
+                {
+                  "storeCategoryId": "07b1dcb3-fbe5-46c6-b42f-66d82e89f2a7",
+                  "sbCategoryId": "290f8a04-0464-4140-904b-8fa33df9cbd9",
+                  "sbProductId": "643bc477-0eec-4da1-946a-38ff7d1292c9",
+                  "active": true
+                }
+              ]
+            }
+            },
+            "description": "An array containing store category details used for identifying product categories within a store. Each object represents a category and includes IDs and status."
+          },
+          {
             "name": "country",
             "in": "query",
             "required": true,
@@ -390,7 +444,7 @@
               "pattern": "^[A-Z]{2}$",
               "example": "US"
             },
-            "description": "The country code of the merchant's store location"
+            "description": "The country code of the identified customer location"
           },
           {
             "name":"visitId",
@@ -403,14 +457,13 @@
             "description": "Unique identifier of the visitor"
           },
           {
-            "name": "state",
+            "name": "province",
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string",
-              "example": "AL"
+              "type": "string"
             },
-            "description": "The state code of the merchant's store location"
+            "description": "The province code corresponding to the customer’s location — relevant only for Canada stores."
           }
         ],
         "responses": {
@@ -434,12 +487,7 @@
                     "country": {
                       "type": "string",
                       "example": "US",
-                      "description": "The country code of the merchant's store location"
-                    },
-                    "province": {
-                      "type": "string",
-                      "example": "AL",
-                      "description": "The province code of the merchant's store location"
+                      "description": "The country code of the identified customer location"
                     },
                     "platform":{
                       "type": "string",
@@ -489,12 +537,12 @@
                           },
                           "lowerPrice":{
                             "type": "number",
-                            "example": 123.45,
+                            "example": 749.99,
                             "description": "The lower price of the quote item"
                           },
                           "upperPrice":{
                             "type": "number",
-                            "example": 123.45,
+                            "example": 999.99,
                             "description": "The upper price of the quote item"
                           },
                           "coverageYears":{
@@ -502,20 +550,20 @@
                             "example": "1",
                             "description": "The number of years of coverage in years"
                           },
+                          "policyPrice":{
+                            "type": "string",
+                            "example": "79",
+                            "description": "The price of the policy product"
+                          },
                           "storeProductVariantPrice":{
                             "type": "string",
-                            "example": "123.45",
+                            "example": "899.99",
                             "description": "The price of the product variant"
-                          },
-                          "province":{
-                            "type": "string",
-                            "example": "AL",
-                            "description": "The province code of the merchant's store location"
                           },
                           "country":{
                             "type": "string",
                             "example": "US",
-                            "description": "The country code of the merchant's store location"
+                            "description": "The country code of the identified customer location"
                           },
                           "isActive":{
                             "type": "boolean",
@@ -525,52 +573,41 @@
                       }
                     }
                   },
-                   "categoryList": {
-                      "type": "array",
-                      "description": "A list containing details of SureBright categories",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "sbCategoryName": {
-                            "type": "string",
-                            "example": "Small Home Appliance",
-                            "description": "Name of the SureBright category"
-                          },
-                          "sbCategoryId": {
-                            "type": "string",
-                            "example": "4c3103e4-38dc-4171-96e5-b4b77ab0e96f",
-                            "description": "Unique identifier for the category"
-                          },
-                          "labelList": {
-                            "type": "array",
-                            "description": "List of category labels",
-                            "items": {
-                              "type": "string",
-                              "example": "HOME_APPLIANCES"
-                            },
-                            "example": [
-                              "Ovens",
-                              "Microwaves",
-                              "Refrigerators"
-                            ]
-                          }
-                        },
-                        "example": {
-                          "sbCategoryName": "Small Home Appliance",
-                          "sbCategoryId": "4c3103e4-38dc-4171-96e5-b4b77ab0e96f",
-                          "labelList": [
-                            "Ovens",
-                            "Microwaves",
-                            "Refrigerators"
-                          ]
-                        }
-                      }
-                    },
                     "coverageType":{
                       "type": "string",
                       "example": "AD",
-                      "description": "The type of coverage"
-                    }, 
+                      "description": "Represents the type of policy coverage associated with a product"
+                    },
+                    "coverageList": {
+                      "type": "array",
+                      "description": "List of coverage options grouped under different sections",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "coverageItemType": {
+                            "type": "string",
+                            "enum": [
+                              "COVERAGE_OPTION",
+                              "WHY_SUREBRIGHT"
+                            ],
+                            "example": "COVERAGE_OPTION"
+                          },
+                          "coverageItemTitle": {
+                            "type": "string",
+                            "example": "Your warranty plan provides"
+                          },
+                          "coverageItemList": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "example": [
+                              "Protection against everyday spills (food, beverages, human or pet biological stains, cosmetics, etc)."
+                            ]
+                          }
+                        }
+                      }
+                    },
                     "policyId":{
                       "type": "string",
                       "example": "1234567890",
