@@ -75,6 +75,13 @@
                 ]
               },
               {
+                "group": "Product Category",
+                "pages": [
+                  "api-reference/endpoint/product-category/index",
+                  "api-reference/endpoint/product-category/categorize-product"
+                ]
+              },
+              {
                 "group": "Quote",
                 "pages": [
                   "api-reference/endpoint/quote/index",
