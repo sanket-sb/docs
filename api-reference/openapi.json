@@ -2836,5 +2836,337 @@
         }
       }
     }
+    ,
+    "/site-platform/api/v1/categorize/product": {
+      "post": {
+        "summary": "Categorize Product",
+        "description": "This endpoint categorizes a product based on its title, description, and other attributes. It returns the SureBright category information including category ID, category name, and SB category name.",
+        "operationId": "categorizeProduct",
+        "tags": [
+          "product-category"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "productTitle",
+                  "storeId"
+                ],
+                "properties": {
+                  "productTitle": {
+                    "type": "string",
+                    "description": "The title or name of the product to be categorized",
+                    "example": "Sony Bravia OLED 4K"
+                  },
+                  "storeId": {
+                    "type": "string",
+                    "description": "A unique identifier for a store will be shared as part of the integration kit",
+                    "example": "3226a01adbf64d94803dac879d1fba099"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The description of the product",
+                    "example": "55-inch 4K OLED Smart TV with HDR"
+                  },
+                  "quantity": {
+                    "type": "integer",
+                    "description": "The quantity of the product",
+                    "example": 1
+                  },
+                  "productPrice": {
+                    "type": "number",
+                    "description": "The price of the product",
+                    "example": 21
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Product categorized successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "Indicates if an error occurred",
+                      "example": false
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Response message",
+                      "example": "Product categorized successfully"
+                    },
+                    "lineItemsList": {
+                      "type": "object",
+                      "description": "The categorized product information",
+                      "properties": {
+                        "productTitle": {
+                          "type": "string",
+                          "description": "The title or name of the product",
+                          "example": "Sony Bravia OLED 4K"
+                        },
+                        "quantity": {
+                          "type": "integer",
+                          "description": "The quantity of the product",
+                          "example": 1
+                        },
+                        "productPrice": {
+                          "type": "number",
+                          "description": "The price of the product",
+                          "example": 21
+                        },
+                        "sbCategoryId": {
+                          "type": "string",
+                          "description": "Unique identifier for the SureBright category",
+                          "example": "aedd580b-9a9e-4ceb-8f9a-f239f04f817a"
+                        },
+                        "categoryName": {
+                          "type": "string",
+                          "description": "The name of the category assigned to the product",
+                          "example": "System Warranty - B"
+                        },
+                        "sbCategoryName": {
+                          "type": "string",
+                          "description": "The SureBright category name",
+                          "example": "TV_MONITOR"
+                        }
+                      }
+                    }
+                  },
+                  "example": {
+                    "isError": false,
+                    "message": "Product categorized successfully",
+                    "lineItemsList": {
+                      "productTitle": "Sony Bravia OLED 4K",
+                      "quantity": 1,
+                      "productPrice": 21,
+                      "sbCategoryId": "aedd580b-9a9e-4ceb-8f9a-f239f04f817a",
+                      "categoryName": "System Warranty - B",
+                      "sbCategoryName": "TV_MONITOR"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "511": {
+            "description": "Insufficient Parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 511
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Insufficient Parameters"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "512": {
+            "description": "Validation Failed for Input Parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 512
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Validation Failed for Input Parameters"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "513": {
+            "description": "Product Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 513
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Product Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "514": {
+            "description": "No Quote Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 514
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "No Quote Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "515": {
+            "description": "Store Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 515
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Store Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "516": {
+            "description": "Not Eligible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 516
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Not Eligible"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "517": {
+            "description": "Category Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 517
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Category Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Something Unexpectedly Went Wrong",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 500
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Something Unexpectedly Went Wrong"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
