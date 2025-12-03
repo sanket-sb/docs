@@ -3568,9 +3568,9 @@
         }
       }
     },
-    "/api/v1/quote/whole-system/quote": {
+    "/api/v1/quote/whole-system-warranty/quote": {
       "post": {
-        "summary": "List Quotes by Whole System",
+        "summary": "List Quotes by Whole System Warranty",
         "description": "This endpoint retrieves a list of warranty quotes based on whole system details (title, description, and price). The response includes detailed warranty options, pricing, and coverage information similar to other quote endpoints.",
         "operationId": "listWarrantyQuotesByWholeSystem",
         "tags": [
@@ -3585,16 +3585,6 @@
               "type": "string"
             },
             "description": "Access token for authentication"
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "application/json"
-            },
-            "description": "Content type of the request"
           }
         ],
         "requestBody": {
@@ -3605,6 +3595,7 @@
                 "type": "object",
                 "required": [
                   "storeInfo",
+                  "proposalId",
                   "lineItemList",
                   "installerWarrantyDuration"
                 ],
@@ -3612,14 +3603,14 @@
                   "storeInfo": {  
                     "type": "object",
                     "required": [
-                      "storeParentId",
+                      "storeId",
                       "currency"
                     ],
                     "properties": {
-                      "storeParentId": {
+                      "storeId": {
                         "type": "string",
-                        "description": "A unique identifier for the store parent",
-                        "example": "62608668-ceaf-4800-813f-5836b7eb9aaf"
+                        "description": "A unique identifier for the store",
+                        "example": "store.myshopify.com"
                       },
                       "currency": {
                         "type": "string",
@@ -3627,6 +3618,11 @@
                         "example": "USD"
                       }
                     }
+                  },
+                  "proposalId": {
+                    "type": "string",
+                    "description": "A unique identifier for the proposal",
+                    "example": "9f3e21c6-6bdb-4c7f-9b91-2a4f9a2c7d11"
                   },
                   "lineItemList": {
                     "type": "array",
@@ -3636,7 +3632,6 @@
                       "required": [
                         "title",
                         "unitPrice",
-                        "proposalId",
                         "quantity"
                       ],
                       "properties": {
@@ -3651,15 +3646,10 @@
                           "description": "The unit price of the product",
                           "example": 5628.99
                         },
-                        "proposalId": {
-                          "type": "string",
-                          "description": "A unique identifier for the proposal",
-                          "example": "9f3e21c6-6bdb-4c7f-9b91-2a4f9a2c7d11"
-                        },
                         "categoryName": {
                           "type": "string",
                           "description": "The category name for the product",
-                          "example": "System Warranty - B"
+                          "example": "Amplifier"
                         },
                         "quantity": {
                           "type": "integer",
@@ -3676,8 +3666,8 @@
                   },
                   "installerWarrantyDuration": {
                     "type": "integer",
-                    "description": "The duration of the installer warranty in years",
-                    "example": 3
+                    "description": "The duration of the installer warranty in months",
+                    "example": 36
                   }
                 }
               }
@@ -3691,11 +3681,6 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "warrantyQuoteId",
-                    "warrantyQuoteItemList",
-                    "tncLink"
-                  ],
                   "properties": {
                     "warrantyQuoteId": {
                       "type": "string",
@@ -3713,18 +3698,23 @@
                             "description": "Duration of the warranty in years",
                             "example": 2
                           },
-                          "price": {
+                          "quotePrice": {
                             "type": "number",
                             "format": "float",
-                            "description": "Price of the warranty",
+                            "description": "Price of the warranty quote",
                             "example": 40.0
+                          },
+                          "warrantyQuoteItemId": {
+                            "type": "string",
+                            "description": "Unique identifier for the warranty quote item",
+                            "example": "a7defcbd-aa07-4e01-9076-c1935af20a98"
                           }
                         }
                       }
                     },
                     "lineItemList": {
                       "type": "array",
-                      "description": "A list of line items with full product information",
+                      "description": "A list of line items with full product information and coverage status",
                       "items": {
                         "type": "object",
                         "properties": {
@@ -3739,15 +3729,15 @@
                             "description": "The unit price of the product",
                             "example": 5628.99
                           },
-                          "proposalId": {
-                            "type": "string",
-                            "description": "A unique identifier for the proposal",
-                            "example": "9f3e21c6-6bdb-4c7f-9b91-2a4f9a2c7d11"
+                          "isCovered": {
+                            "type": "boolean",
+                            "description": "Indicates whether the line item is covered by the warranty",
+                            "example": true
                           },
-                          "categoryName": {
+                          "sbCategoryName": {
                             "type": "string",
-                            "description": "The category name for the line item",
-                            "example": "System Warranty - B"
+                            "description": "The SureBright category name for the product",
+                            "example": "Amplifier"
                           },
                           "quantity": {
                             "type": "integer",
@@ -3758,86 +3748,6 @@
                             "type": "string",
                             "description": "The description of the product",
                             "example": "Central automation controller used to integrate and manage multiple smart home systems and devices."
-                          }
-                        }
-                      }
-                    },
-                    "coveredLineItemsList": {
-                      "type": "array",
-                      "description": "A list of line items that are covered by the warranty",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "title": {
-                            "type": "string",
-                            "description": "The title or name of the product",
-                            "example": "CA-10 Hub and Automation Controller"
-                          },
-                          "unitPrice": {
-                            "type": "number",
-                            "format": "float",
-                            "description": "The unit price of the product",
-                            "example": 5628.99
-                          },
-                          "proposalId": {
-                            "type": "string",
-                            "description": "A unique identifier for the proposal",
-                            "example": "9f3e21c6-6bdb-4c7f-9b91-2a4f9a2c7d11"
-                          },
-                          "categoryName": {
-                            "type": "string",
-                            "description": "The category name for the product",
-                            "example": "System Warranty - B"
-                          },
-                          "quantity": {
-                            "type": "integer",
-                            "description": "The quantity of the product",
-                            "example": 1
-                          },
-                          "description": {
-                            "type": "string",
-                            "description": "The description of the product",
-                            "example": "Central automation controller for managing smart home systems."
-                          }
-                        }
-                      }
-                    },
-                    "uncoveredLineItemsList": {
-                      "type": "array",
-                      "description": "A list of line items that are not covered by the warranty",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "title": {
-                            "type": "string",
-                            "description": "The title or name of the product",
-                            "example": "Eldorado Club Chair"
-                          },
-                          "unitPrice": {
-                            "type": "number",
-                            "format": "float",
-                            "description": "The unit price of the product",
-                            "example": 4950
-                          },
-                          "proposalId": {
-                            "type": "string",
-                            "description": "A unique identifier for the proposal",
-                            "example": "9f3e21c6-6bdb-4c7f-9b91-2a4f9a2c7d11"
-                          },
-                          "categoryName": {
-                            "type": "string",
-                            "description": "The category name for the product",
-                            "example": ""
-                          },
-                          "quantity": {
-                            "type": "integer",
-                            "description": "The quantity of the product",
-                            "example": 1
-                          },
-                          "description": {
-                            "type": "string",
-                            "description": "The description of the product",
-                            "example": "Premium luxury seating chair."
                           }
                         }
                       }
