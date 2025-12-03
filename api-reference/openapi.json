@@ -3567,6 +3567,501 @@
           }
         }
       }
+    },
+    "/api/v1/quote/whole-system/quote": {
+      "post": {
+        "summary": "List Quotes by Whole System",
+        "description": "This endpoint retrieves a list of warranty quotes based on whole system details (title, description, and price). The response includes detailed warranty options, pricing, and coverage information similar to other quote endpoints.",
+        "operationId": "listWarrantyQuotesByWholeSystem",
+        "tags": [
+          "quotes"
+        ],
+        "parameters": [
+          {
+            "name": "X-SureBright-Access-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Access token for authentication"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "application/json"
+            },
+            "description": "Content type of the request"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "storeInfo",
+                  "lineItemList",
+                  "installerWarrantyDuration"
+                ],
+                "properties": {
+                  "storeInfo": {  
+                    "type": "object",
+                    "required": [
+                      "storeParentId",
+                      "currency"
+                    ],
+                    "properties": {
+                      "storeParentId": {
+                        "type": "string",
+                        "description": "A unique identifier for the store parent",
+                        "example": "62608668-ceaf-4800-813f-5836b7eb9aaf"
+                      },
+                      "currency": {
+                        "type": "string",
+                        "description": "The currency code for the store",
+                        "example": "USD"
+                      }
+                    }
+                  },
+                  "lineItemList": {
+                    "type": "array",
+                    "description": "A list of line items representing the products in the order",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "title",
+                        "unitPrice",
+                        "proposalId",
+                        "quantity"
+                      ],
+                      "properties": {
+                        "title": {
+                          "type": "string",
+                          "description": "The title or name of the product",
+                          "example": "CA-10 Hub and Automation Controller"
+                        },
+                        "unitPrice": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "The unit price of the product",
+                          "example": 5628.99
+                        },
+                        "proposalId": {
+                          "type": "string",
+                          "description": "A unique identifier for the proposal",
+                          "example": "9f3e21c6-6bdb-4c7f-9b91-2a4f9a2c7d11"
+                        },
+                        "categoryName": {
+                          "type": "string",
+                          "description": "The category name for the product",
+                          "example": "System Warranty - B"
+                        },
+                        "quantity": {
+                          "type": "integer",
+                          "description": "The quantity of the product",
+                          "example": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The description of the product",
+                          "example": "Central automation controller used to integrate and manage multiple smart home systems and devices."
+                        }
+                      }
+                    }
+                  },
+                  "installerWarrantyDuration": {
+                    "type": "integer",
+                    "description": "The duration of the installer warranty in years",
+                    "example": 3
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Quotes Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "warrantyQuoteId",
+                    "warrantyQuoteItemList",
+                    "tncLink"
+                  ],
+                  "properties": {
+                    "warrantyQuoteId": {
+                      "type": "string",
+                      "description": "A unique ID representing this specific return quote in this particular API call",
+                      "example": "36eaa6e3-ca1f-4bc1-86da-76caf7a7114d"
+                    },
+                    "warrantyQuoteItemList": {
+                      "type": "array",
+                      "description": "A list of warranty offers generated for this particular request",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "coverageYears": {
+                            "type": "integer",
+                            "description": "Duration of the warranty in years",
+                            "example": 2
+                          },
+                          "price": {
+                            "type": "number",
+                            "format": "float",
+                            "description": "Price of the warranty",
+                            "example": 40.0
+                          }
+                        }
+                      }
+                    },
+                    "lineItemList": {
+                      "type": "array",
+                      "description": "A list of line items with full product information",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string",
+                            "description": "The title or name of the product",
+                            "example": "CA-10 Hub and Automation Controller"
+                          },
+                          "unitPrice": {
+                            "type": "number",
+                            "format": "float",
+                            "description": "The unit price of the product",
+                            "example": 5628.99
+                          },
+                          "proposalId": {
+                            "type": "string",
+                            "description": "A unique identifier for the proposal",
+                            "example": "9f3e21c6-6bdb-4c7f-9b91-2a4f9a2c7d11"
+                          },
+                          "categoryName": {
+                            "type": "string",
+                            "description": "The category name for the line item",
+                            "example": "System Warranty - B"
+                          },
+                          "quantity": {
+                            "type": "integer",
+                            "description": "The quantity of the product",
+                            "example": 1
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "The description of the product",
+                            "example": "Central automation controller used to integrate and manage multiple smart home systems and devices."
+                          }
+                        }
+                      }
+                    },
+                    "coveredLineItemsList": {
+                      "type": "array",
+                      "description": "A list of line items that are covered by the warranty",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string",
+                            "description": "The title or name of the product",
+                            "example": "CA-10 Hub and Automation Controller"
+                          },
+                          "unitPrice": {
+                            "type": "number",
+                            "format": "float",
+                            "description": "The unit price of the product",
+                            "example": 5628.99
+                          },
+                          "proposalId": {
+                            "type": "string",
+                            "description": "A unique identifier for the proposal",
+                            "example": "9f3e21c6-6bdb-4c7f-9b91-2a4f9a2c7d11"
+                          },
+                          "categoryName": {
+                            "type": "string",
+                            "description": "The category name for the product",
+                            "example": "System Warranty - B"
+                          },
+                          "quantity": {
+                            "type": "integer",
+                            "description": "The quantity of the product",
+                            "example": 1
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "The description of the product",
+                            "example": "Central automation controller for managing smart home systems."
+                          }
+                        }
+                      }
+                    },
+                    "uncoveredLineItemsList": {
+                      "type": "array",
+                      "description": "A list of line items that are not covered by the warranty",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string",
+                            "description": "The title or name of the product",
+                            "example": "Eldorado Club Chair"
+                          },
+                          "unitPrice": {
+                            "type": "number",
+                            "format": "float",
+                            "description": "The unit price of the product",
+                            "example": 4950
+                          },
+                          "proposalId": {
+                            "type": "string",
+                            "description": "A unique identifier for the proposal",
+                            "example": "9f3e21c6-6bdb-4c7f-9b91-2a4f9a2c7d11"
+                          },
+                          "categoryName": {
+                            "type": "string",
+                            "description": "The category name for the product",
+                            "example": ""
+                          },
+                          "quantity": {
+                            "type": "integer",
+                            "description": "The quantity of the product",
+                            "example": 1
+                          },
+                          "description": {
+                            "type": "string",
+                            "description": "The description of the product",
+                            "example": "Premium luxury seating chair."
+                          }
+                        }
+                      }
+                    },
+                    "tncLink": {
+                      "type": "string",
+                      "description": "Unique link for legal Terms & Conditions of the warranty for each product Category",
+                      "example": "https://customer.surebright.com/t-c/098e0e696f20839479dfe4a2804756233d32130f068441e24c6c0dbbc790677f71879502aee2ce87e116739d4dae3332"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "511": {
+            "description": "Insufficient Parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 511
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Insufficient Parameters"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "512": {
+            "description": "Validation Failed for Input Parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 512
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Validation Failed for Input Parameters"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "513": {
+            "description": "Product Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 513
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Product Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "514": {
+            "description": "No Quote Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 514
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "No Quote Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "515": {
+            "description": "Store Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 515
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Store Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "516": {
+            "description": "Not Eligible",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 516
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Not Eligible"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "517": {
+            "description": "Category Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 517
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Category Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Something Unexpectedly Went Wrong",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 500
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Something Unexpectedly Went Wrong"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
