@@ -1988,6 +1988,17 @@
         "tags": [
           "orders"
         ],
+        "parameters": [
+          {
+            "name": "X-SureBright-Access-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Access token for authentication"
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -2414,6 +2425,17 @@
         "operationId": "UpdateWarranty",
         "tags": [
           "orders"
+        ],
+        "parameters": [
+          {
+            "name": "X-SureBright-Access-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Access token for authentication"
+          }
         ],
         "requestBody": {
           "required": true,
@@ -3245,6 +3267,17 @@
         "tags": [
           "product-category"
         ],
+        "parameters": [
+          {
+            "name": "X-SureBright-Access-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Access token for authentication"
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -3570,9 +3603,9 @@
     },
     "/api/v1/quote/whole-system-warranty/quote": {
       "post": {
-        "summary": "List Quotes by Whole System Warranty",
-        "description": "This endpoint retrieves a list of warranty quotes based on whole system details (title, description, and price). The response includes detailed warranty options, pricing, and coverage information similar to other quote endpoints.",
-        "operationId": "listWarrantyQuotesByWholeSystem",
+        "summary": "List Quotes for Whole System Warranty",
+        "description": "This endpoint generates warranty quotes for an entire system order. Provide store, proposal, and detailed line item information along with the installer warranty duration. The API returns available warranty offers, product coverage details, and a link to specific terms and conditions for the quoted products.",
+        "operationId": "listWarrantyQuotesForWholeSystemWarranty",
         "tags": [
           "quotes"
         ],
@@ -3594,30 +3627,21 @@
               "schema": {
                 "type": "object",
                 "required": [
-                  "storeInfo",
-                  "proposalId",
+                  "storeId",
+                  "platform",
                   "lineItemList",
                   "installerWarrantyDuration"
                 ],
                 "properties": {
-                  "storeInfo": {  
-                    "type": "object",
-                    "required": [
-                      "storeId",
-                      "currency"
-                    ],
-                    "properties": {
-                      "storeId": {
-                        "type": "string",
-                        "description": "A unique identifier for the store",
-                        "example": "store.myshopify.com"
-                      },
-                      "currency": {
-                        "type": "string",
-                        "description": "The currency code for the store",
-                        "example": "USD"
-                      }
-                    }
+                  "storeId": {
+                    "type": "string",
+                    "description": "A unique identifier for the store",
+                    "example": "test-store-id"
+                  },
+                  "platform": {
+                    "type": "string",
+                    "description": "The platform identifier for the store",
+                    "example": "Dtools"
                   },
                   "proposalId": {
                     "type": "string",
@@ -3638,28 +3662,28 @@
                         "title": {
                           "type": "string",
                           "description": "The title or name of the product",
-                          "example": "CA-10 Hub and Automation Controller"
+                          "example": "PMC Prophecy5 2-Way Floorstanding Speaker (Pair)"
                         },
                         "unitPrice": {
                           "type": "number",
                           "format": "float",
-                          "description": "The unit price of the product",
-                          "example": 5628.99
+                          "description": "The unit price of the product purchased",
+                          "example": 6500
                         },
-                        "categoryName": {
+                        "categoryTag": {
                           "type": "string",
-                          "description": "The category name for the product",
-                          "example": "Amplifier"
+                          "description": "The category tag for the product",
+                          "example": "Speaker Floorstanding"
                         },
                         "quantity": {
                           "type": "integer",
-                          "description": "The quantity of the product",
+                          "description": "The quantity of the product purchased",
                           "example": 1
                         },
                         "description": {
                           "type": "string",
                           "description": "The description of the product",
-                          "example": "Central automation controller used to integrate and manage multiple smart home systems and devices."
+                          "example": "High-performance floorstanding speaker pair for immersive audio systems."
                         }
                       }
                     }
@@ -3667,7 +3691,7 @@
                   "installerWarrantyDuration": {
                     "type": "integer",
                     "description": "The duration of the installer warranty in months",
-                    "example": 36
+                    "example": 3
                   }
                 }
               }
@@ -3693,6 +3717,11 @@
                       "items": {
                         "type": "object",
                         "properties": {
+                          "warrantyQuoteItemId": {
+                            "type": "string",
+                            "description": "Unique identifier for the warranty quote item",
+                            "example": "a7defcbd-aa07-4e01-9076-c1935af20a98"
+                          },
                           "coverageYears": {
                             "type": "integer",
                             "description": "Duration of the warranty in years",
@@ -3703,11 +3732,54 @@
                             "format": "float",
                             "description": "Price of the warranty quote",
                             "example": 40.0
-                          },
-                          "warrantyQuoteItemId": {
+                          }
+                        }
+                      }
+                    },
+                    "tncLink": {
+                      "type": "string",
+                      "description": "Unique link for legal Terms & Conditions of the warranty for each product Category",
+                      "example": "https://customer.surebright.com/t-c/098e0e696f20839479dfe4a2804756233d32130f068441e24c6c0dbbc790677f71879502aee2ce87e116739d4dae3332"
+                    },
+                    "coverageWidgetHeading": {
+                      "type": "string",
+                      "description": "Heading for the various tenure options shown to a customer on the product page",
+                      "example": "Add premium product protection"
+                    },
+                    "coveragePopupHeading": {
+                      "type": "string",
+                      "description": "Title that nudges the customers to buy a warranty for their product purchase",
+                      "example": "Don't want to spend extra on this product for the next few years? We've got you covered!"
+                    },
+                    "coverageList": {
+                      "type": "array",
+                      "description": "List of coverage options grouped under different sections",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "coverageItemType": {
                             "type": "string",
-                            "description": "Unique identifier for the warranty quote item",
-                            "example": "a7defcbd-aa07-4e01-9076-c1935af20a98"
+                            "enum": [
+                              "COVERAGE_OPTION",
+                              "WHY_SUREBRIGHT_OPTION"
+                            ],
+                            "example": "COVERAGE_OPTION"
+                          },
+                          "coverageItemTitle": {
+                            "type": "string",
+                            "example": "Your warranty plan provides,"
+                          },
+                          "coverageItemList": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "example": [
+                              "Comprehensive coverage for mechanical or electrical breakdowns and even power surges",
+                              "100% coverage for repairs for extended years that also includes labor and not just parts",
+                              "Coverage for inevitable wear and tear affecting the product's functionality after years of usage",
+                              "Replacement or reimbursement, if we can't repair it"
+                            ]
                           }
                         }
                       }
@@ -3721,13 +3793,13 @@
                           "title": {
                             "type": "string",
                             "description": "The title or name of the product",
-                            "example": "CA-10 Hub and Automation Controller"
+                            "example": "PMC Prophecy5 2-Way Floorstanding Speaker (Pair)"
                           },
                           "unitPrice": {
                             "type": "number",
                             "format": "float",
-                            "description": "The unit price of the product",
-                            "example": 5628.99
+                            "description": "The unit price of the product purchased",
+                            "example": 6500
                           },
                           "isCovered": {
                             "type": "boolean",
@@ -3737,25 +3809,20 @@
                           "sbCategoryName": {
                             "type": "string",
                             "description": "The SureBright category name for the product",
-                            "example": "Amplifier"
+                            "example": "Speaker Floorstanding"
                           },
                           "quantity": {
                             "type": "integer",
-                            "description": "The quantity of the product",
+                            "description": "The quantity of the product purchased",
                             "example": 1
                           },
                           "description": {
                             "type": "string",
                             "description": "The description of the product",
-                            "example": "Central automation controller used to integrate and manage multiple smart home systems and devices."
+                            "example": "High-performance floorstanding speaker pair for immersive audio systems."
                           }
                         }
                       }
-                    },
-                    "tncLink": {
-                      "type": "string",
-                      "description": "Unique link for legal Terms & Conditions of the warranty for each product Category",
-                      "example": "https://customer.surebright.com/t-c/098e0e696f20839479dfe4a2804756233d32130f068441e24c6c0dbbc790677f71879502aee2ce87e116739d4dae3332"
                     }
                   }
                 }

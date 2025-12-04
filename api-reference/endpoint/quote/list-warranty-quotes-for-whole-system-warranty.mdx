@@ -1,0 +1,19 @@
+---
+title: 'For Whole System Warranty'
+openapi: 'POST /api/v1/quote/whole-system-warranty/quote'
+description: 'This endpoint generates warranty quotes for an entire system order. Provide store, proposal, and detailed line item information along with the installer warranty duration. The API returns available warranty offers, product coverage details, and a link to specific terms and conditions for the quoted products.'
+---
+
+
+## Headers
+
+| Header | Description | Required |
+|--------|-------------|----------|
+| X-SureBright-Access-Token | Access token for authentication | Yes |
+| Content-Type              | application/json                | Yes |
+
+
+## Country and State Codes
+
+- Country codes (Alpha 2): [IBAN Country Codes](https://www.iban.com/country-codes)
+- US State codes: [FIPS State Codes](https://en.wikipedia.org/wiki/Federal_Information_Processing_Standard_state_code) 
