@@ -3711,6 +3711,17 @@
                       "description": "A unique ID representing this specific return quote in this particular API call",
                       "example": "36eaa6e3-ca1f-4bc1-86da-76caf7a7114d"
                     },
+                    "totalCoveredAmount": {
+                      "type": "number",
+                      "format": "float",
+                      "description": "Total covered amount for the product purchased",
+                      "example": 6500.00
+                    },
+                    "tncLink": {
+                      "type": "string",
+                      "description": "Unique link for legal Terms & Conditions of the warranty for each product Category",
+                      "example": "https://customer.surebright.com/t-c/098e0e696f20839479dfe4a2804756233d32130f068441e24c6c0dbbc790677f71879502aee2ce87e116739d4dae3332"
+                    },
                     "warrantyQuoteItemList": {
                       "type": "array",
                       "description": "A list of warranty offers generated for this particular request",
@@ -3735,11 +3746,6 @@
                           }
                         }
                       }
-                    },
-                    "tncLink": {
-                      "type": "string",
-                      "description": "Unique link for legal Terms & Conditions of the warranty for each product Category",
-                      "example": "https://customer.surebright.com/t-c/098e0e696f20839479dfe4a2804756233d32130f068441e24c6c0dbbc790677f71879502aee2ce87e116739d4dae3332"
                     },
                     "coverageWidgetHeading": {
                       "type": "string",
