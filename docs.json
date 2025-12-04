@@ -90,7 +90,7 @@
                   "api-reference/endpoint/quote/list-warranty-quotes-by-product-details",
                   "api-reference/endpoint/quote/list-warranty-quotes-by-url",
                   "api-reference/endpoint/quote/list-warranty-quotes-by-category-for-all-price-bands",
-                  "api-reference/endpoint/quote/list-warranty-quotes-for-whole-system-warranty"
+                  "api-reference/endpoint/quote/list-warranty-quotes-for-whole-system"
                 ]
               },
               {
