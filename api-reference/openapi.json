@@ -3643,7 +3643,7 @@
                     "description": "The platform identifier for the store",
                     "example": "Dtools"
                   },
-                  "proposalId": {
+                  "partnerProposalId": {
                     "type": "string",
                     "description": "A unique identifier for the proposal",
                     "example": "9f3e21c6-6bdb-4c7f-9b91-2a4f9a2c7d11"
@@ -3716,6 +3716,11 @@
                       "format": "float",
                       "description": "Total covered amount for the product purchased",
                       "example": 6500.00
+                    },
+                    "sbSalesLeadId":{
+                      "type": "string",
+                      "description": "A unique ID representing the SureBright sales lead ID",
+                      "example": "da5747e7-a60d-4625-a91d-ea2728ecf589"
                     },
                     "tncLink": {
                       "type": "string",
