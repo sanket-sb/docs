@@ -3567,6 +3567,560 @@
           }
         }
       }
+    },
+    "/partner/api/v1/whole-system-order": {
+      "post": {
+        "summary": "Create Contracts for Whole System Warranty",
+        "description": "This endpoint creates warranty contracts for a whole system order. Submit the warranty quote details obtained from the List Quotes for Whole System Warranty endpoint along with the selected warranty plan and line item details. The API returns contract IDs and transaction details for the created warranty contracts.",
+        "operationId": "createContractsForWholeSystemWarranty",
+        "tags": [
+          "orders"
+        ],
+        "parameters": [
+          {
+            "name": "X-SureBright-Access-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Access token for authentication"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "warrantyQuoteId",
+                  "warrantyQuoteItemList",
+                  "lineItemList"
+                ],
+                "properties": {
+                  "warrantyQuoteId": {
+                    "type": "string",
+                    "description": "The unique identifier for the warranty quote obtained from the List Quotes for Whole System Warranty endpoint",
+                    "example": "36eaa6e3-ca1f-4bc1-86da-76caf7a7114d"
+                  },
+                  "partnerProposalId": {
+                    "type": "string",
+                    "description": "A unique identifier for the partner's proposal",
+                    "example": "9f3e21c6-6bdb-4c7f-9b91-2a4f9a2c7d11"
+                  },
+                  "warrantyQuoteItemList": {
+                    "type": "array",
+                    "description": "List of selected warranty quote items with coverage details",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "coverageYears",
+                        "quotePrice",
+                        "warrantyQuoteItemId"
+                      ],
+                      "properties": {
+                        "coverageYears": {
+                          "type": "integer",
+                          "description": "Duration of the warranty coverage in years",
+                          "example": 2
+                        },
+                        "quotePrice": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "Price of the warranty quote",
+                          "example": 40.0
+                        },
+                        "warrantyQuoteItemId": {
+                          "type": "string",
+                          "description": "Unique identifier for the warranty quote item",
+                          "example": "a7defcbd-aa07-4e01-9076-c1935af20a98"
+                        }
+                      }
+                    }
+                  },
+                  "lineItemList": {
+                    "type": "array",
+                    "description": "A list of line items representing the products in the order with coverage status",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "title",
+                        "unitPrice",
+                        "quantity"
+                      ],
+                      "properties": {
+                        "title": {
+                          "type": "string",
+                          "description": "The title or name of the product",
+                          "example": "PMC Prophecy5 2-Way Floorstanding Speaker (Pair)"
+                        },
+                        "unitPrice": {
+                          "type": "number",
+                          "format": "float",
+                          "description": "The unit price of the product purchased",
+                          "example": 6500
+                        },
+                        "isCovered": {
+                          "type": "boolean",
+                          "description": "Indicates whether the line item is covered by the warranty",
+                          "example": true
+                        },
+                        "sbCategoryName": {
+                          "type": "string",
+                          "description": "The SureBright category name for the product",
+                          "example": "Speaker Floorstanding"
+                        },
+                        "quantity": {
+                          "type": "integer",
+                          "description": "The quantity of the product purchased",
+                          "example": 1
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The description of the product",
+                          "example": "High-performance floorstanding speaker pair for immersive audio systems."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Contracts Created Successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "contractIdList": {
+                      "type": "array",
+                      "description": "List of unique contract IDs created for the warranty",
+                      "items": {
+                        "type": "string"
+                      },
+                      "example": ["54a3a238407f426e862a0a11cab11164"]
+                    },
+                    "transactionResponse": {
+                      "type": "object",
+                      "description": "Transaction response containing order details",
+                      "properties": {
+                        "isError": {
+                          "type": "boolean",
+                          "description": "Indicates if an error occurred",
+                          "example": false
+                        },
+                        "order": {
+                          "type": "object",
+                          "description": "Order details for the created contract",
+                          "properties": {
+                            "sourcePlatform": {
+                              "type": "string",
+                              "description": "The platform source of the order",
+                              "example": "SERVICE_PORTAL"
+                            },
+                            "merchantId": {
+                              "type": "string",
+                              "description": "Unique identifier for the merchant",
+                              "example": "dc087e7938cc4d6aa6d5ef8e4a09720f"
+                            },
+                            "sellerID": {
+                              "type": "string",
+                              "description": "Unique identifier for the seller",
+                              "example": "dc087e7938cc4d6aa6d5ef8e4a09720f"
+                            },
+                            "sbMemberId": {
+                              "type": "string",
+                              "description": "SureBright member ID",
+                              "example": "f3b4e2c6-a5e0-425a-93d6-a2d1fc02f4b5"
+                            },
+                            "sbSalesLeadId": {
+                              "type": "string",
+                              "description": "SureBright sales lead ID associated with the proposal",
+                              "example": "8c7cee7c-4521-4eb2-9e48-0528035d525f"
+                            },
+                            "salesMemberUserId": {
+                              "type": "string",
+                              "description": "Sales member user ID",
+                              "example": "f3b4e2c6-a5e0-425a-93d6-a2d1fc02f4b5"
+                            },
+                            "invoiceNumber": {
+                              "type": "string",
+                              "description": "Invoice number for the order",
+                              "example": ""
+                            },
+                            "cancellationDate": {
+                              "type": "string",
+                              "description": "Date of cancellation if applicable",
+                              "example": ""
+                            },
+                            "transactionDate": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "Date and time of the transaction",
+                              "example": "2025-12-08T16:24:52.223Z"
+                            },
+                            "transactionReason": {
+                              "type": "string",
+                              "description": "Reason code for the transaction",
+                              "example": "1"
+                            },
+                            "saleType": {
+                              "type": "string",
+                              "description": "Type of sale",
+                              "example": "O"
+                            },
+                            "orderNumber": {
+                              "type": "string",
+                              "description": "Order number",
+                              "example": ""
+                            },
+                            "customerDetails": {
+                              "type": "object",
+                              "description": "Customer information",
+                              "properties": {
+                                "customerEmail": {
+                                  "type": "string",
+                                  "format": "email",
+                                  "description": "Customer email address",
+                                  "example": "customer@example.com"
+                                },
+                                "customerPhone": {
+                                  "type": "string",
+                                  "description": "Customer phone number",
+                                  "example": "131 321 3123"
+                                },
+                                "customerFirstName": {
+                                  "type": "string",
+                                  "description": "Customer first name",
+                                  "example": "John"
+                                },
+                                "customerLastName": {
+                                  "type": "string",
+                                  "description": "Customer last name",
+                                  "example": "Doe"
+                                },
+                                "customerAddress1": {
+                                  "type": "string",
+                                  "description": "Customer primary address",
+                                  "example": "123 Main St, Nashville, TN 37076, USA"
+                                },
+                                "customerAddress2": {
+                                  "type": "string",
+                                  "description": "Customer secondary address",
+                                  "example": ""
+                                },
+                                "customerCity": {
+                                  "type": "string",
+                                  "description": "Customer city",
+                                  "example": "Nashville"
+                                },
+                                "customerState": {
+                                  "type": "string",
+                                  "description": "Customer state",
+                                  "example": "Tennessee"
+                                },
+                                "customerCountry": {
+                                  "type": "string",
+                                  "description": "Customer country",
+                                  "example": "USA"
+                                },
+                                "customerZipCode": {
+                                  "type": "string",
+                                  "description": "Customer zip code",
+                                  "example": "37076"
+                                },
+                                "addressType": {
+                                  "type": "string",
+                                  "description": "Type of address",
+                                  "example": "BILLING"
+                                }
+                              }
+                            },
+                            "orderId": {
+                              "type": "string",
+                              "description": "Unique order identifier",
+                              "example": "dc087e7938cc4d6aa6d5ef8e4a09720f#7a9501126439-46a3-9bad-28019ed511fd"
+                            },
+                            "orderItems": {
+                              "type": "array",
+                              "description": "List of order items",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "contractStatus": {
+                                    "type": "string",
+                                    "description": "Status of the contract (A = Active)",
+                                    "example": "A"
+                                  },
+                                  "quoteId": {
+                                    "type": "string",
+                                    "description": "Quote ID associated with this item",
+                                    "example": "c8152608-83bf-479f-8f59-ee8278ca14c0"
+                                  },
+                                  "quoteItemId": {
+                                    "type": "string",
+                                    "description": "Quote item ID",
+                                    "example": "53ba3d22-3afa-4330-b315-e42e5ef69ffb"
+                                  },
+                                  "termMonths": {
+                                    "type": "integer",
+                                    "description": "Term duration in months",
+                                    "example": 24
+                                  },
+                                  "modelName": {
+                                    "type": "string",
+                                    "description": "Name of the warranty plan",
+                                    "example": "SureBright Whole System Warranty Plan"
+                                  },
+                                  "modelNumber": {
+                                    "type": "string",
+                                    "description": "Model number or sales lead ID",
+                                    "example": "8c7cee7c-4521-4eb2-9e48-0528035d525f"
+                                  },
+                                  "manufacturerName": {
+                                    "type": "string",
+                                    "description": "Manufacturer name",
+                                    "example": ""
+                                  },
+                                  "policyTax": {
+                                    "type": "string",
+                                    "description": "Tax amount on the policy",
+                                    "example": "0.0"
+                                  },
+                                  "productListPrice": {
+                                    "type": "number",
+                                    "description": "List price of the product",
+                                    "example": 50
+                                  },
+                                  "productPurchasePrice": {
+                                    "type": "number",
+                                    "description": "Purchase price of the product",
+                                    "example": 50
+                                  },
+                                  "productTax": {
+                                    "type": "string",
+                                    "description": "Tax amount on the product",
+                                    "example": "0.0"
+                                  },
+                                  "purchaseDate": {
+                                    "type": "string",
+                                    "format": "date",
+                                    "description": "Date of purchase",
+                                    "example": "2025-12-08"
+                                  },
+                                  "productId": {
+                                    "type": "string",
+                                    "description": "Product identifier",
+                                    "example": "LEAD_8c7cee7c-4521-4eb2-9e48-0528035d525f"
+                                  },
+                                  "coveredLineItemsList": {
+                                    "type": "array",
+                                    "description": "List of covered line items",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "Model_Name": {
+                                          "type": "string",
+                                          "description": "Category name of the covered item",
+                                          "example": "TV"
+                                        },
+                                        "Model_Number": {
+                                          "type": "string",
+                                          "description": "Model number of the covered item",
+                                          "example": ""
+                                        },
+                                        "Product_Purchase_Price": {
+                                          "type": "string",
+                                          "description": "Purchase price of the covered item",
+                                          "example": "50"
+                                        },
+                                        "Product_Tax": {
+                                          "type": "string",
+                                          "description": "Tax on the covered item",
+                                          "example": "0.0"
+                                        },
+                                        "Quantity": {
+                                          "type": "string",
+                                          "description": "Quantity of covered items",
+                                          "example": "1"
+                                        },
+                                        "sbCategoryTag": {
+                                          "type": "string",
+                                          "description": "SureBright category tag",
+                                          "example": "TV_MONITOR"
+                                        },
+                                        "Product_Condition": {
+                                          "type": "string",
+                                          "description": "Condition of the product",
+                                          "example": "NEW"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "policyPrice": {
+                              "type": "string",
+                              "description": "Price of the policy",
+                              "example": "2"
+                            },
+                            "source": {
+                              "type": "string",
+                              "description": "Source of the order",
+                              "example": "SERVICE_PORTAL"
+                            },
+                            "installerWarrantyDuration": {
+                              "type": "string",
+                              "description": "Duration of the installer warranty",
+                              "example": "3 Months"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "511": {
+            "description": "Insufficient Parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 511
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Insufficient Parameters"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "512": {
+            "description": "Validation Failed for Input Parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 512
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Validation Failed for Input Parameters"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "514": {
+            "description": "No Quote Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 514
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "No Quote Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "515": {
+            "description": "Store Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 515
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Store Not Found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Something Unexpectedly Went Wrong",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 500
+                    },
+                    "errorMessage": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Something Unexpectedly Went Wrong"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

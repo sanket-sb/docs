@@ -1,0 +1,33 @@
+---
+title: 'Create Contracts for Whole System Warranty'
+openapi: 'POST /partner/api/v1/whole-system-order'
+---
+
+## Headers
+
+| Header | Description | Required |
+|--------|-------------|----------|
+| X-SureBright-Access-Token | Access token for authentication | Yes |
+| Content-Type              | application/json                | Yes |
+
+## Overview
+
+This endpoint creates warranty contracts for a whole system order. It is used after obtaining warranty quotes from the **List Quotes for Whole System Warranty** endpoint.
+
+### Flow
+
+1. First, call the **List Quotes for Whole System Warranty** endpoint to get available warranty quotes for your system order
+2. Select the desired warranty plan from the returned `warrantyQuoteItemList`
+3. Submit the selected warranty details along with the line items to this endpoint to create the contracts
+
+### Request Details
+
+- **`warrantyQuoteId`** - The unique quote ID received from the quote endpoint
+- **`warrantyQuoteItemList`** - The selected warranty plan(s) with coverage years and pricing
+- **`lineItemList`** - The complete list of products with their coverage status (`isCovered: true/false`)
+
+### Response
+
+On success, you will receive:
+- **`contractIdList`** - Array of created contract IDs
+- **`transactionResponse`** - Complete transaction details including order information and customer details
