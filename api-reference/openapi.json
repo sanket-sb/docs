@@ -3570,7 +3570,7 @@
     },
     "/partner/api/v1/whole-system-order": {
       "post": {
-        "summary": "Create Contracts for Whole System Warranty",
+        "summary": "Create Contracts for Whole System Order",
         "description": "This endpoint creates warranty contracts for a whole system order. Submit the warranty quote details obtained from the List Quotes for Whole System Warranty endpoint along with the selected warranty plan and line item details. The API returns contract IDs and transaction details for the created warranty contracts.",
         "operationId": "createContractsForWholeSystemWarranty",
         "tags": [
@@ -3594,11 +3594,18 @@
               "schema": {
                 "type": "object",
                 "required": [
+                  "storeId",
                   "warrantyQuoteId",
                   "warrantyQuoteItemList",
+                  "customerDetails",
                   "lineItemList"
                 ],
                 "properties": {
+                  "storeId": {
+                    "type": "string",
+                    "description": "A unique identifier for the store",
+                    "example": "test-store-id"
+                  },
                   "warrantyQuoteId": {
                     "type": "string",
                     "description": "The unique identifier for the warranty quote obtained from the List Quotes for Whole System Warranty endpoint",
@@ -3608,6 +3615,79 @@
                     "type": "string",
                     "description": "A unique identifier for the partner's proposal",
                     "example": "9f3e21c6-6bdb-4c7f-9b91-2a4f9a2c7d11"
+                  },
+                  "customerDetails": {
+                    "type": "object",
+                    "description": "Customer information for the warranty contract",
+                    "required": [
+                      "customerEmail",
+                      "customerFirstName",
+                      "customerLastName",
+                      "customerAddress1",
+                      "customerCity",
+                      "customerState",
+                      "customerCountry",
+                      "customerZipCode"
+                    ],
+                    "properties": {
+                      "customerEmail": {
+                        "type": "string",
+                        "format": "email",
+                        "description": "Customer email address",
+                        "example": "john.doe@example.com"
+                      },
+                      "customerPhone": {
+                        "type": "string",
+                        "description": "Customer phone number",
+                        "example": "+1 (615) 555-0123"
+                      },
+                      "customerFirstName": {
+                        "type": "string",
+                        "description": "Customer first name",
+                        "example": "John"
+                      },
+                      "customerLastName": {
+                        "type": "string",
+                        "description": "Customer last name",
+                        "example": "Doe"
+                      },
+                      "customerAddress1": {
+                        "type": "string",
+                        "description": "Customer primary address line",
+                        "example": "1234 Tulip Grove Rd"
+                      },
+                      "customerAddress2": {
+                        "type": "string",
+                        "description": "Customer secondary address line (apt, suite, etc.)",
+                        "example": "Suite 100"
+                      },
+                      "customerCity": {
+                        "type": "string",
+                        "description": "Customer city",
+                        "example": "Nashville"
+                      },
+                      "customerState": {
+                        "type": "string",
+                        "description": "Customer state or province",
+                        "example": "TN"
+                      },
+                      "customerCountry": {
+                        "type": "string",
+                        "description": "Customer country",
+                        "example": "USA"
+                      },
+                      "customerZipCode": {
+                        "type": "string",
+                        "description": "Customer postal/zip code",
+                        "example": "37076"
+                      },
+                      "addressType": {
+                        "type": "string",
+                        "description": "Type of address",
+                        "enum": ["BILLING", "SHIPPING"],
+                        "example": "BILLING"
+                      }
+                    }
                   },
                   "warrantyQuoteItemList": {
                     "type": "array",
@@ -3733,30 +3813,10 @@
                               "description": "Unique identifier for the seller",
                               "example": "dc087e7938cc4d6aa6d5ef8e4a09720f"
                             },
-                            "sbMemberId": {
-                              "type": "string",
-                              "description": "SureBright member ID",
-                              "example": "f3b4e2c6-a5e0-425a-93d6-a2d1fc02f4b5"
-                            },
                             "sbSalesLeadId": {
                               "type": "string",
                               "description": "SureBright sales lead ID associated with the proposal",
                               "example": "8c7cee7c-4521-4eb2-9e48-0528035d525f"
-                            },
-                            "salesMemberUserId": {
-                              "type": "string",
-                              "description": "Sales member user ID",
-                              "example": "f3b4e2c6-a5e0-425a-93d6-a2d1fc02f4b5"
-                            },
-                            "invoiceNumber": {
-                              "type": "string",
-                              "description": "Invoice number for the order",
-                              "example": ""
-                            },
-                            "cancellationDate": {
-                              "type": "string",
-                              "description": "Date of cancellation if applicable",
-                              "example": ""
                             },
                             "transactionDate": {
                               "type": "string",
@@ -3774,11 +3834,6 @@
                               "description": "Type of sale",
                               "example": "O"
                             },
-                            "orderNumber": {
-                              "type": "string",
-                              "description": "Order number",
-                              "example": ""
-                            },
                             "customerDetails": {
                               "type": "object",
                               "description": "Customer information",
@@ -3787,12 +3842,12 @@
                                   "type": "string",
                                   "format": "email",
                                   "description": "Customer email address",
-                                  "example": "customer@example.com"
+                                  "example": "john.doe@example.com"
                                 },
                                 "customerPhone": {
                                   "type": "string",
                                   "description": "Customer phone number",
-                                  "example": "131 321 3123"
+                                  "example": "+1 (615) 555-0123"
                                 },
                                 "customerFirstName": {
                                   "type": "string",
@@ -3806,13 +3861,13 @@
                                 },
                                 "customerAddress1": {
                                   "type": "string",
-                                  "description": "Customer primary address",
-                                  "example": "123 Main St, Nashville, TN 37076, USA"
+                                  "description": "Customer primary address line",
+                                  "example": "1234 Tulip Grove Rd"
                                 },
                                 "customerAddress2": {
                                   "type": "string",
-                                  "description": "Customer secondary address",
-                                  "example": ""
+                                  "description": "Customer secondary address line (apt, suite, etc.)",
+                                  "example": "Suite 100"
                                 },
                                 "customerCity": {
                                   "type": "string",
@@ -3821,8 +3876,8 @@
                                 },
                                 "customerState": {
                                   "type": "string",
-                                  "description": "Customer state",
-                                  "example": "Tennessee"
+                                  "description": "Customer state or province",
+                                  "example": "TN"
                                 },
                                 "customerCountry": {
                                   "type": "string",
@@ -3831,7 +3886,7 @@
                                 },
                                 "customerZipCode": {
                                   "type": "string",
-                                  "description": "Customer zip code",
+                                  "description": "Customer postal/zip code",
                                   "example": "37076"
                                 },
                                 "addressType": {
