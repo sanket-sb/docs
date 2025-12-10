@@ -3601,7 +3601,7 @@
         }
       }
     },
-    "/api/v1/quote/whole-system/quote": {
+    "/quote/api/quote/whole-system/quote": {
       "post": {
         "summary": "List Quotes for Whole System Warranty",
         "description": "This endpoint generates warranty quotes for an entire system order. Provide store, proposal, and detailed line item information along with the installer warranty duration. The API returns available warranty offers, product coverage details, and a link to specific terms and conditions for the quoted products.",
@@ -3632,6 +3632,11 @@
                   "partnerProposalId": {
                     "type": "string",
                     "description": "A unique identifier for the proposal",
+                    "example": "9f3e21c6-6bdb-4c7f-9b91-2a4f9a2c7d11"
+                  },
+                  "sbSalesLeadId": {
+                    "type": "string",
+                    "description": "A unique identifier for the sales lead",
                     "example": "9f3e21c6-6bdb-4c7f-9b91-2a4f9a2c7d11"
                   },
                   "lineItemList": {
