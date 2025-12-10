@@ -3610,15 +3610,7 @@
           "quotes"
         ],
         "parameters": [
-          {
-            "name": "X-SureBright-Access-Token",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Access token for authentication"
-          }
+          
         ],
         "requestBody": {
           "required": true,
