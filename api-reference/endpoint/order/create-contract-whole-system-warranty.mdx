@@ -1,6 +1,6 @@
 ---
-title: 'Create Contracts for Whole System Order'
-openapi: 'POST /partner/api/v1/whole-system-order'
+title: 'Create Contracts for Whole System Warranty'
+openapi: 'POST /partner/api/v1/whole-system/order'
 ---
 
 ## Headers
@@ -23,11 +23,11 @@ This endpoint creates warranty contracts for a whole system order. It is used af
 ### Request Details
 
 - **`warrantyQuoteId`** - The unique quote ID received from the quote endpoint
-- **`warrantyQuoteItemList`** - The selected warranty plan(s) with coverage years and pricing
+- **`warrantyQuoteItemId`** - The unique identifier for the warranty quote item obtained from the quote endpoint
 - **`lineItemList`** - The complete list of products with their coverage status (`isCovered: true/false`)
 
 ### Response
 
 On success, you will receive:
-- **`contractIdList`** - Array of created contract IDs
+- **`contractId`** - The unique identifier for the warranty contract created
 - **`transactionResponse`** - Complete transaction details including order information and customer details

@@ -3620,7 +3620,6 @@
                 "type": "object",
                 "required": [
                   "storeId",
-                  "platform",
                   "lineItemList",
                   "installerWarrantyDuration"
                 ],
@@ -3629,11 +3628,6 @@
                     "type": "string",
                     "description": "A unique identifier for the store",
                     "example": "test-store-id"
-                  },
-                  "platform": {
-                    "type": "string",
-                    "description": "The platform identifier for the store",
-                    "example": "Dtools"
                   },
                   "partnerProposalId": {
                     "type": "string",
@@ -4043,7 +4037,7 @@
         }
       }
     },
-    "/partner/api/v1/whole-system-order": {
+    "/partner/api/v1/whole-system/order": {
       "post": {
         "summary": "Create Contracts for Whole System Order",
         "description": "This endpoint creates warranty contracts for a whole system order. Submit the warranty quote details obtained from the List Quotes for Whole System Warranty endpoint along with the selected warranty plan and line item details. The API returns contract IDs and transaction details for the created warranty contracts.",
@@ -4071,7 +4065,9 @@
                 "required": [
                   "storeId",
                   "warrantyQuoteId",
-                  "warrantyQuoteItemList",
+                  "warrantyQuoteItemId",
+                  "warrantyPrice",
+                  "warrantyCoverageYears",
                   "customerDetails",
                   "lineItemList"
                 ],
@@ -4086,10 +4082,26 @@
                     "description": "The unique identifier for the warranty quote obtained from the List Quotes for Whole System Warranty endpoint",
                     "example": "36eaa6e3-ca1f-4bc1-86da-76caf7a7114d"
                   },
+                  "warrantyQuoteItemId": {
+                    "type": "string",
+                    "description": "The unique identifier for the warranty quote item obtained from the List Quotes for Whole System Warranty endpoint",
+                    "example": "a7defcbd-aa07-4e01-9076-c1935af20a98"
+                  },
                   "partnerProposalId": {
                     "type": "string",
                     "description": "A unique identifier for the partner's proposal",
                     "example": "9f3e21c6-6bdb-4c7f-9b91-2a4f9a2c7d11"
+                  },
+                  "warrantyPrice": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Price of the warranty quote",
+                    "example": 40.0
+                  },
+                  "warrantyCoverageYears": {
+                    "type": "integer",
+                    "description": "Duration of the warranty coverage in years",
+                    "example": 2
                   },
                   "customerDetails": {
                     "type": "object",
@@ -4164,36 +4176,6 @@
                       }
                     }
                   },
-                  "warrantyQuoteItemList": {
-                    "type": "array",
-                    "description": "List of selected warranty quote items with coverage details",
-                    "items": {
-                      "type": "object",
-                      "required": [
-                        "coverageYears",
-                        "quotePrice",
-                        "warrantyQuoteItemId"
-                      ],
-                      "properties": {
-                        "coverageYears": {
-                          "type": "integer",
-                          "description": "Duration of the warranty coverage in years",
-                          "example": 2
-                        },
-                        "quotePrice": {
-                          "type": "number",
-                          "format": "float",
-                          "description": "Price of the warranty quote",
-                          "example": 40.0
-                        },
-                        "warrantyQuoteItemId": {
-                          "type": "string",
-                          "description": "Unique identifier for the warranty quote item",
-                          "example": "a7defcbd-aa07-4e01-9076-c1935af20a98"
-                        }
-                      }
-                    }
-                  },
                   "lineItemList": {
                     "type": "array",
                     "description": "A list of line items representing the products in the order with coverage status",
@@ -4252,23 +4234,20 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "contractIdList": {
-                      "type": "array",
-                      "description": "List of unique contract IDs created for the warranty",
-                      "items": {
-                        "type": "string"
-                      },
-                      "example": ["54a3a238407f426e862a0a11cab11164"]
+                    "isError": {
+                      "type": "boolean",
+                      "description": "Indicates if an error occurred",
+                      "example": false
+                    },
+                    "contractId": {
+                      "type": "string",
+                      "description": "The unique identifier for the warranty contract created",
+                      "example": "54a3a238407f426e862a0a11cab11164"
                     },
                     "transactionResponse": {
                       "type": "object",
                       "description": "Transaction response containing order details",
                       "properties": {
-                        "isError": {
-                          "type": "boolean",
-                          "description": "Indicates if an error occurred",
-                          "example": false
-                        },
                         "order": {
                           "type": "object",
                           "description": "Order details for the created contract",
@@ -4322,7 +4301,7 @@
                                 "customerPhone": {
                                   "type": "string",
                                   "description": "Customer phone number",
-                                  "example": "+1 (615) 555-0123"
+                                  "example": "615-555-0123"
                                 },
                                 "customerFirstName": {
                                   "type": "string",

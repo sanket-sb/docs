@@ -99,7 +99,7 @@
                   "api-reference/endpoint/order/index",
                   "api-reference/endpoint/order/create-contract",
                   "api-reference/endpoint/order/update-contract",
-                  "api-reference/endpoint/order/create-contract-whole-system-order"
+                  "api-reference/endpoint/order/create-contract-whole-system-warranty"
                 ]
               },
               "api-reference/http-status-codes"

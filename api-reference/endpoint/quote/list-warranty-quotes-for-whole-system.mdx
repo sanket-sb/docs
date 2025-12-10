@@ -19,5 +19,8 @@ description: 'This endpoint generates warranty quotes for an entire system order
 ---
 
 <Note>
-When updating an SB Sales Lead, include a unique identifier in your request: either the `partnerProposalId` (your system's proposalId) or the `sbSalesLeadId`, which is provided in the initial response from the List Quotes API.
+To regenerate quotes for the same proposalId / lead, provide one of the following identifiers:
+
+- `proposalId` (this corresponds to your system's `partnerProposalId`)
+- `sbSalesLeadId` (returned in the first List Quotes API response)
 </Note>
