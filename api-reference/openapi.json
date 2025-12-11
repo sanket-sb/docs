@@ -4295,7 +4295,7 @@
                     "errorType": {
                       "type": "integer",
                       "description": "error type",
-                      "example": 514
+                      "example": 513
                     },
                     "message": {
                       "type": "string",
@@ -4321,7 +4321,7 @@
                     "errorType": {
                       "type": "integer",
                       "description": "error type",
-                      "example": 515
+                      "example": 514
                     },
                     "message": {
                       "type": "string",
