@@ -4016,7 +4016,7 @@
         }
       }
     },
-    "/partner/api/v1/whole-system/order": {
+    "/partner/api/v1/order/whole-system": {
       "post": {
         "summary": "Create Contracts for Whole System Order",
         "description": "This endpoint creates warranty contracts for a whole system order. Submit the warranty quote details obtained from the List Quotes for Whole System Warranty endpoint along with the selected warranty plan and line item details. The API returns contract IDs and transaction details for the created warranty contracts.",
@@ -4281,7 +4281,7 @@
               }
             }
           },
-          "514": {
+          "513": {
             "description": "No Quote Found",
             "content": {
               "application/json": {
@@ -4307,7 +4307,7 @@
               }
             }
           },
-          "515": {
+          "514": {
             "description": "Store Not Found",
             "content": {
               "application/json": {
