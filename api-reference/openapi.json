@@ -4281,7 +4281,7 @@
               }
             }
           },
-          "514": {
+          "513": {
             "description": "No Quote Found",
             "content": {
               "application/json": {
@@ -4307,7 +4307,7 @@
               }
             }
           },
-          "515": {
+          "514": {
             "description": "Store Not Found",
             "content": {
               "application/json": {
