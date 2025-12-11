@@ -30,4 +30,10 @@ This endpoint creates warranty contracts for a whole system order. It is used af
 
 On success, you will receive:
 - **`contractId`** - The unique identifier for the warranty contract created
-- **`transactionResponse`** - Complete transaction details including order information and customer details
+
+<Note>
+Either `sbSalesLeadId` or `lineItemList` is required in the request:
+
+- **`sbSalesLeadId`** - Use this if you have already obtained quotes and have the sales lead ID from the List Quotes API response
+- **`lineItemList`** - Use this to provide the complete list of products with their coverage status when creating a new contract
+</Note>

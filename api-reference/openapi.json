@@ -4047,9 +4047,7 @@
                   "warrantyQuoteItemId",
                   "warrantyPrice",
                   "warrantyCoverageYears",
-                  "customerDetails",
-                  "lineItemList",
-                  "sbSalesLeadId"
+                  "customerDetails"
                 ],
                 "properties": {
                   "storeId": {
