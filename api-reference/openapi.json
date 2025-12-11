@@ -3847,7 +3847,7 @@
                       "description": "error type",
                       "example": 511
                     },
-                    "errorMessage": {
+                    "message": {
                       "type": "string",
                       "description": "error message",
                       "example": "Insufficient Parameters"
@@ -3873,7 +3873,7 @@
                       "description": "error type",
                       "example": 512
                     },
-                    "errorMessage": {
+                    "message": {
                       "type": "string",
                       "description": "error message",
                       "example": "Validation Failed for Input Parameters"
@@ -3899,7 +3899,7 @@
                       "description": "error type",
                       "example": 513
                     },
-                    "errorMessage": {
+                    "message": {
                       "type": "string",
                       "description": "error message",
                       "example": "Product Not Found"
@@ -3925,7 +3925,7 @@
                       "description": "error type",
                       "example": 514
                     },
-                    "errorMessage": {
+                    "message": {
                       "type": "string",
                       "description": "error message",
                       "example": "No Quote Found"
@@ -3951,7 +3951,7 @@
                       "description": "error type",
                       "example": 515
                     },
-                    "errorMessage": {
+                    "message": {
                       "type": "string",
                       "description": "error message",
                       "example": "Store Not Found"
@@ -3977,7 +3977,7 @@
                       "description": "error type",
                       "example": 516
                     },
-                    "errorMessage": {
+                    "message": {
                       "type": "string",
                       "description": "error message",
                       "example": "Not Eligible"
@@ -4003,7 +4003,7 @@
                       "description": "error type",
                       "example": 517
                     },
-                    "errorMessage": {
+                    "message": {
                       "type": "string",
                       "description": "error message",
                       "example": "Category Not Found"
@@ -4029,7 +4029,7 @@
                       "description": "error type",
                       "example": 500
                     },
-                    "errorMessage": {
+                    "message": {
                       "type": "string",
                       "description": "error message",
                       "example": "Something Unexpectedly Went Wrong"
@@ -4074,7 +4074,8 @@
                   "warrantyPrice",
                   "warrantyCoverageYears",
                   "customerDetails",
-                  "lineItemList"
+                  "lineItemList",
+                  "sbSalesLeadId"
                 ],
                 "properties": {
                   "storeId": {
@@ -4092,9 +4093,9 @@
                     "description": "The unique identifier for the warranty quote item obtained from the List Quotes for Whole System Warranty endpoint",
                     "example": "a7defcbd-aa07-4e01-9076-c1935af20a98"
                   },
-                  "partnerProposalId": {
+                  "sbSalesLeadId": {
                     "type": "string",
-                    "description": "A unique identifier for the partner's proposal",
+                    "description": "A unique identifier for the SureBright sales lead",
                     "example": "9f3e21c6-6bdb-4c7f-9b91-2a4f9a2c7d11"
                   },
                   "warrantyPrice": {
@@ -4248,255 +4249,6 @@
                       "type": "string",
                       "description": "The unique identifier for the warranty contract created",
                       "example": "54a3a238407f426e862a0a11cab11164"
-                    },
-                    "transactionResponse": {
-                      "type": "object",
-                      "description": "Transaction response containing order details",
-                      "properties": {
-                        "order": {
-                          "type": "object",
-                          "description": "Order details for the created contract",
-                          "properties": {
-                            "sourcePlatform": {
-                              "type": "string",
-                              "description": "The platform source of the order",
-                              "example": "SERVICE_PORTAL"
-                            },
-                            "merchantId": {
-                              "type": "string",
-                              "description": "Unique identifier for the merchant",
-                              "example": "dc087e7938cc4d6aa6d5ef8e4a09720f"
-                            },
-                            "sellerID": {
-                              "type": "string",
-                              "description": "Unique identifier for the seller",
-                              "example": "dc087e7938cc4d6aa6d5ef8e4a09720f"
-                            },
-                            "sbSalesLeadId": {
-                              "type": "string",
-                              "description": "SureBright sales lead ID associated with the proposal",
-                              "example": "8c7cee7c-4521-4eb2-9e48-0528035d525f"
-                            },
-                            "transactionDate": {
-                              "type": "string",
-                              "format": "date-time",
-                              "description": "Date and time of the transaction",
-                              "example": "2025-12-08T16:24:52.223Z"
-                            },
-                            "transactionReason": {
-                              "type": "string",
-                              "description": "Reason code for the transaction",
-                              "example": "1"
-                            },
-                            "saleType": {
-                              "type": "string",
-                              "description": "Type of sale",
-                              "example": "O"
-                            },
-                            "customerDetails": {
-                              "type": "object",
-                              "description": "Customer information",
-                              "properties": {
-                                "customerEmail": {
-                                  "type": "string",
-                                  "format": "email",
-                                  "description": "Customer email address",
-                                  "example": "john.doe@example.com"
-                                },
-                                "customerPhone": {
-                                  "type": "string",
-                                  "description": "Customer phone number",
-                                  "example": "615-555-0123"
-                                },
-                                "customerFirstName": {
-                                  "type": "string",
-                                  "description": "Customer first name",
-                                  "example": "John"
-                                },
-                                "customerLastName": {
-                                  "type": "string",
-                                  "description": "Customer last name",
-                                  "example": "Doe"
-                                },
-                                "customerAddress1": {
-                                  "type": "string",
-                                  "description": "Customer primary address line",
-                                  "example": "1234 Tulip Grove Rd"
-                                },
-                                "customerAddress2": {
-                                  "type": "string",
-                                  "description": "Customer secondary address line (apt, suite, etc.)",
-                                  "example": "Suite 100"
-                                },
-                                "customerCity": {
-                                  "type": "string",
-                                  "description": "Customer city",
-                                  "example": "Nashville"
-                                },
-                                "customerState": {
-                                  "type": "string",
-                                  "description": "Customer state or province",
-                                  "example": "TN"
-                                },
-                                "customerCountry": {
-                                  "type": "string",
-                                  "description": "Customer country",
-                                  "example": "USA"
-                                },
-                                "customerZipCode": {
-                                  "type": "string",
-                                  "description": "Customer postal/zip code",
-                                  "example": "37076"
-                                },
-                                "addressType": {
-                                  "type": "string",
-                                  "description": "Type of address",
-                                  "example": "BILLING"
-                                }
-                              }
-                            },
-                            "orderId": {
-                              "type": "string",
-                              "description": "Unique order identifier",
-                              "example": "dc087e7938cc4d6aa6d5ef8e4a09720f#7a9501126439-46a3-9bad-28019ed511fd"
-                            },
-                            "orderItems": {
-                              "type": "array",
-                              "description": "List of order items",
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "contractStatus": {
-                                    "type": "string",
-                                    "description": "Status of the contract (A = Active)",
-                                    "example": "A"
-                                  },
-                                  "quoteId": {
-                                    "type": "string",
-                                    "description": "Quote ID associated with this item",
-                                    "example": "c8152608-83bf-479f-8f59-ee8278ca14c0"
-                                  },
-                                  "quoteItemId": {
-                                    "type": "string",
-                                    "description": "Quote item ID",
-                                    "example": "53ba3d22-3afa-4330-b315-e42e5ef69ffb"
-                                  },
-                                  "termMonths": {
-                                    "type": "integer",
-                                    "description": "Term duration in months",
-                                    "example": 24
-                                  },
-                                  "modelName": {
-                                    "type": "string",
-                                    "description": "Name of the warranty plan",
-                                    "example": "SureBright Whole System Warranty Plan"
-                                  },
-                                  "modelNumber": {
-                                    "type": "string",
-                                    "description": "Model number or sales lead ID",
-                                    "example": "8c7cee7c-4521-4eb2-9e48-0528035d525f"
-                                  },
-                                  "manufacturerName": {
-                                    "type": "string",
-                                    "description": "Manufacturer name",
-                                    "example": ""
-                                  },
-                                  "policyTax": {
-                                    "type": "string",
-                                    "description": "Tax amount on the policy",
-                                    "example": "0.0"
-                                  },
-                                  "productListPrice": {
-                                    "type": "number",
-                                    "description": "List price of the product",
-                                    "example": 50
-                                  },
-                                  "productPurchasePrice": {
-                                    "type": "number",
-                                    "description": "Purchase price of the product",
-                                    "example": 50
-                                  },
-                                  "productTax": {
-                                    "type": "string",
-                                    "description": "Tax amount on the product",
-                                    "example": "0.0"
-                                  },
-                                  "purchaseDate": {
-                                    "type": "string",
-                                    "format": "date",
-                                    "description": "Date of purchase",
-                                    "example": "2025-12-08"
-                                  },
-                                  "productId": {
-                                    "type": "string",
-                                    "description": "Product identifier",
-                                    "example": "LEAD_8c7cee7c-4521-4eb2-9e48-0528035d525f"
-                                  },
-                                  "coveredLineItemsList": {
-                                    "type": "array",
-                                    "description": "List of covered line items",
-                                    "items": {
-                                      "type": "object",
-                                      "properties": {
-                                        "Model_Name": {
-                                          "type": "string",
-                                          "description": "Category name of the covered item",
-                                          "example": "TV"
-                                        },
-                                        "Model_Number": {
-                                          "type": "string",
-                                          "description": "Model number of the covered item",
-                                          "example": ""
-                                        },
-                                        "Product_Purchase_Price": {
-                                          "type": "string",
-                                          "description": "Purchase price of the covered item",
-                                          "example": "50"
-                                        },
-                                        "Product_Tax": {
-                                          "type": "string",
-                                          "description": "Tax on the covered item",
-                                          "example": "0.0"
-                                        },
-                                        "Quantity": {
-                                          "type": "string",
-                                          "description": "Quantity of covered items",
-                                          "example": "1"
-                                        },
-                                        "sbCategoryTag": {
-                                          "type": "string",
-                                          "description": "SureBright category tag",
-                                          "example": "TV_MONITOR"
-                                        },
-                                        "Product_Condition": {
-                                          "type": "string",
-                                          "description": "Condition of the product",
-                                          "example": "NEW"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            },
-                            "policyPrice": {
-                              "type": "string",
-                              "description": "Price of the policy",
-                              "example": "2"
-                            },
-                            "source": {
-                              "type": "string",
-                              "description": "Source of the order",
-                              "example": "SERVICE_PORTAL"
-                            },
-                            "installerWarrantyDuration": {
-                              "type": "string",
-                              "description": "Duration of the installer warranty",
-                              "example": "3 Months"
-                            }
-                          }
-                        }
-                      }
                     }
                   }
                 }
@@ -4519,7 +4271,7 @@
                       "description": "error type",
                       "example": 511
                     },
-                    "errorMessage": {
+                    "message": {
                       "type": "string",
                       "description": "error message",
                       "example": "Insufficient Parameters"
@@ -4545,7 +4297,7 @@
                       "description": "error type",
                       "example": 512
                     },
-                    "errorMessage": {
+                    "message": {
                       "type": "string",
                       "description": "error message",
                       "example": "Validation Failed for Input Parameters"
@@ -4571,7 +4323,7 @@
                       "description": "error type",
                       "example": 514
                     },
-                    "errorMessage": {
+                    "message": {
                       "type": "string",
                       "description": "error message",
                       "example": "No Quote Found"
@@ -4597,7 +4349,7 @@
                       "description": "error type",
                       "example": 515
                     },
-                    "errorMessage": {
+                    "message": {
                       "type": "string",
                       "description": "error message",
                       "example": "Store Not Found"
@@ -4623,7 +4375,7 @@
                       "description": "error type",
                       "example": 500
                     },
-                    "errorMessage": {
+                    "message": {
                       "type": "string",
                       "description": "error message",
                       "example": "Something Unexpectedly Went Wrong"
@@ -4632,7 +4384,33 @@
                 }
               }
             }
+          },
+        "401": {
+          "description": "Authorization Error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "isError": {
+                    "type": "boolean",
+                    "description": "true"
+                  },
+                  "errorType": {
+                    "type": "integer",
+                    "description": "error type",
+                    "example": 401
+                  },
+                  "message": {
+                    "type": "string",
+                    "description": "error message",
+                    "example": "X-SureBright-Access-Token header is required"
+                  }
+                }
+              }
+            }
           }
+        }
         }
       }
     }
