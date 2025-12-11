@@ -3884,7 +3884,7 @@
             }
           },
           "513": {
-            "description": "Product Not Found",
+            "description": "No Quote Found",
             "content": {
               "application/json": {
                 "schema": {
@@ -3902,7 +3902,7 @@
                     "errorMessage": {
                       "type": "string",
                       "description": "error message",
-                      "example": "Product Not Found"
+                      "example": "No Quote Found"
                     }
                   }
                 }
@@ -3910,7 +3910,7 @@
             }
           },
           "514": {
-            "description": "No Quote Found",
+            "description": "Store Not Found",
             "content": {
               "application/json": {
                 "schema": {
@@ -3928,7 +3928,7 @@
                     "errorMessage": {
                       "type": "string",
                       "description": "error message",
-                      "example": "No Quote Found"
+                      "example": "Store Not Found"
                     }
                   }
                 }
@@ -3936,7 +3936,7 @@
             }
           },
           "515": {
-            "description": "Store Not Found",
+            "description": "Not Eligible",
             "content": {
               "application/json": {
                 "schema": {
@@ -3954,32 +3954,6 @@
                     "errorMessage": {
                       "type": "string",
                       "description": "error message",
-                      "example": "Store Not Found"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "516": {
-            "description": "Not Eligible",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
-                    },
-                    "errorType": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 516
-                    },
-                    "errorMessage": {
-                      "type": "string",
-                      "description": "error message",
                       "example": "Not Eligible"
                     }
                   }
@@ -3987,7 +3961,7 @@
               }
             }
           },
-          "517": {
+          "516": {
             "description": "Category Not Found",
             "content": {
               "application/json": {
@@ -4001,7 +3975,7 @@
                     "errorType": {
                       "type": "integer",
                       "description": "error type",
-                      "example": 517
+                      "example": 516
                     },
                     "errorMessage": {
                       "type": "string",
