@@ -12,28 +12,28 @@ openapi: 'POST /partner/api/v1/order/whole-system'
 
 ## Overview
 
-This endpoint creates warranty contracts for a whole system order. It is used after obtaining warranty quotes from the **List Quotes for Whole System Warranty** endpoint.
+This endpoint creates warranty contract for a whole system order. It is used after obtaining warranty quotes from the **List Quotes for Whole System Warranty** endpoint.
 
 ### Flow
 
 1. First, call the **List Quotes for Whole System Warranty** endpoint to get available warranty quotes for your system order
 2. Select the desired warranty plan from the returned `warrantyQuoteItemList`
-3. Submit the selected warranty details along with the line items to this endpoint to create the contracts
+3. Submit the selected warranty details along with the line items to this endpoint to create the contract
 
 ### Request Details
 
-- **`warrantyQuoteId`** - The unique quote ID received from the quote endpoint
+- **`warrantyQuoteId`** - The unique quote Id received from the quote endpoint
 - **`warrantyQuoteItemId`** - The unique identifier for the warranty quote item obtained from the quote endpoint
 - **`lineItemList`** - The complete list of products with their coverage status (`isCovered: true/false`)
+
+<Note>
+Either `sbSalesLeadId` or `lineItemList` is required in the request:
+
+- **`sbSalesLeadId`** - Use this if you have already obtained quotes and have the sales lead Id from the List Quotes API response
+- **`lineItemList`** - Use this to provide the complete list of products with their coverage status when creating a new contract
+</Note>
 
 ### Response
 
 On success, you will receive:
 - **`contractId`** - The unique identifier for the warranty contract created
-
-<Note>
-Either `sbSalesLeadId` or `lineItemList` is required in the request:
-
-- **`sbSalesLeadId`** - Use this if you have already obtained quotes and have the sales lead ID from the List Quotes API response
-- **`lineItemList`** - Use this to provide the complete list of products with their coverage status when creating a new contract
-</Note>
