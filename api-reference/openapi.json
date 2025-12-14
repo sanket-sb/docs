@@ -2026,7 +2026,7 @@
                   },
                   "manufacturerWarrantyDuration": {
                     "type": "integer",
-                    "description": "Duration of the manufacturer warranty in months",
+                    "description": "The warranty period provided by the product’s manufacturer, specified in months.",
                     "example": 24
                   },
                   "orderPurchaseDate": {
