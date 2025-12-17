@@ -102,8 +102,7 @@
                   "api-reference/endpoint/order/create-contract-whole-system-warranty"
                 ]
               },
-              "api-reference/http-status-codes",
-              "servify/update-claim-service-status"
+              "api-reference/http-status-codes"
             ]
           }
         ]
@@ -121,6 +120,19 @@
                   "frontend-widget-integration/frontend-widget-kit/get-cart-item-list"
                 ]
               }
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Servify",
+        "hidden": true,
+        "groups": [
+          {
+            "group": " ",
+            "hidden": true,
+            "pages": [
+              "servify/update-claim-service-status"
             ]
           }
         ]
