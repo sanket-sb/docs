@@ -130,7 +130,12 @@
           {
             "group": " ",
             "pages": [
-              "servify/update-claim-service-status"
+              {
+                "group": "Servify",
+                "pages": [
+                  "servify/update-claim-service-status"
+                ]
+              }
             ]
           }
         ]
@@ -138,7 +143,7 @@
     ],
     "global": {
       "anchors": [
-        
+       
       ]
     }
   },
@@ -147,11 +152,12 @@
     "dark": "https://demtt2r26n0u0.cloudfront.net/misc/sb_transparent_logo_v1.png"
   },
   "navbar": {
-    
+   
   },
   "footer": {
     "socials": {
-      
+     
     }
   }
 }
+ 
