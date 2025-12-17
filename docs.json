@@ -126,11 +126,9 @@
       },
       {
         "tab": "Servify",
-        "hidden": true,
         "groups": [
           {
             "group": " ",
-            "hidden": true,
             "pages": [
               "servify/update-claim-service-status"
             ]
