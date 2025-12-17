@@ -4412,7 +4412,7 @@
         }
       }
     },
-    "/partners/servify/update-claim-service-status":{
+    "/partner/api/v1/servify/claim-service-status":{
       "post":{
         "summary": "SureBright’s update claim and service status API for Servify",
         "description": "",
@@ -4453,7 +4453,7 @@
                   },
                   "serviceId": {
                     "type": "string",
-                    "description": "Service requestId if one claim can have multiple service request otherwise same as claimId",
+                    "description": "serviceId if one claim can have multiple service request otherwise same as claimId",
                     "example": "G76BBG9B4Z"
                   },
                   "serviceType": {
@@ -4564,231 +4564,6 @@
                       "type": "string",
                       "description": "Success or failure message",
                       "example": "Claim's service status updated successfully"
-                    },
-                    "success": {
-                      "type": "string",
-                      "description": "Success or failure",
-                      "example": "true",
-                      "enum": ["true", "false"]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "number",
-                      "description": "Status code",
-                      "example": 400
-                    },
-                    "errorCode": {
-                      "type": "string",
-                      "description": "Error code",
-                      "enum": [
-                        "INVALID_REQUEST",
-                        "MISSING_MANDATORY_PARAMETER",
-                        "INVALID_PARAMETER_VALUE",
-                        "INVALID_DATE_FORMAT",
-                        "INVALID_STATUS_TRANSITION",
-                        "REPLACEMENT_OPTIONS_REQUIRED"
-                      ],
-                      "example": "MISSING_MANDATORY_PARAMETER"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Error message",
-                      "example": "Missing mandatory claimId parameter"
-                    },
-                    "success": {
-                      "type": "string",
-                      "description": "Success or failure",
-                      "example": "false",
-                      "enum": ["true", "false"]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "number",
-                      "description": "Status code",
-                      "example": 401
-                    },
-                    "errorCode": {
-                      "type": "string",
-                      "description": "Error code",
-                      "example": "UNAUTHORIZED"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Error message",
-                      "example": "API key invalid / missing"
-                    },
-                    "success": {
-                      "type": "string",
-                      "description": "Success or failure",
-                      "example": "false",
-                      "enum": ["true", "false"]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "number",
-                      "description": "Status code",
-                      "example": 403
-                    },
-                    "errorCode": {
-                      "type": "string",
-                      "description": "Error code",
-                      "example": "FORBIDDEN"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Error message",
-                      "example": "Access denied to contract / claim"
-                    },
-                    "success": {
-                      "type": "string",
-                      "description": "Success or failure",
-                      "example": "false",
-                      "enum": ["true", "false"]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "number",
-                      "description": "Status code",
-                      "example": 404
-                    },
-                    "errorCode": {
-                      "type": "string",
-                      "description": "Error code",
-                      "enum": [
-                        "CONTRACT_NOT_FOUND",
-                        "CLAIM_NOT_FOUND"
-                      ],
-                      "example": "CLAIM_NOT_FOUND"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Error message",
-                      "example": "claimId does not exist"
-                    },
-                    "success": {
-                      "type": "string",
-                      "description": "Success or failure",
-                      "example": "false",
-                      "enum": ["true", "false"]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "number",
-                      "description": "Status code",
-                      "example": 409
-                    },
-                    "errorCode": {
-                      "type": "string",
-                      "description": "Error code",
-                      "enum": [
-                        "DUPLICATE_SERVICE_ID",
-                        "STATUS_ALREADY_UPDATED"
-                      ],
-                      "example": "DUPLICATE_SERVICE_ID"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Error message",
-                      "example": "serviceId already exists for claim"
-                    },
-                    "success": {
-                      "type": "string",
-                      "description": "Success or failure",
-                      "example": "false",
-                      "enum": ["true", "false"]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Unprocessable Entity",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "number",
-                      "description": "Status code",
-                      "example": 422
-                    },
-                    "errorCode": {
-                      "type": "string",
-                      "description": "Error code",
-                      "enum": [
-                        "INVALID_SERVICE_TYPE",
-                        "INVALID_CURRENCY",
-                        "INVALID_COUNTRY"
-                      ],
-                      "example": "INVALID_SERVICE_TYPE"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Error message",
-                      "example": "Unsupported serviceType"
-                    },
-                    "success": {
-                      "type": "string",
-                      "description": "Success or failure",
-                      "example": "false",
-                      "enum": ["true", "false"]
                     }
                   }
                 }
@@ -4807,21 +4582,10 @@
                       "description": "Status code",
                       "example": 500
                     },
-                    "errorCode": {
-                      "type": "string",
-                      "description": "Error code",
-                      "example": "INTERNAL_SERVER_ERROR"
-                    },
                     "message": {
                       "type": "string",
                       "description": "Error message",
                       "example": "System failure"
-                    },
-                    "success": {
-                      "type": "string",
-                      "description": "Success or failure",
-                      "example": "false",
-                      "enum": ["true", "false"]
                     }
                   }
                 }
@@ -4829,7 +4593,7 @@
             }
           },
           "503": {
-            "description": "Service Unavailable",
+            "description": "Temporary outage / DB down",
             "content": {
               "application/json": {
                 "schema": {
@@ -4840,21 +4604,10 @@
                       "description": "Status code",
                       "example": 503
                     },
-                    "errorCode": {
-                      "type": "string",
-                      "description": "Error code",
-                      "example": "SERVICE_UNAVAILABLE"
-                    },
                     "message": {
                       "type": "string",
                       "description": "Error message",
                       "example": "Temporary outage / DB down"
-                    },
-                    "success": {
-                      "type": "string",
-                      "description": "Success or failure",
-                      "example": "false",
-                      "enum": ["true", "false"]
                     }
                   }
                 }
@@ -4862,7 +4615,7 @@
             }
           },
           "504": {
-            "description": "Gateway Timeout",
+            "description": "API timeout or downstream service timeout",
             "content": {
               "application/json": {
                 "schema": {
@@ -4873,21 +4626,340 @@
                       "description": "Status code",
                       "example": 504
                     },
-                    "errorCode": {
-                      "type": "string",
-                      "description": "Error code",
-                      "example": "TIMEOUT"
-                    },
                     "message": {
                       "type": "string",
                       "description": "Error message",
                       "example": "API timeout or downstream service timeout"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request body is malformed / wrong datatype",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "Status code",
+                      "example": 400
                     },
-                    "success": {
+                    "message": {
                       "type": "string",
-                      "description": "Success or failure",
-                      "example": "false",
-                      "enum": ["true", "false"]
+                      "description": "Error message",
+                      "example": "Invalid JSON format"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "510": {
+            "description": "Missing Mandatory Parameter",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "Status code",
+                      "example": 510
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Missing mandatory claimId parameter"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "511": {
+            "description": "Invalid Parameter Value",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "Status code",
+                      "example": 511
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Invalid claimStatus value"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "512": {
+            "description": "Invalid Date Format",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "Status code",
+                      "example": 512
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Invalid date format for updateAt"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "513": {
+            "description": "Invalid Status Transition",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "Status code",
+                      "example": 513
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Cannot move from Closed → Open"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "514": {
+            "description": "Replacement Options Required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "Status code",
+                      "example": 514
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Replacement options required for status Replacement Options Provided"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "API key invalid / missing",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "Status code",
+                      "example": 401
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "API key invalid / missing"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Access denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "Status code",
+                      "example": 403
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Access denied to contract / claim"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "515": {
+            "description": "externalReferenceId not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "Status code",
+                      "example": 515
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "externalReferenceId not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "516": {
+            "description": "Claim Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "Status code",
+                      "example": 516
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "claimId does not exist"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "517": {
+            "description": "serviceId already exists for claim",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "Status code",
+                      "example": 517
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "serviceId already exists for claim"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "518": {
+            "description": "Status Already Updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "Status code",
+                      "example": 518
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "duplicate update, idempotency conflict"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "519": {
+            "description": "Invalid Service Type",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "Status code",
+                      "example": 519
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Unsupported serviceType"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "520": {
+            "description": "Invalid Currency",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "Status code",
+                      "example": 520
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Currency not mapped"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "521": {
+            "description": "Invalid Country",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "description": "Status code",
+                      "example": 521
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Country not supported"
                     }
                   }
                 }
