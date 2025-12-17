@@ -129,6 +129,7 @@
         "groups": [
           {
             "group": " ",
+            "hidden": true,
             "pages": [
               {
                 "group": "Servify",
