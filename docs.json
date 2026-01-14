@@ -77,8 +77,6 @@
               {
                 "group": "Product Category",
                 "pages": [
-                  "api-reference/endpoint/product-category/index",
-                  "api-reference/endpoint/product-category/categorize-product"
                 ]
               },
               {
