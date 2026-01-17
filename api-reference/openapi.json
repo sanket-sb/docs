@@ -2024,6 +2024,11 @@
                     "maxLength": 48,
                     "example": "83737121380"
                   },
+                  "manufacturerWarrantyDuration": {
+                    "type": "integer",
+                    "description": "The warranty period provided by the product’s manufacturer, specified in months.",
+                    "example": 24
+                  },
                   "orderPurchaseDate": {
                     "type": "string",
                     "format": "date-time",
