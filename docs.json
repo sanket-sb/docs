@@ -96,6 +96,7 @@
                 "pages": [
                   "api-reference/endpoint/order/index",
                   "api-reference/endpoint/order/create-contract",
+                  "api-reference/endpoint/order/cancel-contract-whole-system-warranty",
                   "api-reference/endpoint/order/update-contract",
                   "api-reference/endpoint/order/create-contract-whole-system-warranty"
                 ]

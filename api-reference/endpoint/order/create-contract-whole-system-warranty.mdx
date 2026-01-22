@@ -1,5 +1,5 @@
 ---
-title: 'Create Contracts for Whole System Warranty'
+title: 'Create / Update Contracts for Whole System Warranty'
 openapi: 'POST /partner/api/v1/order/whole-system'
 ---
 
@@ -31,6 +31,15 @@ Either `sbSalesLeadId` or `lineItemList` is required in the request:
 
 - **`sbSalesLeadId`** - Use this if you have already obtained quotes and have the sales lead Id from the List Quotes API response
 - **`lineItemList`** - Use this to provide the complete list of products with their coverage status when creating a new contract
+</Note>
+
+<Note>
+**Updating Existing Contracts**
+
+If a contract already exists for the provided `sbSalesLeadId`, calling this endpoint will update the existing contract instead of creating a new one:
+- Updates to line items are not permitted beyond **30 days** from the date of sale.
+ 
+- **Customer details** and other non-line item fields can be updated at any time
 </Note>
 
 ### Response

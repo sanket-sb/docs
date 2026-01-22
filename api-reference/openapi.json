@@ -4357,6 +4357,188 @@
               }
             }
           },
+          "516": {
+            "description": "Contract Already Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 516
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Contract already created"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "517": {
+            "description": "Contract Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 517
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Contract not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "518": {
+            "description": "Line Items Update Not Allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 518
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Updates to line items are not permitted beyond 30 days from the date of sale."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "519": {
+            "description": "Line Items Mismatch",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 519
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Line items do not match sales lead"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "520": {
+            "description": "Covered Amount Mismatch",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 520
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Covered amount does not match sales lead"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "521": {
+            "description": "Quote ID Mismatch",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 521
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Quote ID mismatch with sales lead"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "522": {
+            "description": "Quote Item Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 522
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Quote item not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
           "500": {
             "description": "Something Unexpectedly Went Wrong",
             "content": {
@@ -4383,32 +4565,259 @@
               }
             }
           },
-        "401": {
-          "description": "Authorization Error",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "isError": {
-                    "type": "boolean",
-                    "description": "true"
-                  },
-                  "errorType": {
-                    "type": "integer",
-                    "description": "error type",
-                    "example": 401
-                  },
-                  "message": {
-                    "type": "string",
-                    "description": "error message",
-                    "example": "X-SureBright-Access-Token header is required"
+          "401": {
+            "description": "Authorization Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 401
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "X-SureBright-Access-Token header is required"
+                    }
                   }
                 }
               }
             }
           }
         }
+      }
+    },
+    "/partner/api/v1/order/whole-system/cancel?contractId={contractId}": {
+      "post": {
+        "summary": "Cancel Contract for Whole System Warranty",
+        "description": "This endpoint cancels an existing warranty contract for a whole system order. Provide the contract ID obtained from the Create Contracts for Whole System Warranty endpoint. The API returns the cancellation status of the warranty contract.",
+        "operationId": "cancelContractForWholeSystemWarranty",
+        "tags": [
+          "orders"
+        ],
+        "parameters": [
+          {
+            "name": "X-SureBright-Access-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Access token for authentication"
+          },
+          {
+            "name": "contractId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "5233a92bfcc04a77920abfa1fe52194a"
+            },
+            "description": "The unique identifier for the warranty contract to be cancelled"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Contract Cancelled Successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "Indicates if an error occurred",
+                      "example": false
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Success message",
+                      "example": "Contract cancelled successfully"
+                    },
+                    "contractId": {
+                      "type": "string",
+                      "description": "The unique identifier for the cancelled warranty contract",
+                      "example": "54a3a238407f426e862a0a11cab11164"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 400
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "contractId is required"
+                    }
+                  }
+                },
+                "examples": {
+                  
+                  "cancellationWindowExpired": {
+                    "summary": "contractId is required",
+                    "value": {
+                      "isError": true,
+                      "errorType": 400,
+                      "message": "contractId is required"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 401
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "X-SureBright-Access-Token header is required"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Access Denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 503
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Contract access denied"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Contract Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 504
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Contract not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "505": {
+            "description": "Contract can be cancelled only within 30 days from order creation date",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 505
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Contract can be cancelled only within 30 days from order creation date"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Service Unreachable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 502
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Something went wrong"
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },

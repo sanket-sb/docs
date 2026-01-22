@@ -1,0 +1,18 @@
+---
+title: 'Cancel Contracts for Whole System Warranty'
+openapi: 'POST /partner/api/v1/order/whole-system/cancel?contractId={contractId}'
+---
+
+## Headers
+
+| Header | Description | Required |
+|--------|-------------|----------|
+| X-SureBright-Access-Token | Access token for authentication | Yes |
+
+## Overview
+
+This endpoint cancels warranty contract for a whole system order.
+
+<Note>
+A contract can only be cancelled within 30 days after the date of sale of purchase.
+</Note>
