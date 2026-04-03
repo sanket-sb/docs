@@ -1,0 +1,84 @@
+---
+title: "Enable SureBright Cart Validator"
+description: "Prevent standalone SureBright warranty product sales without an associated product by enabling the cart validator in your Shopify store."
+---
+
+The SureBright Cart Validator is a Shopify checkout rule that ensures customers cannot purchase a SureBright warranty policy without adding the corresponding product to their cart. Follow the steps below to enable this validation in your store.
+
+## Steps to Enable SureBright Cart Validator
+
+<Steps>
+    <Step title="Open Settings">
+        Navigate to your Shopify Admin dashboard and click on **Settings** from the bottom-left corner of the sidebar.
+    </Step>
+
+    <Step title="Navigate to Checkout Settings">
+        In the Settings menu, click on **Checkout** from the left-hand navigation panel. Scroll down to the bottom of the page to locate the **Checkout rules** section.
+        <img
+            src="/images/enable-surebright-cart-validator/sb-cart-validator-step-1.png"
+            alt="Checkout rules section"
+            title="Checkout Rules Section"
+            className="mx-auto"
+            style={{ width: "86%" }}
+        />
+    </Step>
+
+    <Step title="Add a New Rule">
+        In the **Checkout rules** section, click the **Add rule** button. A modal will appear listing the available checkout rule extensions.
+        <img
+            src="/images/enable-surebright-cart-validator/sb-cart-validator-step-2.png"
+            alt="Add rule button in Checkout rules"
+            title="Add Checkout Rule"
+            className="mx-auto"
+            style={{ width: "86%" }}
+        />
+    </Step>
+
+    <Step title="Select the SureBright Cart Validator">
+        In the modal, locate the **SUREBRIGHT - EXTENDED WARRANTY** section and click on **sb-cart-validator** to select it.
+        <img
+            src="/images/enable-surebright-cart-validator/sb-cart-validator-step-3.png"
+            alt="Select sb-cart-validator under SureBright Extended Warranty"
+            title="Select SureBright Cart Validator"
+            className="mx-auto"
+            style={{ width: "86%" }}
+        />
+    </Step>
+
+    <Step title="Configure and Save the Rule">
+        Ensure the **Allow all customers to complete checkout** option is checked under the *"If the app fails or experiences a problem"* section. This ensures that orders are still processed even if the validation app encounters an issue. Click **Save** to apply your changes.
+        <img
+            src="/images/enable-surebright-cart-validator/sb-cart-validator-step-4.png"
+            alt="Save checkout rule with fallback option enabled"
+            title="Configure and Save Rule"
+            className="mx-auto"
+            style={{ width: "86%" }}
+        />
+    </Step>
+
+    <Step title="Turn On the Rule">
+        After saving, click the **Turn on** button in the top-right corner to activate the checkout rule. Once enabled, the **sb-cart-validator** will appear with an **Active** status badge under the Checkout rules section.
+        <img
+            src="/images/enable-surebright-cart-validator/sb-cart-validator-step-5.png"
+            alt="sb-cart-validator shown as Active"
+            title="Cart Validator Active"
+            className="mx-auto"
+            style={{ width: "86%" }}
+        />
+    </Step>
+
+    <Step title="Verify the Setup">
+        The SureBright Cart Validator is now active on your store. To confirm everything is working correctly, perform a test by completing a basic user journey through to the checkout page. Attempt to add a SureBright warranty product without its associated product to verify that the validation is triggered as expected.
+         <img
+            src="/images/enable-surebright-cart-validator/sb-cart-validator-step-6.png"
+            alt="Successful checkout test"
+            title="Verify Cart Validator Setup"
+            className="mx-auto"
+            style={{ width: "86%" }}
+        />
+    </Step>
+</Steps>
+
+<Note>
+    If the cart validator app encounters an error, the checkout will still proceed normally since the **"Allow all customers to complete checkout"** fallback option is enabled. This ensures a seamless customer experience at all times.
+</Note>
