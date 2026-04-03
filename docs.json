@@ -21,7 +21,8 @@
                 "pages":[
                       "draft-order-guide/shopify-draft-order",
                       "shopify/online-sales-channel",
-                      "shopify/create-discount-excluding-surebright-products"
+                      "shopify/create-discount-excluding-surebright-products",
+                      "shopify/enable-surebright-cart-validator"
                 ]
               },
               {
