@@ -46,11 +46,13 @@ The endpoint performs the following cross-checks before creating or updating a c
 | Check | Error |
 |-------|-------|
 | `sbSalesLeadId` exists **and** belongs to the requesting `storeId` (lookup is keyed by both) | `515` Sales Lead Not Found |
-| `warrantyQuoteId` matches the `sbQuoteId` carried on the lead's line items | `521` Quote ID Mismatch |
-| The fetched quote document's `quoteId` matches the request's `warrantyQuoteId` | `521` Quote ID Mismatch |
-| `warrantyQuoteItemId` resolves to an item inside the quote | `522` Quote Item Not Found |
-| `warrantyPrice` equals the resolved quote item's `policyPrice` (compared in cents) | `524` Warranty Price Mismatch |
-| `warrantyCoverageYears` equals the resolved quote item's `coverageYears` | `525` Warranty Coverage Years Mismatch |
+| `warrantyQuoteId` matches the `sbQuoteId` carried on the lead's line items | `518` Quote ID Mismatch |
+| The quote document is retrievable from DDB by `warrantyQuoteId` | `513` No Quote Found |
+| The store exists for the requesting `storeId` | `514` Store Not Found |
+| `warrantyQuoteItemId` resolves to an item inside the quote | `519` Quote Item Not Found |
+| `warrantyCoverageYears` equals the resolved quote item's `coverageYears` | `520` Warranty Coverage Years Mismatch |
+| (Existing-contract update path) The contract referenced by the lead's `contractIdList` exists in DDB | `516` Contract Not Found |
+| (Existing-contract update path) Covered line items unchanged once 30 days have elapsed since purchase | `517` Line Items Update Not Allowed |
 
 These gates run **before** any user account creation, contract write, or notification, so a rejected request leaves no partial state behind.
 
