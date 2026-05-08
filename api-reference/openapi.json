@@ -4287,8 +4287,34 @@
               }
             }
           },
-          "517": {
+          "516": {
             "description": "Contract Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 516
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Contract not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "517": {
+            "description": "Line Items Update Not Allowed",
             "content": {
               "application/json": {
                 "schema": {
@@ -4306,7 +4332,7 @@
                     "message": {
                       "type": "string",
                       "description": "error message",
-                      "example": "Contract not found"
+                      "example": "Updates to line items are not permitted beyond 30 days from the date of sale."
                     }
                   }
                 }
@@ -4314,7 +4340,7 @@
             }
           },
           "518": {
-            "description": "Line Items Update Not Allowed",
+            "description": "Quote ID Mismatch",
             "content": {
               "application/json": {
                 "schema": {
@@ -4332,32 +4358,6 @@
                     "message": {
                       "type": "string",
                       "description": "error message",
-                      "example": "Updates to line items are not permitted beyond 30 days from the date of sale."
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "521": {
-            "description": "Quote ID Mismatch",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
-                    },
-                    "errorType": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 521
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "error message",
                       "example": "Quote ID mismatch"
                     }
                   }
@@ -4365,7 +4365,7 @@
               }
             }
           },
-          "522": {
+          "519": {
             "description": "Quote Item Not Found",
             "content": {
               "application/json": {
@@ -4379,7 +4379,7 @@
                     "errorType": {
                       "type": "integer",
                       "description": "error type",
-                      "example": 522
+                      "example": 519
                     },
                     "message": {
                       "type": "string",
@@ -4391,7 +4391,7 @@
               }
             }
           },
-          "524": {
+          "520": {
             "description": "Warranty Price Mismatch",
             "content": {
               "application/json": {
@@ -4405,7 +4405,7 @@
                     "errorType": {
                       "type": "integer",
                       "description": "error type",
-                      "example": 524
+                      "example": 520
                     },
                     "message": {
                       "type": "string",
@@ -4417,7 +4417,7 @@
               }
             }
           },
-          "525": {
+          "521": {
             "description": "Warranty Coverage Years Mismatch",
             "content": {
               "application/json": {
@@ -4431,7 +4431,7 @@
                     "errorType": {
                       "type": "integer",
                       "description": "error type",
-                      "example": 525
+                      "example": 521
                     },
                     "message": {
                       "type": "string",
