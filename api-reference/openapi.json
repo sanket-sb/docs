@@ -4073,18 +4073,18 @@
                   },
                   "sbSalesLeadId": {
                     "type": "string",
-                    "description": "Unique identifier for the SureBright sales lead. Required — the contract's covered line items, purchase price, and warranty duration are derived from this lead.",
+                    "description": "Unique identifier for the SureBright sales lead. Required — the contract's covered line items, purchase price, and warranty duration are derived from this lead. The lead must belong to the requesting `storeId`; a lead that exists for another store is treated as not found (515).",
                     "example": "9f3e21c6-6bdb-4c7f-9b91-2a4f9a2c7d11"
                   },
                   "warrantyPrice": {
                     "type": "number",
                     "format": "float",
-                    "description": "Price of the warranty quote",
+                    "description": "Price of the warranty quote. Must equal the resolved quote item's `policyPrice` (compared in cents); otherwise the request is rejected with 524.",
                     "example": 40.0
                   },
                   "warrantyCoverageYears": {
                     "type": "integer",
-                    "description": "Duration of the warranty coverage in years",
+                    "description": "Duration of the warranty coverage in years. Must equal the resolved quote item's `coverageYears`; otherwise the request is rejected with 525.",
                     "example": 2
                   },
                   "customerDetails": {
@@ -4384,7 +4384,7 @@
                     "message": {
                       "type": "string",
                       "description": "error message",
-                      "example": "Quote ID mismatch with sales lead"
+                      "example": "Quote ID mismatch"
                     }
                   }
                 }
@@ -4411,6 +4411,58 @@
                       "type": "string",
                       "description": "error message",
                       "example": "Quote item not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "524": {
+            "description": "Warranty Price Mismatch",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 524
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Warranty price does not match quote item"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "525": {
+            "description": "Warranty Coverage Years Mismatch",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isError": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "errorType": {
+                      "type": "integer",
+                      "description": "error type",
+                      "example": 525
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "error message",
+                      "example": "Warranty coverage years do not match quote item"
                     }
                   }
                 }

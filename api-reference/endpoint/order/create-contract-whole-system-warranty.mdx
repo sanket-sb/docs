@@ -39,6 +39,21 @@ If a contract already exists for the provided `sbSalesLeadId`, calling this endp
 - **Customer details** and other non-line item fields can be updated at any time
 </Note>
 
+### Validations
+
+The endpoint performs the following cross-checks before creating or updating a contract. Each failed check returns the listed error code and short-circuits the request before any side effect.
+
+| Check | Error |
+|-------|-------|
+| `sbSalesLeadId` exists **and** belongs to the requesting `storeId` (lookup is keyed by both) | `515` Sales Lead Not Found |
+| `warrantyQuoteId` matches the `sbQuoteId` carried on the lead's line items | `521` Quote ID Mismatch |
+| The fetched quote document's `quoteId` matches the request's `warrantyQuoteId` | `521` Quote ID Mismatch |
+| `warrantyQuoteItemId` resolves to an item inside the quote | `522` Quote Item Not Found |
+| `warrantyPrice` equals the resolved quote item's `policyPrice` (compared in cents) | `524` Warranty Price Mismatch |
+| `warrantyCoverageYears` equals the resolved quote item's `coverageYears` | `525` Warranty Coverage Years Mismatch |
+
+These gates run **before** any user account creation, contract write, or notification, so a rejected request leaves no partial state behind.
+
 ### Response
 
 On success, you will receive:
