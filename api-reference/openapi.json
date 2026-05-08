@@ -4023,8 +4023,8 @@
     },
     "/partner/api/v1/order/whole-system": {
       "post": {
-        "summary": "Create Contracts for Whole System Order",
-        "description": "This endpoint creates warranty contract for a whole system order. Submit the warranty quote details obtained from the List Quotes for Whole System Warranty endpoint along with the selected warranty plan and line item details. The API returns contract Id for the created warranty contract.",
+        "summary": "Create / Update Contracts for Whole System Warranty",
+        "description": "This endpoint creates or updates a warranty contract for a whole system order. Line items, total covered amount, and warranty duration are derived from the sales lead identified by `sbSalesLeadId`. Provide the warranty quote details and customer information; the API returns the contract ID. If a contract already exists for the given sales lead, the existing contract is updated instead of creating a new one.",
         "operationId": "createContractsForWholeSystemWarranty",
         "tags": [
           "orders"
@@ -4048,6 +4048,7 @@
                 "type": "object",
                 "required": [
                   "storeId",
+                  "sbSalesLeadId",
                   "warrantyQuoteId",
                   "warrantyQuoteItemId",
                   "warrantyPrice",
@@ -4072,18 +4073,18 @@
                   },
                   "sbSalesLeadId": {
                     "type": "string",
-                    "description": "A unique identifier for the SureBright sales lead",
+                    "description": "Unique identifier for the SureBright sales lead. Required — the contract's covered line items, purchase price, and warranty duration are derived from this lead. The lead must belong to the requesting `storeId`; a lead that exists for another store is treated as not found (515).",
                     "example": "9f3e21c6-6bdb-4c7f-9b91-2a4f9a2c7d11"
                   },
                   "warrantyPrice": {
                     "type": "number",
                     "format": "float",
-                    "description": "Price of the warranty quote",
+                    "description": "Price of the warranty quote. Must equal the resolved quote item's `policyPrice` (compared in cents); otherwise the request is rejected with 524.",
                     "example": 40.0
                   },
                   "warrantyCoverageYears": {
                     "type": "integer",
-                    "description": "Duration of the warranty coverage in years",
+                    "description": "Duration of the warranty coverage in years. Must equal the resolved quote item's `coverageYears`; otherwise the request is rejected with 525.",
                     "example": 2
                   },
                   "customerDetails": {
@@ -4092,12 +4093,7 @@
                     "required": [
                       "customerEmail",
                       "customerFirstName",
-                      "customerLastName",
-                      "customerAddress1",
-                      "customerCity",
-                      "customerState",
-                      "customerCountry",
-                      "customerZipCode"
+                      "customerLastName"
                     ],
                     "properties": {
                       "customerEmail": {
@@ -4158,51 +4154,6 @@
                         "example": "BILLING"
                       }
                     }
-                  },
-                  "lineItemList": {
-                    "type": "array",
-                    "description": "A list of line items representing the products in the order with coverage status",
-                    "items": {
-                      "type": "object",
-                      "required": [
-                        "title",
-                        "unitPrice",
-                        "quantity"
-                      ],
-                      "properties": {
-                        "title": {
-                          "type": "string",
-                          "description": "The title or name of the product",
-                          "example": "PMC Prophecy5 2-Way Floorstanding Speaker (Pair)"
-                        },
-                        "unitPrice": {
-                          "type": "number",
-                          "format": "float",
-                          "description": "The unit price of the product purchased",
-                          "example": 6500
-                        },
-                        "isCovered": {
-                          "type": "boolean",
-                          "description": "Indicates whether the line item is covered by the warranty",
-                          "example": true
-                        },
-                        "sbCategoryName": {
-                          "type": "string",
-                          "description": "The SureBright category name for the product",
-                          "example": "Speaker Floorstanding"
-                        },
-                        "quantity": {
-                          "type": "integer",
-                          "description": "The quantity of the product purchased",
-                          "example": 1
-                        },
-                        "description": {
-                          "type": "string",
-                          "description": "The description of the product",
-                          "example": "High-performance floorstanding speaker pair for immersive audio systems."
-                        }
-                      }
-                    }
                   }
                 }
               }
@@ -4226,32 +4177,6 @@
                       "type": "string",
                       "description": "The unique identifier for the warranty contract created",
                       "example": "54a3a238407f426e862a0a11cab11164"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "511": {
-            "description": "Insufficient Parameters",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
-                    },
-                    "errorType": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 511
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "error message",
-                      "example": "Insufficient Parameters"
                     }
                   }
                 }
@@ -4363,7 +4288,7 @@
             }
           },
           "516": {
-            "description": "Contract Already Created",
+            "description": "Contract Not Found",
             "content": {
               "application/json": {
                 "schema": {
@@ -4381,7 +4306,7 @@
                     "message": {
                       "type": "string",
                       "description": "error message",
-                      "example": "Contract already created"
+                      "example": "Contract not found"
                     }
                   }
                 }
@@ -4389,7 +4314,7 @@
             }
           },
           "517": {
-            "description": "Contract Not Found",
+            "description": "Line Items Update Not Allowed",
             "content": {
               "application/json": {
                 "schema": {
@@ -4407,7 +4332,7 @@
                     "message": {
                       "type": "string",
                       "description": "error message",
-                      "example": "Contract not found"
+                      "example": "Updates to line items are not permitted beyond 30 days from the date of sale."
                     }
                   }
                 }
@@ -4415,7 +4340,7 @@
             }
           },
           "518": {
-            "description": "Line Items Update Not Allowed",
+            "description": "Quote ID Mismatch",
             "content": {
               "application/json": {
                 "schema": {
@@ -4433,7 +4358,7 @@
                     "message": {
                       "type": "string",
                       "description": "error message",
-                      "example": "Updates to line items are not permitted beyond 30 days from the date of sale."
+                      "example": "Quote ID mismatch"
                     }
                   }
                 }
@@ -4441,7 +4366,7 @@
             }
           },
           "519": {
-            "description": "Line Items Mismatch",
+            "description": "Quote Item Not Found",
             "content": {
               "application/json": {
                 "schema": {
@@ -4459,7 +4384,7 @@
                     "message": {
                       "type": "string",
                       "description": "error message",
-                      "example": "Line items do not match sales lead"
+                      "example": "Quote item not found"
                     }
                   }
                 }
@@ -4467,7 +4392,7 @@
             }
           },
           "520": {
-            "description": "Covered Amount Mismatch",
+            "description": "Warranty Price Mismatch",
             "content": {
               "application/json": {
                 "schema": {
@@ -4485,7 +4410,7 @@
                     "message": {
                       "type": "string",
                       "description": "error message",
-                      "example": "Covered amount does not match sales lead"
+                      "example": "Warranty price does not match quote item"
                     }
                   }
                 }
@@ -4493,7 +4418,7 @@
             }
           },
           "521": {
-            "description": "Quote ID Mismatch",
+            "description": "Warranty Coverage Years Mismatch",
             "content": {
               "application/json": {
                 "schema": {
@@ -4511,33 +4436,7 @@
                     "message": {
                       "type": "string",
                       "description": "error message",
-                      "example": "Quote ID mismatch with sales lead"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "522": {
-            "description": "Quote Item Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
-                    },
-                    "errorType": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 522
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "error message",
-                      "example": "Quote item not found"
+                      "example": "Warranty coverage years do not match quote item"
                     }
                   }
                 }
