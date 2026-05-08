@@ -4287,32 +4287,6 @@
               }
             }
           },
-          "516": {
-            "description": "Contract Already Created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
-                    },
-                    "errorType": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 516
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "error message",
-                      "example": "Contract already created"
-                    }
-                  }
-                }
-              }
-            }
-          },
           "517": {
             "description": "Contract Not Found",
             "content": {
