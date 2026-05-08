@@ -4392,32 +4392,6 @@
             }
           },
           "520": {
-            "description": "Warranty Price Mismatch",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "isError": {
-                      "type": "boolean",
-                      "description": "true"
-                    },
-                    "errorType": {
-                      "type": "integer",
-                      "description": "error type",
-                      "example": 520
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "error message",
-                      "example": "Warranty price does not match quote item"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "521": {
             "description": "Warranty Coverage Years Mismatch",
             "content": {
               "application/json": {
@@ -4431,7 +4405,7 @@
                     "errorType": {
                       "type": "integer",
                       "description": "error type",
-                      "example": 521
+                      "example": 520
                     },
                     "message": {
                       "type": "string",
