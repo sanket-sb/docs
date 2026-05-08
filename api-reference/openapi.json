@@ -4079,12 +4079,12 @@
                   "warrantyPrice": {
                     "type": "number",
                     "format": "float",
-                    "description": "Price of the warranty quote. Must equal the resolved quote item's `policyPrice` (compared in cents); otherwise the request is rejected with 524.",
+                    "description": "Price charged for the warranty quote. Honored as-is on the contract; the merchant absorbs any difference from the resolved quote item's `policyPrice` via `merchantMargin`.",
                     "example": 40.0
                   },
                   "warrantyCoverageYears": {
                     "type": "integer",
-                    "description": "Duration of the warranty coverage in years. Must equal the resolved quote item's `coverageYears`; otherwise the request is rejected with 525.",
+                    "description": "Duration of the warranty coverage in years. Must equal the resolved quote item's `coverageYears`; otherwise the request is rejected with 520.",
                     "example": 2
                   },
                   "customerDetails": {
